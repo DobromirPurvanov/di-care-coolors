@@ -1,0 +1,790 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --bg: #102423;
+    --bg-elevated: #25424a;
+    --bg-card: #496074;
+    --text: #f7f4f6;
+    --text-secondary: color-mix(in srgb, var(--text) 78%, transparent);
+    --text-muted: color-mix(in srgb, var(--text) 68%, transparent);
+    --accent: #b698b8;
+    --accent-light: #f0b7ca;
+    --accent-soft: #d8bad0;
+    --accent-bright: #f8d8e2;
+    --accent-contrast: #102423;
+    --secondary: #7b7c9b;
+    --surface-accent: #496074;
+    --accent-glow: color-mix(in srgb, var(--accent) 30%, transparent);
+    --accent-glow-soft: color-mix(in srgb, var(--accent) 10%, transparent);
+    --accent-border: color-mix(in srgb, var(--accent) 42%, transparent);
+    --accent-border-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+    --border: color-mix(in srgb, var(--text) 10%, transparent);
+    --surface-subtle: color-mix(in srgb, var(--surface-accent) 18%, transparent);
+    --page-overlay: color-mix(in srgb, var(--bg) 48%, transparent);
+    --success: #8fd0a6;
+    --error: #e58d7e;
+    --shader-bg: #102423;
+    --shader-accent: #f0b7ca;
+    --shader-secondary: #496074;
+    --shader-star: #f7f4f6;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+  }
+
+  :root[data-theme='spot'] {
+    --bg: #005b45;
+    --bg-elevated: #084c3c;
+    --bg-card: #557262;
+    --text: #ffefca;
+    --accent: #d0c4ab;
+    --accent-light: #ffefca;
+    --accent-soft: #e4d6b7;
+    --accent-bright: #fff7e4;
+    --accent-contrast: #005b45;
+    --secondary: #998e77;
+    --surface-accent: #998e77;
+    --page-overlay: color-mix(in srgb, #003c2e 56%, transparent);
+    --shader-bg: #005b45;
+    --shader-accent: #d0c4ab;
+    --shader-secondary: #998e77;
+    --shader-star: #ffefca;
+  }
+
+  :root[data-theme='matching'] {
+    --bg: #4d4637;
+    --bg-elevated: #3e392e;
+    --bg-card: #59645a;
+    --text: #f4efe5;
+    --accent: #a5cdc4;
+    --accent-light: #d0c4ab;
+    --accent-soft: #c7dcd5;
+    --accent-bright: #edf5f1;
+    --accent-contrast: #3c3a30;
+    --secondary: #71978f;
+    --surface-accent: #b3aa99;
+    --page-overlay: color-mix(in srgb, #302c23 54%, transparent);
+    --shader-bg: #4d4637;
+    --shader-accent: #a5cdc4;
+    --shader-secondary: #71978f;
+    --shader-star: #f4efe5;
+  }
+
+  :root[data-theme='dust'] {
+    --bg: #343c3a;
+    --bg-elevated: #404846;
+    --bg-card: #52635f;
+    --text: #f1f5f4;
+    --accent: #80b5aa;
+    --accent-light: #b8d9d2;
+    --accent-soft: #a7cbc4;
+    --accent-bright: #e2f0ed;
+    --accent-contrast: #303a38;
+    --secondary: #677890;
+    --surface-accent: #647c76;
+    --page-overlay: color-mix(in srgb, #2d3432 48%, transparent);
+    --shader-bg: #404846;
+    --shader-accent: #80b5aa;
+    --shader-secondary: #677890;
+    --shader-star: #f1f5f4;
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis поема плавния скрол */
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  @supports (overflow: clip) {
+    html,
+    body,
+    #root {
+      overflow-x: clip;
+    }
+  }
+
+  /* Native mobile scroll се заключва отделно за менюто и Cal модала, за да
+     не си пречат, ако единият слой се затвори преди другия. */
+  html.mobile-menu-open,
+  html.mobile-menu-open body,
+  html.cal-modal-open,
+  html.cal-modal-open body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  img,
+  svg,
+  canvas {
+    max-width: 100%;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 40%, transparent);
+    color: var(--text);
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 55%, transparent); }
+
+  :focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent) 75%, transparent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .font-serif-luxe { font-family: var(--font-serif); }
+  .font-mono-luxe { font-family: var(--font-mono); }
+
+  .theme-logo {
+    display: block;
+    flex: none;
+    background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    -webkit-mask: url('/images/logo-di-care-gold.png') center / contain no-repeat;
+    mask: url('/images/logo-di-care-gold.png') center / contain no-repeat;
+    filter: drop-shadow(0 0 18px var(--accent-glow));
+    user-select: none;
+  }
+
+  .theme-logo-header {
+    width: clamp(47px, 6.2vw, 59px);
+    height: clamp(30px, 4vw, 38px);
+  }
+
+  .theme-logo-loader {
+    width: 87px;
+    height: 56px;
+    animation: loaderPulse 1.6s ease-in-out infinite;
+  }
+
+  .theme-logo-section {
+    width: clamp(69px, 9.4vw, 93px);
+    height: clamp(44px, 6vw, 60px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent-light) 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 60px color-mix(in srgb, var(--accent) 40%, transparent), 0 0 120px color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+
+  .glow-pulse {
+    animation: glowPulse 3.2s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 50px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 110px color-mix(in srgb, var(--accent) 12%, transparent); }
+    50% { text-shadow: 0 0 70px color-mix(in srgb, var(--accent) 55%, transparent), 0 0 140px color-mix(in srgb, var(--accent) 22%, transparent); }
+  }
+
+  /* ------- Етикети на 3D сферата ------- */
+  .procedure-sphere {
+    width: 100%;
+    height: min(80svh, 800px);
+  }
+
+  .procedure-section,
+  .services-section {
+    padding: clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem);
+  }
+
+  .services-section {
+    background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--accent) 3%, transparent) 40%, transparent 100%);
+  }
+
+  .label-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    /* По-плътен фон + blur, за да изпъкват над анимирания звезден фон */
+    background: color-mix(in srgb, var(--bg-elevated) 97%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    white-space: nowrap;
+    user-select: none;
+    /* Тъмен ринг + сянка = ясно отделяне от фона */
+    box-shadow: 0 6px 24px rgba(0,0,0,0.65), 0 0 0 1px rgba(0,0,0,0.4);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+    touch-action: manipulation;
+  }
+
+  .label-tag::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    margin-left: -4px;
+  }
+
+  .label-tag:hover,
+  .label-tag:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent-bright);
+    background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 25%, transparent), 0 4px 18px rgba(0,0,0,0.4);
+  }
+
+  .label-tag.label-active {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent-bright);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .label-tag.label-active::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (pointer: coarse) {
+    .label-tag {
+      justify-content: center;
+      min-height: 48px;
+      max-width: min(76vw, 260px);
+      padding: 12px 16px;
+      font-size: 15px;
+      line-height: 1.25;
+      letter-spacing: 0.035em;
+      text-align: center;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  /* ------- Превключвател Сфера / Списък ------- */
+  .proc-toggle {
+    display: inline-flex;
+    padding: 4px;
+    gap: 2px;
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg) 50%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .proc-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 8px 18px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    /* ≥4.5:1 контраст върху тъмния фон */
+    color: color-mix(in srgb, var(--accent-light) 90%, transparent);
+    border-radius: 999px;
+    transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .proc-toggle-btn:hover { color: var(--accent-light); }
+
+  .proc-toggle-btn.is-active {
+    color: var(--accent-bright);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 18px color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+
+  @media (pointer: coarse) {
+    .proc-toggle-btn { min-height: 44px; }
+  }
+
+  /* ------- Чипове в списъчния изглед ------- */
+  .proc-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 9px 17px;
+    background: color-mix(in srgb, var(--bg) 60%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--accent-light);
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 100%;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .proc-chip:hover,
+  .proc-chip:focus-visible {
+    border-color: var(--accent);
+    color: var(--accent-bright);
+    background: color-mix(in srgb, var(--bg-elevated) 85%, transparent);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  .proc-chip-active {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    color: var(--accent-bright);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+
+  @media (pointer: coarse) {
+    .proc-chip { min-height: 44px; padding: 11px 18px; }
+  }
+
+  /* ------- Форма ------- */
+  .field-wrap { position: relative; }
+
+  .field-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+    color: var(--text);
+    /* 16px минимум — под 16px iOS Safari прави zoom при фокус на полето */
+    font-size: 16px;
+    font-weight: 300;
+    padding: 22px 0 10px;
+    min-height: 48px;
+    transition: border-color 0.3s ease;
+    border-radius: 0;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .field-input::placeholder { color: transparent; }
+
+  .field-input:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+  }
+
+  .field-input.field-error { border-bottom-color: var(--error); }
+
+  .field-label {
+    position: absolute;
+    left: 0;
+    top: 22px;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    /* ≥4.5:1 контраст (0.4 беше ~3.6:1) */
+    color: color-mix(in srgb, var(--text) 60%, transparent);
+    pointer-events: none;
+    transition: top 0.25s ease, font-size 0.25s ease, color 0.25s ease, letter-spacing 0.25s ease;
+  }
+
+  .field-input:focus ~ .field-label,
+  .field-input:not(:placeholder-shown) ~ .field-label,
+  .field-label.label-float {
+    top: 0;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--accent) 85%, transparent);
+  }
+
+  .field-msg {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    color: var(--error);
+  }
+
+  .field-help {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    /* ≥4.5:1 контраст (0.42 беше ~3.8:1) */
+    color: color-mix(in srgb, var(--text) 58%, transparent);
+  }
+
+  /* Видим фокус ринг за GDPR чекбокса (sr-only input-ът клипва глобалния) */
+  input:focus-visible + .gdpr-box {
+    outline: 2px solid color-mix(in srgb, var(--accent) 75%, transparent);
+    outline-offset: 3px;
+  }
+
+  /* Подсветка на процедура при директен клик от сферата/списъка */
+  .proc-highlight {
+    animation: procHighlight 2.4s ease;
+    border-radius: 12px;
+  }
+
+  @keyframes procHighlight {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); background: color-mix(in srgb, var(--accent) 0%, transparent); }
+    18% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent), 0 0 34px color-mix(in srgb, var(--accent) 18%, transparent); background: color-mix(in srgb, var(--accent) 7%, transparent); }
+    70% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 24px color-mix(in srgb, var(--accent) 10%, transparent); background: color-mix(in srgb, var(--accent) 5%, transparent); }
+    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); background: color-mix(in srgb, var(--accent) 0%, transparent); }
+  }
+
+  select.field-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23f0b7ca' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 2px center;
+    padding-right: 24px;
+  }
+
+  select.field-input option {
+    background: var(--bg-elevated);
+    color: var(--text);
+  }
+
+  /* Тъмна Google Maps чрез CSS филтър */
+  .map-dark {
+    filter: grayscale(1) invert(0.92) hue-rotate(180deg) brightness(0.88) contrast(0.92);
+  }
+
+  /* ------- Preview switcher for the four requested color editions ------- */
+  .theme-switcher {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+
+  .theme-switcher-trigger,
+  .theme-switcher-close,
+  .theme-option {
+    cursor: pointer;
+  }
+
+  .theme-switcher-trigger {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+    color: var(--text);
+    box-shadow: 0 12px 38px rgba(0,0,0,0.34), inset 0 0 0 1px var(--border);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease;
+  }
+
+  .theme-switcher-trigger:hover,
+  .theme-switcher-trigger:focus-visible {
+    border-color: var(--accent);
+    background: var(--bg-elevated);
+    color: var(--accent-light);
+  }
+
+  .theme-trigger-swatches {
+    display: flex;
+    align-items: center;
+    padding-left: 0.15rem;
+  }
+
+  .theme-trigger-swatches span {
+    width: 14px;
+    height: 14px;
+    margin-left: -4px;
+    border: 1px solid color-mix(in srgb, var(--text) 55%, transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--bg) 55%, transparent);
+  }
+
+  .theme-switcher-panel {
+    width: min(360px, calc(100vw - 2rem));
+    overflow: hidden;
+    border: 1px solid var(--accent-border);
+    border-radius: 20px;
+    background: color-mix(in srgb, var(--bg-elevated) 96%, transparent);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.48), inset 0 0 0 1px var(--border);
+    backdrop-filter: blur(24px) saturate(1.15);
+    -webkit-backdrop-filter: blur(24px) saturate(1.15);
+    animation: themePanelIn 180ms ease-out both;
+  }
+
+  .theme-switcher-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.15rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .theme-switcher-kicker {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--accent-light);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .theme-switcher-heading h2 {
+    color: var(--text);
+    font-family: var(--font-serif);
+    font-size: 19px;
+    line-height: 1.25;
+  }
+
+  .theme-switcher-close {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    margin: -0.55rem -0.55rem 0 0;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    transition: color 200ms ease, background-color 200ms ease;
+  }
+
+  .theme-switcher-close:hover,
+  .theme-switcher-close:focus-visible {
+    background: var(--accent-glow-soft);
+    color: var(--accent-light);
+  }
+
+  .theme-switcher-options {
+    display: grid;
+    gap: 0.45rem;
+    padding: 0.65rem;
+  }
+
+  .theme-option {
+    position: relative;
+    display: grid;
+    min-height: 74px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 0.9rem;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    color: var(--text-secondary);
+    text-align: left;
+    transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease;
+  }
+
+  .theme-option:hover,
+  .theme-option:focus-visible {
+    border-color: var(--accent-border-soft);
+    background: var(--surface-subtle);
+    color: var(--text);
+  }
+
+  .theme-option[data-active] {
+    border-color: var(--accent-border);
+    background: var(--accent-glow-soft);
+    color: var(--text);
+  }
+
+  .theme-option-copy {
+    min-width: 0;
+  }
+
+  .theme-option-copy strong,
+  .theme-option-copy small {
+    display: block;
+  }
+
+  .theme-option-copy strong {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .theme-option-copy small {
+    margin-top: 0.3rem;
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .theme-swatches {
+    display: flex;
+    align-items: center;
+    padding-right: 0.25rem;
+  }
+
+  .theme-swatches span {
+    width: 19px;
+    height: 19px;
+    margin-left: -5px;
+    border: 1px solid color-mix(in srgb, white 38%, transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px color-mix(in srgb, black 20%, transparent);
+  }
+
+  .theme-option-check {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.45rem;
+    color: var(--accent-light);
+  }
+
+  @keyframes themePanelIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes loaderPulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.97); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 15%, transparent)); }
+    50% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 28px color-mix(in srgb, var(--accent) 40%, transparent)); }
+  }
+
+  @media (max-width: 639px) {
+    .theme-switcher-trigger {
+      width: 48px;
+      height: 48px;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .theme-trigger-swatches {
+      display: none;
+    }
+  }
+}
+
+@layer utilities {
+  .will-change-transform { will-change: transform; }
+}
+
+/*
+  Скрива „Cal.com" воден знак в дъното на booking popup-а.
+  Cal рендерира баджа вътре в собствения си cross-origin iframe (в light DOM
+  на body), затова не може да се махне с достъп до iframe съдържанието — тук
+  отрязваме долната лента на самия iframe елемент чрез clip-path.
+
+  Само за десктоп (≥768px): там popup-ът е центрирана карта с плаващ баджа и
+  голямо празно пространство отдолу, така че отрязването не пипа съдържание.
+  На мобилен Cal показва popup-а на цял екран БЕЗ плаващ баджа, а бутонът
+  „Потвърди" стои близо до дъното — затова там НЕ режем, за да не се счупи.
+
+  Забележка: визуален хак, зависи от текущия layout на Cal — при промяна от
+  тяхна страна стойността може да се наложи да се коригира. Чистото решение е
+  „Hide branding" на платен Cal план.
+*/
+@media (min-width: 768px) {
+  iframe.cal-embed {
+    clip-path: inset(0 0 72px 0);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Между процедурите и услугите не натрупваме два пълни section padding-а. */
+  .procedure-section {
+    padding-bottom: 1.25rem;
+  }
+
+  .services-section {
+    padding-top: 2.75rem;
+    background: var(--bg);
+  }
+
+  /* Сферата използва цялата ширина на телефона, включително секционния
+     padding. Стабилната височина не оставя голямо празно поле около нея. */
+  .procedure-sphere {
+    --sphere-section-gutter: clamp(1rem, 4vw, 3rem);
+    width: calc(100% + var(--sphere-section-gutter) + var(--sphere-section-gutter));
+    max-width: none;
+    height: clamp(380px, 108vw, 520px);
+    margin-left: calc(0px - var(--sphere-section-gutter));
+  }
+}
+
+@media (max-width: 639px) {
+  /* По-спокойно и по-икономично на тъч устройства, без да губим сиянието. */
+  .glow-pulse {
+    animation: none;
+    text-shadow: 0 0 44px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 90px color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+}
+
+@media (hover: none) {
+  .brand-tooltip,
+  .social-tooltip {
+    display: none;
+  }
+
+  .svc-card:hover,
+  .eq-card:hover {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

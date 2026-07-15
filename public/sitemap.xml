@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://di-care.vercel.app/</loc><priority>1.0</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/ozonoterapia</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/infuzionna-terapia</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/laser-fotona</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/mezoterapia</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/injekcionni-proceduri</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/estetichna-ginekologia</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/laserna-stomatologia</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/poveritelnost</loc><priority>0.3</priority></url>
+</urlset>

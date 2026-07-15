@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Dr. Di Clinic">
+  <rect width="100" height="100" rx="24" fill="#102423"/>
+  <rect x="5" y="5" width="90" height="90" rx="19" fill="none" stroke="#F0B7CA" stroke-width="2.5" opacity="0.85"/>
+  <text x="50" y="54" text-anchor="middle" dominant-baseline="middle"
+        font-family="Georgia, 'Playfair Display', 'Times New Roman', serif"
+        font-size="46" font-weight="600" letter-spacing="-1" fill="#F0B7CA">DC</text>
+</svg>
