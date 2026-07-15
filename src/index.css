@@ -176,6 +176,14 @@
     text-shadow: none;
   }
 
+  /* Върху средно-тъмния графит на dust пълното сияние се чете като размазана
+     мъгла около буквите — оставяме тих, статичен ореол. */
+  :root[data-theme='dust'] .glow-text,
+  :root[data-theme='dust'] .glow-pulse {
+    animation: none;
+    text-shadow: 0 0 30px color-mix(in srgb, var(--color-action) 24%, transparent), 0 0 70px color-mix(in srgb, var(--color-action) 9%, transparent);
+  }
+
   @keyframes glowPulse {
     0%, 100% { text-shadow: 0 0 50px color-mix(in srgb, var(--color-action) 35%, transparent), 0 0 110px color-mix(in srgb, var(--color-action) 12%, transparent); }
     50% { text-shadow: 0 0 70px color-mix(in srgb, var(--color-action) 55%, transparent), 0 0 140px color-mix(in srgb, var(--color-action) 22%, transparent); }

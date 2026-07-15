@@ -35,6 +35,10 @@ export default function ShaderBackground() {
       uniform vec3 u_accent;
       uniform vec3 u_secondary;
       uniform vec3 u_star;
+      // 0..1: сила на атмосферата (сияния + мъглявина). Тя е красива върху
+      // почти черния канвас на тъмната тема, но на по-светли фонове се чете
+      // като мъгла — затова всяка тема я задава през --effect-shader-atmo.
+      uniform float u_atmo;
 
       float hash(vec2 p) {
         return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -90,16 +94,21 @@ export default function ShaderBackground() {
           vec2 toStar = uv - sp;
           float along = dot(toStar, dir);
           float across = abs(dot(toStar, vec2(-dir.y, dir.x)));
-          float trail = exp(-across * across * 8000.0) * exp(-along * along * 200.0) * smoothstep(0.0, 0.1, t) * smoothstep(1.0, 0.7, t);
+          // 22000 (беше 8000): тясна, ясна опашка — широката мека ивица се
+          // четеше като лъч мъгла върху по-светлите канваси.
+          float trail = exp(-across * across * 22000.0) * exp(-along * along * 200.0) * smoothstep(0.0, 0.1, t) * smoothstep(1.0, 0.7, t);
           shoot += trail * 0.26;
         }
+        // Опашките дишат с атмосферата на темата: пълна сила на звездното
+        // небе, дискретни на графита на dust.
+        shoot *= 0.3 + 0.7 * u_atmo;
 
         vec3 color = u_bg;
         // Theme-aware central glow
-        color += u_accent * glow;
-        color += u_secondary * glow2;
+        color += u_accent * glow * u_atmo;
+        color += u_secondary * glow2 * u_atmo;
         // Subtle nebula
-        color += u_secondary * nebula;
+        color += u_secondary * nebula * u_atmo;
         // Stars
         color += u_star * stars * 0.7;
         // Shooting stars inherit the active palette
@@ -135,6 +144,7 @@ export default function ShaderBackground() {
     const uAccent = gl.getUniformLocation(prog, 'u_accent')
     const uSecondary = gl.getUniformLocation(prog, 'u_secondary')
     const uStar = gl.getUniformLocation(prog, 'u_star')
+    const uAtmo = gl.getUniformLocation(prog, 'u_atmo')
 
     const readCssColor = (token: string) => {
       const value = getComputedStyle(document.documentElement).getPropertyValue(token).trim().replace('#', '')
@@ -147,17 +157,10 @@ export default function ShaderBackground() {
       ])
     }
 
-    const syncThemeColors = () => {
-      gl.uniform3fv(uBg, readCssColor('--color-shader-base'))
-      gl.uniform3fv(uAccent, readCssColor('--color-shader-action'))
-      gl.uniform3fv(uSecondary, readCssColor('--color-shader-secondary'))
-      gl.uniform3fv(uStar, readCssColor('--color-shader-star'))
+    const readCssNumber = (token: string, fallback: number) => {
+      const value = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue(token))
+      return Number.isFinite(value) ? value : fallback
     }
-    syncThemeColors()
-    window.addEventListener('dicare:themechange', syncThemeColors)
-
-    resize()
-    window.addEventListener('resize', resize)
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const startTime = performance.now()
@@ -174,6 +177,25 @@ export default function ShaderBackground() {
       animId = requestAnimationFrame(loop)
     }
 
+    const syncThemeColors = () => {
+      gl.uniform3fv(uBg, readCssColor('--color-shader-base'))
+      gl.uniform3fv(uAccent, readCssColor('--color-shader-action'))
+      gl.uniform3fv(uSecondary, readCssColor('--color-shader-secondary'))
+      gl.uniform3fv(uStar, readCssColor('--color-shader-star'))
+      gl.uniform1f(uAtmo, readCssNumber('--effect-shader-atmo', 1))
+    }
+    const onThemeChange = () => {
+      syncThemeColors()
+      // Статичният кадър (мобилно/reduced-motion) не се рисува в loop — без
+      // изрично прерисуване смяната на тема оставя старите пиксели.
+      if (staticFrame) drawFrame()
+    }
+    syncThemeColors()
+    window.addEventListener('dicare:themechange', onThemeChange)
+
+    resize()
+    window.addEventListener('resize', resize)
+
     // На мобилно фонът е статичен: запазва визията, но освобождава GPU за
     // скрол, формите и 3D сферата. На десктоп остава напълно анимиран.
     if (staticFrame) drawFrame()
@@ -188,7 +210,7 @@ export default function ShaderBackground() {
 
     return () => {
       window.removeEventListener('resize', resize)
-      window.removeEventListener('dicare:themechange', syncThemeColors)
+      window.removeEventListener('dicare:themechange', onThemeChange)
       document.removeEventListener('visibilitychange', onVisibility)
       cancelAnimationFrame(animId)
     }

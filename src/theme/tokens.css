@@ -81,6 +81,9 @@
   --text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
   --filter-map: grayscale(1) invert(0.92) hue-rotate(180deg) brightness(0.88) contrast(0.92);
   --effect-shader-opacity: 1;
+  /* Сияния + мъглявина в шейдъра: 1 = пълна атмосфера (звездно небе върху
+     почти черен канвас); по-светлите теми я гасят, за да няма „мъгла". */
+  --effect-shader-atmo: 1;
   --effect-noise-opacity: 0.018;
 
   /* Canvas / Three integrations */
@@ -150,8 +153,10 @@
   --label-shadow: 0 6px 18px rgba(0, 59, 44, 0.12);
   --text-shadow: none;
   --filter-map: grayscale(0.78) sepia(0.14) saturate(0.72) brightness(0.98) contrast(0.9);
-  /* Светлите версии остават чисти и плътни, без мътен nebula слой. */
-  --effect-shader-opacity: 0.06;
+  /* Светлите версии са чисти и плътни: шейдърът е изцяло изключен — дори на
+     6% облачният шум оставяше мръсни петна по крема. */
+  --effect-shader-opacity: 0;
+  --effect-shader-atmo: 0;
   --effect-noise-opacity: 0.008;
 
   --color-shader-base: var(--palette-3);
@@ -214,8 +219,10 @@
   --label-shadow: 0 6px 18px rgba(59, 52, 42, 0.12);
   --text-shadow: none;
   --filter-map: grayscale(0.76) sepia(0.18) saturate(0.7) brightness(0.96) contrast(0.88);
-  /* Светлите версии остават чисти и плътни, без мътен nebula слой. */
-  --effect-shader-opacity: 0.06;
+  /* Светлите версии са чисти и плътни: шейдърът е изцяло изключен — дори на
+     6% облачният шум оставяше мръсни петна по тана. */
+  --effect-shader-opacity: 0;
+  --effect-shader-atmo: 0;
   --effect-noise-opacity: 0.008;
 
   --color-shader-base: var(--palette-1);
@@ -269,6 +276,11 @@
 
   --color-page-overlay: color-mix(in srgb, #2d3432 54%, transparent);
   --paint-brand: linear-gradient(110deg, var(--palette-4), var(--palette-2) 56%, var(--palette-6));
+
+  /* Графитът е доста по-светъл от почти черния канвас на основната тема —
+     пълната атмосфера там се четеше като пушек. Оставяме само шепот дълбочина;
+     звездите не зависят от това и остават чисти. */
+  --effect-shader-atmo: 0.22;
 
   --color-shader-base: var(--palette-1);
   --color-shader-action: var(--palette-2);
