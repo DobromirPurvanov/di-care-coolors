@@ -101,7 +101,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="relative min-h-screen" style={{ background: 'var(--bg)' }}>
+    <div className="relative min-h-screen" style={{ background: 'var(--color-canvas)' }}>
       <LoadingScreen />
       <Suspense fallback={null}>
         <ShaderBackground />
@@ -111,7 +111,7 @@ export default function App() {
       <div
         aria-hidden="true"
         className="fixed inset-0 pointer-events-none"
-        style={{ zIndex: 1, background: 'var(--page-overlay)' }}
+        style={{ zIndex: 1, background: 'var(--color-page-overlay)' }}
       />
       <Header />
       <ScrollToTop />

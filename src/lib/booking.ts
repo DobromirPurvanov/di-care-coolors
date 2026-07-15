@@ -29,7 +29,7 @@ function getCalTheme(): 'light' | 'dark' {
 function getCalUiConfig() {
   const accent = typeof document === 'undefined'
     ? '#B698B8'
-    : getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#B698B8'
+    : getComputedStyle(document.documentElement).getPropertyValue('--color-action').trim() || '#B698B8'
 
   return {
     theme: getCalTheme(),

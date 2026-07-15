@@ -3,143 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    color-scheme: dark;
-    --bg: #102423;
-    --bg-elevated: #25424a;
-    --bg-card: #496074;
-    --text: #f7f4f6;
-    --text-secondary: color-mix(in srgb, var(--text) 82%, var(--bg));
-    --text-muted: color-mix(in srgb, var(--text) 72%, var(--bg));
-    --accent: #b698b8;
-    --accent-light: #f0b7ca;
-    --accent-soft: #d8bad0;
-    --accent-bright: #f8d8e2;
-    --accent-contrast: #102423;
-    --tone-ink: #102423;
-    --surface-ink: #f7f4f6;
-    --secondary: #7b7c9b;
-    --surface-accent: #496074;
-    --accent-glow: color-mix(in srgb, var(--accent) 30%, transparent);
-    --accent-glow-soft: color-mix(in srgb, var(--accent) 10%, transparent);
-    --accent-border: color-mix(in srgb, var(--accent) 42%, transparent);
-    --accent-border-soft: color-mix(in srgb, var(--accent) 18%, transparent);
-    --border: color-mix(in srgb, var(--text) 10%, transparent);
-    --surface-subtle: color-mix(in srgb, var(--surface-accent) 18%, transparent);
-    --page-overlay: color-mix(in srgb, var(--bg) 48%, transparent);
-    --brand-gradient: linear-gradient(110deg, var(--secondary), var(--accent) 52%, var(--accent-light));
-    --card-bg: var(--bg-elevated);
-    --card-bg-hover: color-mix(in srgb, var(--bg-elevated) 94%, var(--text) 6%);
-    --card-border: color-mix(in srgb, var(--secondary) 46%, var(--border));
-    --glass-bg: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
-    --section-wash: var(--bg);
-    --section-wash-alt: var(--bg-elevated);
-    --hero-gradient: linear-gradient(180deg, color-mix(in srgb, var(--bg) 18%, transparent), var(--bg));
-    --card-shadow: 0 18px 52px rgba(0, 0, 0, 0.32);
-    --floating-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
-    --label-shadow: 0 6px 24px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(0, 0, 0, 0.34);
-    --text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
-    --map-filter: grayscale(1) invert(0.92) hue-rotate(180deg) brightness(0.88) contrast(0.92);
-    --shader-opacity: 1;
-    --success: #8fd0a6;
-    --error: #e58d7e;
-    --shader-bg: #102423;
-    --shader-accent: #f0b7ca;
-    --shader-secondary: #496074;
-    --shader-star: #f7f4f6;
-    --font-serif: 'Playfair Display', Georgia, serif;
-    --font-mono: 'Space Mono', 'Courier New', monospace;
-  }
-
-  :root[data-theme='spot'] {
-    color-scheme: light;
-    --bg: #ffefca;
-    --bg-elevated: #d0c4ab;
-    --bg-card: #998e77;
-    --text: #005b45;
-    --text-secondary: #005b45;
-    --text-muted: #005b45;
-    --accent: #005b45;
-    --accent-light: #004735;
-    --accent-soft: #005b45;
-    --accent-bright: #003d2e;
-    --accent-contrast: #ffefca;
-    --tone-ink: #102423;
-    --surface-ink: #102423;
-    --secondary: #998e77;
-    --surface-accent: #998e77;
-    --page-overlay: color-mix(in srgb, #ffefca 10%, transparent);
-    --brand-gradient: #005b45;
-    --card-border: color-mix(in srgb, #005b45 24%, transparent);
-    --glass-bg: color-mix(in srgb, #ffefca 94%, transparent);
-    --hero-gradient: linear-gradient(180deg, color-mix(in srgb, #ffefca 35%, transparent), #ffefca);
-    --card-shadow: 0 18px 48px rgba(0, 91, 69, 0.14);
-    --floating-shadow: 0 24px 60px rgba(0, 91, 69, 0.18);
-    --label-shadow: 0 7px 22px rgba(0, 91, 69, 0.16);
-    --text-shadow: none;
-    --map-filter: grayscale(0.78) sepia(0.14) saturate(0.72) brightness(0.98) contrast(0.9);
-    --shader-opacity: 0.26;
-    --shader-bg: #ffefca;
-    --shader-accent: #005b45;
-    --shader-secondary: #998e77;
-    --shader-star: #005b45;
-  }
-
-  :root[data-theme='matching'] {
-    color-scheme: light;
-    --bg: #d0c4ab;
-    --bg-elevated: #a5cdc4;
-    --bg-card: #b3aa99;
-    --text: #453f32;
-    --text-secondary: #453f32;
-    --text-muted: #4d4637;
-    --accent: #4d4637;
-    --accent-light: #3f392d;
-    --accent-soft: #4d4637;
-    --accent-bright: #342f27;
-    --accent-contrast: #d0c4ab;
-    --tone-ink: #26312f;
-    --surface-ink: #322e25;
-    --secondary: #71978f;
-    --surface-accent: #b3aa99;
-    --page-overlay: color-mix(in srgb, #d0c4ab 10%, transparent);
-    --brand-gradient: #4d4637;
-    --card-border: color-mix(in srgb, #4d4637 24%, transparent);
-    --glass-bg: color-mix(in srgb, #d0c4ab 94%, transparent);
-    --hero-gradient: linear-gradient(180deg, color-mix(in srgb, #d0c4ab 35%, transparent), #d0c4ab);
-    --card-shadow: 0 18px 48px rgba(77, 70, 55, 0.15);
-    --floating-shadow: 0 24px 60px rgba(77, 70, 55, 0.19);
-    --label-shadow: 0 7px 22px rgba(77, 70, 55, 0.16);
-    --text-shadow: none;
-    --map-filter: grayscale(0.76) sepia(0.18) saturate(0.7) brightness(0.96) contrast(0.88);
-    --shader-opacity: 0.24;
-    --shader-bg: #d0c4ab;
-    --shader-accent: #4d4637;
-    --shader-secondary: #71978f;
-    --shader-star: #4d4637;
-  }
-
-  :root[data-theme='dust'] {
-    --bg: #404846;
-    --bg-elevated: #353d3b;
-    --bg-card: #647c76;
-    --text: #f1f5f4;
-    --accent: #80b5aa;
-    --accent-light: #b8d9d2;
-    --accent-soft: #a7cbc4;
-    --accent-bright: #e2f0ed;
-    --accent-contrast: #303a38;
-    --tone-ink: #202927;
-    --surface-ink: #f1f5f4;
-    --secondary: #677890;
-    --surface-accent: #647c76;
-    --page-overlay: color-mix(in srgb, #2d3432 54%, transparent);
-    --shader-bg: #404846;
-    --shader-accent: #80b5aa;
-    --shader-secondary: #677890;
-    --shader-star: #f1f5f4;
-  }
-
   html {
     scroll-behavior: auto; /* Lenis поема плавния скрол */
     width: 100%;
@@ -157,8 +20,8 @@
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    background: var(--bg);
-    color: var(--text);
+    background: var(--color-canvas);
+    color: var(--color-text);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-weight: 400;
     line-height: 1.5;
@@ -206,17 +69,17 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--accent) 40%, transparent);
-    color: var(--text);
+    background: color-mix(in srgb, var(--color-action) 40%, transparent);
+    color: var(--color-text);
   }
 
   ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 55%, transparent); }
+  ::-webkit-scrollbar-track { background: var(--color-canvas); }
+  ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--color-action) 30%, transparent); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--color-action) 55%, transparent); }
 
   :focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--accent) 75%, transparent);
+    outline: 2px solid color-mix(in srgb, var(--color-action) 75%, transparent);
     outline-offset: 3px;
   }
 }
@@ -233,12 +96,12 @@
     inset: 0 0 auto;
     z-index: 20;
     height: 4px;
-    background: var(--brand-gradient);
+    background: var(--paint-brand);
   }
 
   .eq-color-panel {
-    background: var(--surface-accent);
-    color: var(--surface-ink);
+    background: var(--color-feature);
+    color: var(--color-on-feature);
   }
 
   .eq-color-icon {
@@ -249,18 +112,18 @@
 
   .pillar-icon,
   .contact-icon {
-    color: var(--accent-contrast);
-    background: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent-contrast) 26%, transparent);
+    color: var(--color-on-action);
+    background: var(--color-action);
+    border: 1px solid color-mix(in srgb, var(--color-on-action) 26%, transparent);
   }
 
   .theme-logo {
     display: block;
     flex: none;
-    background: var(--brand-gradient);
+    background: var(--paint-brand);
     -webkit-mask: url('/images/logo-di-care-gold.png') center / contain no-repeat;
     mask: url('/images/logo-di-care-gold.png') center / contain no-repeat;
-    filter: drop-shadow(0 0 18px var(--accent-glow));
+    filter: drop-shadow(0 0 18px var(--color-action-glow));
     user-select: none;
   }
 
@@ -291,14 +154,14 @@
   }
 
   .text-gradient {
-    background: var(--brand-gradient);
+    background: var(--paint-brand);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .glow-text {
-    text-shadow: 0 0 60px color-mix(in srgb, var(--accent) 40%, transparent), 0 0 120px color-mix(in srgb, var(--accent) 15%, transparent);
+    text-shadow: 0 0 60px color-mix(in srgb, var(--color-action) 40%, transparent), 0 0 120px color-mix(in srgb, var(--color-action) 15%, transparent);
   }
 
   .glow-pulse {
@@ -314,8 +177,8 @@
   }
 
   @keyframes glowPulse {
-    0%, 100% { text-shadow: 0 0 50px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 110px color-mix(in srgb, var(--accent) 12%, transparent); }
-    50% { text-shadow: 0 0 70px color-mix(in srgb, var(--accent) 55%, transparent), 0 0 140px color-mix(in srgb, var(--accent) 22%, transparent); }
+    0%, 100% { text-shadow: 0 0 50px color-mix(in srgb, var(--color-action) 35%, transparent), 0 0 110px color-mix(in srgb, var(--color-action) 12%, transparent); }
+    50% { text-shadow: 0 0 70px color-mix(in srgb, var(--color-action) 55%, transparent), 0 0 140px color-mix(in srgb, var(--color-action) 22%, transparent); }
   }
 
   /* ------- Етикети на 3D сферата ------- */
@@ -330,22 +193,22 @@
   }
 
   .services-section {
-    background: var(--section-wash);
-    --card-bg: var(--bg-elevated);
-    --card-bg-hover: color-mix(in srgb, var(--bg-elevated) 94%, var(--text) 6%);
+    background: var(--paint-section-primary);
+    --color-card: var(--color-section);
+    --color-card-hover: color-mix(in srgb, var(--color-section) 94%, var(--color-text) 6%);
   }
 
-  .procedure-section { background: var(--bg); }
+  .procedure-section { background: var(--color-canvas); }
 
   #about,
   #contact {
-    --card-bg: var(--bg);
-    --card-bg-hover: color-mix(in srgb, var(--bg) 94%, var(--text) 6%);
+    --color-card: var(--color-canvas);
+    --color-card-hover: color-mix(in srgb, var(--color-canvas) 94%, var(--color-text) 6%);
   }
 
   #equipment {
-    --card-bg: var(--bg-elevated);
-    --card-bg-hover: color-mix(in srgb, var(--bg-elevated) 94%, var(--text) 6%);
+    --color-card: var(--color-section);
+    --color-card-hover: color-mix(in srgb, var(--color-section) 94%, var(--color-text) 6%);
   }
 
   .label-tag {
@@ -354,8 +217,8 @@
     gap: 8px;
     padding: 10px 18px;
     /* По-плътен фон + blur, за да изпъкват над анимирания звезден фон */
-    background: var(--glass-bg);
-    border: 1px solid color-mix(in srgb, var(--secondary) 62%, var(--accent-border));
+    background: var(--color-glass);
+    border: 1px solid color-mix(in srgb, var(--color-secondary) 62%, var(--color-action-border));
     border-radius: 999px;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -363,7 +226,7 @@
     font-weight: 500;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--accent-soft);
+    color: var(--color-heading);
     cursor: pointer;
     transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     white-space: nowrap;
@@ -379,7 +242,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--color-action);
     flex: none;
     opacity: 0;
     transform: scale(0.4);
@@ -389,17 +252,17 @@
 
   .label-tag:hover,
   .label-tag:focus-visible {
-    border-color: var(--accent);
-    color: var(--accent-bright);
-    background: color-mix(in srgb, var(--bg-elevated) 82%, var(--bg-card) 18%);
+    border-color: var(--color-action);
+    color: var(--color-action-strong);
+    background: color-mix(in srgb, var(--color-section) 82%, var(--color-palette-surface) 18%);
     box-shadow: var(--card-shadow);
   }
 
   .label-tag.label-active {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    color: var(--accent-bright);
-    box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 20%, transparent);
+    border-color: var(--color-action);
+    background: color-mix(in srgb, var(--color-action) 10%, transparent);
+    color: var(--color-action-strong);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-action) 20%, transparent);
   }
 
   .label-tag.label-active::before {
@@ -427,9 +290,9 @@
     display: inline-flex;
     padding: 4px;
     gap: 2px;
-    border: 1px solid var(--card-border);
+    border: 1px solid var(--color-card-border);
     border-radius: 999px;
-    background: var(--glass-bg);
+    background: var(--color-glass);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
@@ -445,17 +308,17 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     /* ≥4.5:1 контраст върху тъмния фон */
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     border-radius: 999px;
     transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .proc-toggle-btn:hover { color: var(--accent-light); }
+  .proc-toggle-btn:hover { color: var(--color-action-hover); }
 
   .proc-toggle-btn.is-active {
-    color: var(--accent-contrast);
-    background: var(--accent);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent), 0 0 18px color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--color-on-action);
+    background: var(--color-action);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-action) 45%, transparent), 0 0 18px color-mix(in srgb, var(--color-action) 12%, transparent);
   }
 
   @media (pointer: coarse) {
@@ -468,13 +331,13 @@
     align-items: center;
     min-height: 40px;
     padding: 9px 17px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: var(--color-card);
+    border: 1px solid var(--color-card-border);
     border-radius: 999px;
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     max-width: 100%;
     white-space: normal;
@@ -485,17 +348,17 @@
 
   .proc-chip:hover,
   .proc-chip:focus-visible {
-    border-color: var(--accent);
-    color: var(--accent-bright);
-    background: var(--card-bg-hover);
-    box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 20%, transparent);
+    border-color: var(--color-action);
+    color: var(--color-action-strong);
+    background: var(--color-card-hover);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--color-action) 20%, transparent);
   }
 
   .proc-chip-active {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: var(--accent-contrast);
-    box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 18%, transparent);
+    border-color: var(--color-action);
+    background: var(--color-action);
+    color: var(--color-on-action);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-action) 18%, transparent);
   }
 
   @media (pointer: coarse) {
@@ -509,8 +372,8 @@
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
-    color: var(--text);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    color: var(--color-text);
     /* 16px минимум — под 16px iOS Safari прави zoom при фокус на полето */
     font-size: 16px;
     font-weight: 300;
@@ -526,10 +389,10 @@
 
   .field-input:focus {
     outline: none;
-    border-bottom-color: var(--accent);
+    border-bottom-color: var(--color-action);
   }
 
-  .field-input.field-error { border-bottom-color: var(--error); }
+  .field-input.field-error { border-bottom-color: var(--color-negative); }
 
   .field-label {
     position: absolute;
@@ -538,7 +401,7 @@
     font-size: 14px;
     letter-spacing: 0.04em;
     /* ≥4.5:1 контраст (0.4 беше ~3.6:1) */
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     pointer-events: none;
     transition: top 0.25s ease, font-size 0.25s ease, color 0.25s ease, letter-spacing 0.25s ease;
   }
@@ -550,7 +413,7 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--color-action);
   }
 
   .field-msg {
@@ -558,8 +421,17 @@
     margin-top: 6px;
     font-size: 11px;
     letter-spacing: 0.03em;
-    color: var(--error);
+    color: var(--color-negative);
   }
+
+  .form-error-banner {
+    border: 1px solid var(--color-negative-border);
+    background: var(--color-negative-surface);
+    color: var(--color-negative);
+  }
+
+  .status-dot-positive { box-shadow: 0 0 8px var(--color-positive-glow); }
+  .status-dot-negative { box-shadow: 0 0 8px var(--color-negative-glow); }
 
   .field-help {
     display: block;
@@ -567,12 +439,12 @@
     font-size: 11px;
     letter-spacing: 0.03em;
     /* ≥4.5:1 контраст (0.42 беше ~3.8:1) */
-    color: var(--text-muted);
+    color: var(--color-text-muted);
   }
 
   /* Видим фокус ринг за GDPR чекбокса (sr-only input-ът клипва глобалния) */
   input:focus-visible + .gdpr-box {
-    outline: 2px solid color-mix(in srgb, var(--accent) 75%, transparent);
+    outline: 2px solid color-mix(in srgb, var(--color-action) 75%, transparent);
     outline-offset: 3px;
   }
 
@@ -583,16 +455,16 @@
   }
 
   @keyframes procHighlight {
-    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); background: color-mix(in srgb, var(--accent) 0%, transparent); }
-    18% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent), 0 0 34px color-mix(in srgb, var(--accent) 18%, transparent); background: color-mix(in srgb, var(--accent) 7%, transparent); }
-    70% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 24px color-mix(in srgb, var(--accent) 10%, transparent); background: color-mix(in srgb, var(--accent) 5%, transparent); }
-    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); background: color-mix(in srgb, var(--accent) 0%, transparent); }
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-action) 0%, transparent); background: color-mix(in srgb, var(--color-action) 0%, transparent); }
+    18% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-action) 55%, transparent), 0 0 34px color-mix(in srgb, var(--color-action) 18%, transparent); background: color-mix(in srgb, var(--color-action) 7%, transparent); }
+    70% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-action) 35%, transparent), 0 0 24px color-mix(in srgb, var(--color-action) 10%, transparent); background: color-mix(in srgb, var(--color-action) 5%, transparent); }
+    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-action) 0%, transparent); background: color-mix(in srgb, var(--color-action) 0%, transparent); }
   }
 
   select.field-input {
     background-image:
-      linear-gradient(45deg, transparent 50%, var(--accent-light) 50%),
-      linear-gradient(135deg, var(--accent-light) 50%, transparent 50%);
+      linear-gradient(45deg, transparent 50%, var(--color-action-hover) 50%),
+      linear-gradient(135deg, var(--color-action-hover) 50%, transparent 50%);
     background-repeat: no-repeat;
     background-position:
       calc(100% - 8px) calc(50% + 1px),
@@ -602,13 +474,13 @@
   }
 
   select.field-input option {
-    background: var(--bg-elevated);
-    color: var(--text);
+    background: var(--color-section);
+    color: var(--color-text);
   }
 
   /* Тъмна Google Maps чрез CSS филтър */
   .map-dark {
-    filter: var(--map-filter);
+    filter: var(--filter-map);
   }
 
   /* ------- Preview switcher for the four requested color editions ------- */
@@ -635,11 +507,11 @@
     align-items: center;
     gap: 0.65rem;
     padding: 0.65rem 0.8rem;
-    border: 1px solid var(--card-border);
+    border: 1px solid var(--color-card-border);
     border-radius: 999px;
-    background: var(--glass-bg);
-    color: var(--text);
-    box-shadow: var(--card-shadow), inset 0 0 0 1px var(--border);
+    background: var(--color-glass);
+    color: var(--color-text);
+    box-shadow: var(--card-shadow), inset 0 0 0 1px var(--color-border);
     backdrop-filter: blur(18px) saturate(1.2);
     -webkit-backdrop-filter: blur(18px) saturate(1.2);
     font-size: 11px;
@@ -651,9 +523,9 @@
 
   .theme-switcher-trigger:hover,
   .theme-switcher-trigger:focus-visible {
-    border-color: var(--accent);
-    background: var(--bg-elevated);
-    color: var(--accent-light);
+    border-color: var(--color-action);
+    background: var(--color-section);
+    color: var(--color-action-hover);
   }
 
   .theme-trigger-swatches {
@@ -666,18 +538,18 @@
     width: 14px;
     height: 14px;
     margin-left: -4px;
-    border: 1px solid color-mix(in srgb, var(--text) 55%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-text) 55%, transparent);
     border-radius: 50%;
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--bg) 55%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-canvas) 55%, transparent);
   }
 
   .theme-switcher-panel {
     width: min(360px, calc(100vw - 2rem));
     overflow: hidden;
-    border: 1px solid var(--card-border);
+    border: 1px solid var(--color-card-border);
     border-radius: 20px;
-    background: var(--glass-bg);
-    box-shadow: var(--floating-shadow), inset 0 0 0 1px var(--border);
+    background: var(--color-glass);
+    box-shadow: var(--floating-shadow), inset 0 0 0 1px var(--color-border);
     backdrop-filter: blur(24px) saturate(1.15);
     -webkit-backdrop-filter: blur(24px) saturate(1.15);
     animation: themePanelIn 180ms ease-out both;
@@ -689,20 +561,20 @@
     justify-content: space-between;
     gap: 1rem;
     padding: 1.15rem 1.15rem 0.9rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .theme-switcher-kicker {
     display: block;
     margin-bottom: 0.25rem;
-    color: var(--accent-light);
+    color: var(--color-action-hover);
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
   }
 
   .theme-switcher-heading h2 {
-    color: var(--text);
+    color: var(--color-text);
     font-family: var(--font-serif);
     font-size: 19px;
     line-height: 1.25;
@@ -717,14 +589,14 @@
     justify-content: center;
     margin: -0.55rem -0.55rem 0 0;
     border-radius: 50%;
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     transition: color 200ms ease, background-color 200ms ease;
   }
 
   .theme-switcher-close:hover,
   .theme-switcher-close:focus-visible {
-    background: var(--accent-glow-soft);
-    color: var(--accent-light);
+    background: var(--color-action-glow-soft);
+    color: var(--color-action-hover);
   }
 
   .theme-switcher-options {
@@ -743,22 +615,22 @@
     padding: 0.85rem 0.9rem;
     border: 1px solid transparent;
     border-radius: 14px;
-    color: var(--text-secondary);
+    color: var(--color-text-secondary);
     text-align: left;
     transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease;
   }
 
   .theme-option:hover,
   .theme-option:focus-visible {
-    border-color: var(--accent-border-soft);
-    background: var(--surface-subtle);
-    color: var(--text);
+    border-color: var(--color-action-border-soft);
+    background: var(--color-surface-subtle);
+    color: var(--color-text);
   }
 
   .theme-option[data-active] {
-    border-color: var(--accent-border);
-    background: var(--accent-glow-soft);
-    color: var(--text);
+    border-color: var(--color-action-border);
+    background: var(--color-action-glow-soft);
+    color: var(--color-text);
   }
 
   .theme-option-copy {
@@ -778,9 +650,9 @@
 
   .theme-option-mode {
     padding: 0.18rem 0.42rem;
-    border: 1px solid var(--card-border);
+    border: 1px solid var(--color-card-border);
     border-radius: 999px;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     font-size: 8px;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -797,7 +669,7 @@
 
   .theme-option-copy small {
     margin-top: 0.3rem;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     font-size: 11px;
     line-height: 1.35;
   }
@@ -821,7 +693,7 @@
     position: absolute;
     right: 0.5rem;
     top: 0.45rem;
-    color: var(--accent-light);
+    color: var(--color-action-hover);
   }
 
   @keyframes themePanelIn {
@@ -830,8 +702,8 @@
   }
 
   @keyframes loaderPulse {
-    0%, 100% { opacity: 0.55; transform: scale(0.97); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 15%, transparent)); }
-    50% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 28px color-mix(in srgb, var(--accent) 40%, transparent)); }
+    0%, 100% { opacity: 0.55; transform: scale(0.97); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-action) 15%, transparent)); }
+    50% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 28px color-mix(in srgb, var(--color-action) 40%, transparent)); }
   }
 
   @keyframes loaderPulseClean {
@@ -886,7 +758,7 @@
 
   .services-section {
     padding-top: 2.75rem;
-    background: var(--section-wash);
+    background: var(--paint-section-primary);
   }
 
   /* Сферата използва цялата ширина на телефона, включително секционния
@@ -904,7 +776,7 @@
   /* По-спокойно и по-икономично на тъч устройства, без да губим сиянието. */
   .glow-pulse {
     animation: none;
-    text-shadow: 0 0 44px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 90px color-mix(in srgb, var(--accent) 12%, transparent);
+    text-shadow: 0 0 44px color-mix(in srgb, var(--color-action) 35%, transparent), 0 0 90px color-mix(in srgb, var(--color-action) 12%, transparent);
   }
 
   :root[data-theme='spot'] .glow-pulse,

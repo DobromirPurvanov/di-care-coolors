@@ -50,7 +50,7 @@ export default function LoadingScreen() {
       aria-hidden="true"
       className="fixed inset-0 z-[2000] flex flex-col items-center justify-center"
       style={{
-        background: 'var(--bg)',
+        background: 'var(--color-canvas)',
         opacity: phase === 'fading' ? 0 : 1,
         transition: 'opacity 600ms ease',
         pointerEvents: phase === 'fading' ? 'none' : 'auto',
@@ -60,7 +60,7 @@ export default function LoadingScreen() {
       <div className="mt-6 flex items-center gap-2">
         <span
           className="text-[10px] tracking-[0.45em] uppercase"
-          style={{ color: 'var(--text-muted)' }}
+          style={{ color: 'var(--color-text-muted)' }}
         >
           Dr. Di Clinic
         </span>

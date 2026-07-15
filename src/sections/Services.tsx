@@ -60,23 +60,23 @@ export default function Services() {
             return (
               <div
                 key={cat.id}
-                className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-1"
+                className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border transition-all duration-300 hover:border-[var(--color-action)] hover:-translate-y-1"
                 style={{
                   minHeight: '260px',
-                  background: 'var(--card-bg)',
-                  borderColor: 'var(--card-border)',
+                  background: 'var(--color-card)',
+                  borderColor: 'var(--color-card-border)',
                   transform: 'translateY(60px)',
                   transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   boxShadow: 'none',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'var(--card-bg-hover)'
+                  el.style.background = 'var(--color-card-hover)'
                   el.style.boxShadow = 'var(--card-shadow)'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'var(--card-bg)'
+                  el.style.background = 'var(--color-card)'
                   el.style.boxShadow = 'none'
                 }}
               >
@@ -84,14 +84,14 @@ export default function Services() {
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 48%)' }}
+                  style={{ background: 'linear-gradient(135deg, color-mix(in srgb, var(--color-action) 10%, transparent), transparent 48%)' }}
                 />
 
                 {/* Златен номер */}
                 <span
                   aria-hidden="true"
                   className="font-mono-luxe absolute top-5 left-6 z-10 text-sm tracking-[0.1em] transition-opacity duration-[400ms] opacity-40 group-hover:opacity-90"
-                  style={{ color: 'var(--accent-soft)' }}
+                  style={{ color: 'var(--color-heading)' }}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
@@ -99,17 +99,17 @@ export default function Services() {
                 {/* Брой процедури */}
                 <span
                   className="absolute top-5 right-6 z-10 text-[11px] tabular-nums tracking-[0.1em]"
-                  style={{ color: 'var(--text-muted)' }}
+                  style={{ color: 'var(--color-text-muted)' }}
                 >
                   {count} {count === 1 ? 'процедура' : 'процедури'}
                 </span>
 
                 <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-6" style={{ minHeight: '260px' }}>
                   <Link to={`/uslugi/${cat.slug}`} className="block" aria-label={`${cat.label}: ${tagline}`}>
-                    <h3 className="font-light text-lg tracking-wider uppercase group-hover:text-[var(--accent-light)] transition-colors duration-300">
+                    <h3 className="font-light text-lg tracking-wider uppercase group-hover:text-[var(--color-action-hover)] transition-colors duration-300">
                       {cat.label}
                     </h3>
-                    <p className="text-[15px] mt-2 font-light leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                    <p className="text-[15px] mt-2 font-light leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                       {tagline}
                     </p>
                   </Link>
@@ -118,18 +118,18 @@ export default function Services() {
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-4">
                     <Link
                       to={`/uslugi/${cat.slug}`}
-                      className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-wider uppercase transition-colors hover:text-[var(--accent-light)]"
-                      style={{ color: 'var(--text-secondary)' }}
+                      className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-wider uppercase transition-colors hover:text-[var(--color-action-hover)]"
+                      style={{ color: 'var(--color-text-secondary)' }}
                     >
                       Научете повече
                       <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-[4px]" aria-hidden="true" />
                     </Link>
-                    <span aria-hidden="true" className="hidden min-[360px]:block w-px h-3.5" style={{ background: 'var(--border)' }} />
+                    <span aria-hidden="true" className="hidden min-[360px]:block w-px h-3.5" style={{ background: 'var(--color-border)' }} />
                     <BookingButton
                       variant="link"
                       service={cat.label}
                       className="inline-flex min-h-[44px] text-xs tracking-wider uppercase font-medium"
-                      style={{ color: 'var(--accent-light)' }}
+                      style={{ color: 'var(--color-action-hover)' }}
                     >
                       Запази час
                     </BookingButton>

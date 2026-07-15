@@ -28,14 +28,14 @@ export default function Footer() {
       className="relative z-10"
       style={{
         padding: 'clamp(3.5rem, 8vh, 4rem) clamp(1rem, 4vw, 3rem)',
-        background: 'var(--bg-elevated)',
+        background: 'var(--color-section)',
       }}
     >
       {/* Gradient top border */}
       <div
         aria-hidden="true"
         className="absolute top-0 left-0 w-full h-[1px]"
-        style={{ background: 'linear-gradient(90deg, transparent 0%, var(--secondary) 30%, var(--accent) 50%, var(--accent-light) 70%, transparent 100%)' }}
+        style={{ background: 'linear-gradient(90deg, transparent 0%, var(--color-secondary) 30%, var(--color-action) 50%, var(--color-action-hover) 70%, transparent 100%)' }}
       />
 
       <div className="max-w-6xl mx-auto">
@@ -43,8 +43,8 @@ export default function Footer() {
           {/* Лого + социални */}
           <div className="flex flex-col items-center md:items-start gap-5">
             <div className="flex items-center gap-2">
-              <span className="font-light text-sm tracking-[0.3em] uppercase text-[var(--text)]">Dr. Di</span>
-              <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--accent-light)' }}>Clinic</span>
+              <span className="font-light text-sm tracking-[0.3em] uppercase text-[var(--color-text)]">Dr. Di</span>
+              <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--color-action-hover)' }}>Clinic</span>
             </div>
             <div className="flex items-center gap-3">
               {[
@@ -56,11 +56,11 @@ export default function Footer() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--accent)]/50 hover:bg-[var(--accent)]/10"
-                  style={{ borderColor: 'var(--card-border)' }}
+                  className="w-11 h-11 flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--color-action)]/50 hover:bg-[var(--color-action)]/10"
+                  style={{ borderColor: 'var(--color-card-border)' }}
                   aria-label={`${s.name} (отваря се в нов раздел)`}
                 >
-                  <s.icon size={16} style={{ color: 'var(--text-secondary)' }} aria-hidden="true" />
+                  <s.icon size={16} style={{ color: 'var(--color-text-secondary)' }} aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -68,7 +68,7 @@ export default function Footer() {
 
           {/* Бързи връзки */}
           <nav className="flex flex-col items-center md:items-start gap-3" aria-label="Бързи връзки">
-            <span className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: 'var(--text-muted)' }}>
+            <span className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: 'var(--color-text-muted)' }}>
               Навигация
             </span>
             {QUICK_LINKS.map(l => (
@@ -76,8 +76,8 @@ export default function Footer() {
                 key={l.href}
                 type="button"
                 onClick={() => goToAnchor(l.href)}
-                className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] uppercase cursor-pointer transition-colors duration-300 hover:text-[var(--accent-light)] text-left"
-                style={{ color: 'var(--text-secondary)' }}
+                className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] uppercase cursor-pointer transition-colors duration-300 hover:text-[var(--color-action-hover)] text-left"
+                style={{ color: 'var(--color-text-secondary)' }}
               >
                 {l.label}
               </button>
@@ -86,17 +86,17 @@ export default function Footer() {
 
           {/* Правни */}
           <div className="flex flex-col items-center md:items-start gap-3">
-            <span className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: 'var(--text-muted)' }}>
+            <span className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: 'var(--color-text-muted)' }}>
               Информация
             </span>
-            <Link to="/poveritelnost" className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] transition-colors duration-300 hover:text-[var(--accent-light)]" style={{ color: 'var(--text-secondary)' }}>
+            <Link to="/poveritelnost" className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-action-hover)]" style={{ color: 'var(--color-text-secondary)' }}>
               Политика за лични данни
             </Link>
             <button
               type="button"
               onClick={openConsentBanner}
-              className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] cursor-pointer transition-colors duration-300 hover:text-[var(--accent-light)] text-center md:text-left"
-              style={{ color: 'var(--text-secondary)' }}
+              className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] cursor-pointer transition-colors duration-300 hover:text-[var(--color-action-hover)] text-center md:text-left"
+              style={{ color: 'var(--color-text-secondary)' }}
             >
               Настройки на бисквитките
             </button>
@@ -105,15 +105,15 @@ export default function Footer() {
           {/* Обратно към началото */}
           <button
             onClick={() => scrollToPosition(0)}
-            className="group w-12 h-12 flex-none flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--accent)]/60 hover:-translate-y-1"
-            style={{ borderColor: 'var(--card-border)' }}
+            className="group w-12 h-12 flex-none flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--color-action)]/60 hover:-translate-y-1"
+            style={{ borderColor: 'var(--color-card-border)' }}
             aria-label="Обратно към началото"
           >
-            <ArrowUp size={17} className="transition-colors duration-300 group-hover:!text-[var(--accent)]" style={{ color: 'var(--text-muted)' }} aria-hidden="true" />
+            <ArrowUp size={17} className="transition-colors duration-300 group-hover:!text-[var(--color-action)]" style={{ color: 'var(--color-text-muted)' }} aria-hidden="true" />
           </button>
         </div>
 
-        <p className="mt-12 text-center md:text-left text-[11px] tracking-wider" style={{ color: 'var(--text-muted)' }}>
+        <p className="mt-12 text-center md:text-left text-[11px] tracking-wider" style={{ color: 'var(--color-text-muted)' }}>
           © {new Date().getFullYear()} Dr. Di Clinic. Всички права запазени.
         </p>
       </div>

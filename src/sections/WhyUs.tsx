@@ -72,12 +72,12 @@ export default function WhyUs() {
       ref={sectionRef}
       id="about"
       className="relative z-10"
-      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)', background: 'var(--section-wash-alt)' }}
+      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)', background: 'var(--paint-section-secondary)' }}
     >
       <div className="max-w-6xl mx-auto">
         {/* Въведение */}
         <div className="max-w-2xl">
-          <p className="text-xs tracking-[0.25em] uppercase mb-4" style={{ color: 'var(--accent-light)' }}>
+          <p className="text-xs tracking-[0.25em] uppercase mb-4" style={{ color: 'var(--color-action-hover)' }}>
             За нас
           </p>
           <h2 className="font-serif-luxe text-gradient leading-[1.12]" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
@@ -86,9 +86,9 @@ export default function WhyUs() {
           <div
             aria-hidden="true"
             className="mt-5 mb-6"
-            style={{ width: '56px', height: '2px', background: 'var(--brand-gradient)' }}
+            style={{ width: '56px', height: '2px', background: 'var(--paint-brand)' }}
           />
-          <p style={{ fontSize: '16px', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
+          <p style={{ fontSize: '16px', lineHeight: 1.8, color: 'var(--color-text-secondary)' }}>
             В Dr. Di Clinic гледаме на красотата през погледа на медицината. Съчетаваме диагностика,
             опит и внимание към детайла, за да се погрижим за кожата ви меко и осмислено. Всеки план е
             личен, а целта ни е естествен и траен резултат, който изглежда просто като по-отпочиналата версия на вас.
@@ -101,18 +101,18 @@ export default function WhyUs() {
             <div
               key={i}
               ref={el => { if (el) cardsRef.current[i] = el }}
-              className="pillar-card relative overflow-hidden rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[var(--card-shadow)]"
-              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
+              className="pillar-card relative overflow-hidden rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-action)] hover:shadow-[var(--card-shadow)]"
+              style={{ background: 'var(--color-card)', border: '1px solid var(--color-card-border)' }}
             >
               <span
                 className="pillar-icon flex items-center justify-center w-12 h-12 rounded-full mb-5"
               >
                 <p.icon size={22} strokeWidth={1.5} aria-hidden="true" />
               </span>
-              <h3 className="font-serif-luxe" style={{ fontSize: '20px', lineHeight: 1.3, color: 'var(--accent-soft)' }}>
+              <h3 className="font-serif-luxe" style={{ fontSize: '20px', lineHeight: 1.3, color: 'var(--color-heading)' }}>
                 {p.title}
               </h3>
-              <p className="mt-3" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)' }}>
+              <p className="mt-3" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
                 {p.text}
               </p>
             </div>

@@ -115,8 +115,8 @@ export default function Privacy() {
         {/* Обратна навигация */}
         <Link
           to="/"
-          className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--accent-light)]"
-          style={{ color: 'var(--text-secondary)' }}
+          className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--color-action-hover)]"
+          style={{ color: 'var(--color-text-secondary)' }}
         >
           <ArrowLeft size={14} aria-hidden="true" />
           Обратно към сайта
@@ -125,17 +125,17 @@ export default function Privacy() {
         {/* Четяща повърхност — спокоен фон над анимирания starfield */}
         <article
           style={{
-            background: 'var(--card-bg)',
+            background: 'var(--color-card)',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
-            border: '1px solid var(--card-border)',
+            border: '1px solid var(--color-card-border)',
             borderRadius: '20px',
             boxShadow: 'var(--floating-shadow)',
             padding: 'clamp(1.25rem, 4.5vw, 3.25rem)',
           }}
         >
           <header>
-            <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--accent-light)' }}>
+            <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--color-action-hover)' }}>
               Защита на личните данни
             </p>
             <h1 className="text-gradient font-serif-luxe leading-[1.1]" style={{ fontSize: 'clamp(2rem, 5.5vw, 3rem)' }}>
@@ -144,9 +144,9 @@ export default function Privacy() {
             <div
               aria-hidden="true"
               className="mt-5 mb-6"
-              style={{ width: '56px', height: '2px', background: 'var(--brand-gradient)' }}
+              style={{ width: '56px', height: '2px', background: 'var(--paint-brand)' }}
             />
-            <p className="text-xs tracking-[0.06em]" style={{ color: 'var(--text-muted)' }}>
+            <p className="text-xs tracking-[0.06em]" style={{ color: 'var(--color-text-muted)' }}>
               Последна актуализация: {UPDATED}
             </p>
           </header>
@@ -155,12 +155,12 @@ export default function Privacy() {
             const extra = s.paragraphs2
             return (
               <section className="mt-11" key={s.title}>
-                <h2 className="font-serif-luxe" style={{ fontSize: '20px', lineHeight: 1.3, color: 'var(--accent-soft)' }}>
+                <h2 className="font-serif-luxe" style={{ fontSize: '20px', lineHeight: 1.3, color: 'var(--color-heading)' }}>
                   {s.title}
                 </h2>
 
                 {s.paragraphs?.map((p, i) => (
-                  <p key={i} className="mt-4" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)' }}>
+                  <p key={i} className="mt-4" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
                     {p}
                   </p>
                 ))}
@@ -171,11 +171,11 @@ export default function Privacy() {
                       <li
                         key={i}
                         className="flex gap-3"
-                        style={{ fontSize: '15px', lineHeight: 1.6, color: 'var(--text-secondary)' }}
+                        style={{ fontSize: '15px', lineHeight: 1.6, color: 'var(--color-text-secondary)' }}
                       >
-                        <span aria-hidden="true" className="mt-[9px] flex-none" style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--accent)' }} />
+                        <span aria-hidden="true" className="mt-[9px] flex-none" style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--color-action)' }} />
                         <span>
-                          {item.term && <strong style={{ color: 'var(--text)', fontWeight: 500 }}>{item.term}: </strong>}
+                          {item.term && <strong style={{ color: 'var(--color-text)', fontWeight: 500 }}>{item.term}: </strong>}
                           {item.text}
                         </span>
                       </li>
@@ -184,7 +184,7 @@ export default function Privacy() {
                 )}
 
                 {extra?.map((p, i) => (
-                  <p key={i} className="mt-4" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)' }}>
+                  <p key={i} className="mt-4" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
                     {p}
                   </p>
                 ))}

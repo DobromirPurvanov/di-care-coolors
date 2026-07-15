@@ -71,7 +71,7 @@ export default function Contact() {
       id="contact"
       ref={sectionRef}
       className="relative z-10"
-      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)', background: 'var(--section-wash-alt)' }}
+      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)', background: 'var(--paint-section-secondary)' }}
     >
       <div className="max-w-6xl mx-auto">
         {/* Двуколонен layout: форма | карта */}
@@ -85,22 +85,22 @@ export default function Contact() {
               >
                 Свържете се с нас
               </h2>
-              <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--accent) 50%, transparent), transparent)' }} />
+              <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--color-action) 50%, transparent), transparent)' }} />
             </div>
-            <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+            <p className="text-sm mb-8" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
               Изберете свободен час директно в календара ни или ни оставете съобщение и ще се свържем с вас.
             </p>
 
             {/* Основен път: онлайн запазване на час в реално време */}
             <div
               className="mb-9 p-5 sm:p-6 rounded-2xl"
-              style={{ border: '1px solid var(--card-border)', background: 'var(--card-bg)' }}
+              style={{ border: '1px solid var(--color-card-border)', background: 'var(--color-card)' }}
             >
               <div className="flex items-start gap-3">
-                <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--accent-light)', marginTop: '2px', flex: 'none' }} />
+                <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--color-action-hover)', marginTop: '2px', flex: 'none' }} />
                 <div>
-                  <p className="text-sm" style={{ color: 'var(--text)' }}>Запазете час онлайн</p>
-                  <p className="text-[13px] mt-1 leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  <p className="text-sm" style={{ color: 'var(--color-text)' }}>Запазете час онлайн</p>
+                  <p className="text-[13px] mt-1 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                     Вижте свободните часове в реално време и потвърдете за минута.
                   </p>
                 </div>
@@ -114,7 +114,7 @@ export default function Contact() {
               </BookingButton>
             </div>
 
-            <p className="text-[11px] tracking-[0.16em] uppercase mb-5" style={{ color: 'var(--text-muted)' }}>
+            <p className="text-[11px] tracking-[0.16em] uppercase mb-5" style={{ color: 'var(--color-text-muted)' }}>
               Или ни оставете съобщение
             </p>
             <ContactForm />
@@ -124,7 +124,7 @@ export default function Contact() {
           <div className="ct-reveal opacity-0 order-2" style={{ transform: 'translateY(40px)' }}>
             <div
               className="w-full h-full overflow-hidden rounded-2xl"
-              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', minHeight: '300px' }}
+              style={{ background: 'var(--color-card)', border: '1px solid var(--color-card-border)', minHeight: '300px' }}
             >
               {mapAllowed ? (
                 <iframe
@@ -140,21 +140,21 @@ export default function Contact() {
                 /* Placeholder до съгласие: адрес + изрично зареждане на картата */
                 <div
                   className="w-full h-full flex flex-col items-center justify-center text-center gap-4 p-5 sm:p-8"
-                  style={{ minHeight: '300px', background: 'var(--card-bg)' }}
+                  style={{ minHeight: '300px', background: 'var(--color-card)' }}
                 >
-                  <MapPin size={26} aria-hidden="true" style={{ color: 'var(--accent-light)' }} />
-                  <p className="text-sm font-light" style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+                  <MapPin size={26} aria-hidden="true" style={{ color: 'var(--color-action-hover)' }} />
+                  <p className="text-sm font-light" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
                     гр. Варна, ул. „Любен Каравелов" № 71, Партер
                   </p>
-                  <p className="text-[12px] max-w-[300px]" style={{ color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                  <p className="text-[12px] max-w-[300px]" style={{ color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
                     Картата се зарежда от Google Maps след вашето изрично действие.
                   </p>
                   <div className="flex flex-wrap items-center justify-center gap-3 mt-1">
                     <button
                       type="button"
                       onClick={() => setMapAllowed(true)}
-                      className="inline-flex items-center gap-2 px-6 min-h-[44px] rounded-full text-[11px] tracking-[0.14em] uppercase font-medium transition-all duration-300 hover:bg-[var(--accent-light)]"
-                      style={{ background: 'var(--accent)', color: 'var(--accent-contrast)' }}
+                      className="inline-flex items-center gap-2 px-6 min-h-[44px] rounded-full text-[11px] tracking-[0.14em] uppercase font-medium transition-all duration-300 hover:bg-[var(--color-action-hover)]"
+                      style={{ background: 'var(--color-action)', color: 'var(--color-on-action)' }}
                     >
                       Покажи картата
                     </button>
@@ -162,8 +162,8 @@ export default function Contact() {
                       href={MAPS_LINK}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 min-h-[44px] px-4 text-[11px] tracking-[0.12em] uppercase transition-colors hover:text-[var(--accent-light)]"
-                      style={{ color: 'var(--text-secondary)' }}
+                      className="inline-flex items-center gap-2 min-h-[44px] px-4 text-[11px] tracking-[0.12em] uppercase transition-colors hover:text-[var(--color-action-hover)]"
+                      style={{ color: 'var(--color-text-secondary)' }}
                     >
                       Отвори в Google Maps
                       <ExternalLink size={12} aria-hidden="true" />
@@ -176,7 +176,7 @@ export default function Contact() {
         </div>
 
         {/* Контактни блокове */}
-        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: 'var(--card-border)' }}>
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: 'var(--color-card-border)' }}>
           {[
             { icon: MapPin, label: 'Адрес', value: 'гр. Варна, ул. Любен Каравелов № 71, Партер', href: undefined as string | undefined },
             { icon: Phone, label: 'Телефон', value: '+359 882 708 081', href: 'tel:+359882708081' },
@@ -186,17 +186,17 @@ export default function Contact() {
             <div
               key={i}
               className="ct-reveal contact-card relative flex items-start gap-4 p-5 sm:p-6 lg:p-7 opacity-0"
-              style={{ background: 'var(--card-bg)', transform: 'translateY(25px)' }}
+              style={{ background: 'var(--color-card)', transform: 'translateY(25px)' }}
             >
               <span className="contact-icon flex h-9 w-9 flex-none items-center justify-center rounded-full">
                 <item.icon size={17} aria-hidden="true" />
               </span>
               <div className="min-w-0">
-                <p className="text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: 'var(--text-muted)' }}>
+                <p className="text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: 'var(--color-text-muted)' }}>
                   {item.label}
                 </p>
                 {item.label === 'Работно време' ? (
-                  <div className="text-sm font-light" style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+                  <div className="text-sm font-light" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
                     <p>Пон – Пет: 10:00 – 17:00</p>
                     <p>Събота: 10:00 – 14:00</p>
                     <p>Неделя: Затворено</p>
@@ -204,10 +204,10 @@ export default function Contact() {
                       <p className="flex items-center gap-2 mt-2 text-xs" aria-live="polite">
                         <span
                           aria-hidden="true"
-                          className="w-2 h-2 rounded-full"
-                          style={{ background: status.open ? 'var(--success)' : 'var(--error)', boxShadow: `0 0 8px ${status.open ? 'rgba(125,201,143,0.6)' : 'rgba(224,122,106,0.6)'}` }}
+                          className={`w-2 h-2 rounded-full ${status.open ? 'status-dot-positive' : 'status-dot-negative'}`}
+                          style={{ background: status.open ? 'var(--color-positive)' : 'var(--color-negative)' }}
                         />
-                        <span style={{ color: status.open ? 'var(--success)' : 'var(--error)' }}>
+                        <span style={{ color: status.open ? 'var(--color-positive)' : 'var(--color-negative)' }}>
                           В момента: {status.open ? 'Отворено' : 'Затворено'}
                         </span>
                       </p>
@@ -216,13 +216,13 @@ export default function Contact() {
                 ) : item.href ? (
                   <a
                     href={item.href}
-                    className="inline-flex min-h-[44px] max-w-full items-center text-sm font-light break-words transition-colors duration-300 hover:text-[var(--accent-light)]"
-                    style={{ color: 'var(--text-secondary)' }}
+                    className="inline-flex min-h-[44px] max-w-full items-center text-sm font-light break-words transition-colors duration-300 hover:text-[var(--color-action-hover)]"
+                    style={{ color: 'var(--color-text-secondary)' }}
                   >
                     {item.value}
                   </a>
                 ) : (
-                  <p className="text-sm font-light" style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>{item.value}</p>
+                  <p className="text-sm font-light" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>{item.value}</p>
                 )}
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function Contact() {
 
         {/* Социални мрежи */}
         <div className="ct-reveal mt-10 flex items-center gap-4 opacity-0" style={{ transform: 'translateY(20px)' }}>
-          <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: 'var(--text-muted)' }}>
+          <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-text-muted)' }}>
             Последвайте ни
           </span>
           {SOCIALS.map(s => (
@@ -240,17 +240,17 @@ export default function Contact() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-11 h-11 flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--accent)]/50"
-              style={{ borderColor: 'var(--border)' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--accent) 10%, transparent)' }}
+              className="group relative w-11 h-11 flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--color-action)]/50"
+              style={{ borderColor: 'var(--color-border)' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--color-action) 10%, transparent)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent' }}
               aria-label={`Последвайте ни в ${s.name}`}
             >
-              <s.icon size={18} className="transition-colors duration-300 group-hover:!text-[var(--accent)]" style={{ color: 'var(--text-muted)' }} aria-hidden="true" />
+              <s.icon size={18} className="transition-colors duration-300 group-hover:!text-[var(--color-action)]" style={{ color: 'var(--color-text-muted)' }} aria-hidden="true" />
               <span
                 role="tooltip"
                 className="social-tooltip pointer-events-none absolute left-1/2 bottom-full mb-2 -translate-x-1/2 whitespace-nowrap px-2.5 py-1.5 text-[10px] tracking-[0.08em] opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
-                style={{ background: 'var(--glass-bg)', border: '1px solid var(--card-border)', color: 'var(--text-secondary)' }}
+                style={{ background: 'var(--color-glass)', border: '1px solid var(--color-card-border)', color: 'var(--color-text-secondary)' }}
               >
                 {s.name}
               </span>

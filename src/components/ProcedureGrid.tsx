@@ -11,27 +11,27 @@ function DetailBody({ active, onClose }: { active: Procedure; onClose: () => voi
   return (
     <div className="p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
-        <h3 className="text-sm tracking-[0.12em] uppercase font-medium" style={{ color: 'var(--accent-light)' }}>
+        <h3 className="text-sm tracking-[0.12em] uppercase font-medium" style={{ color: 'var(--color-action-hover)' }}>
           {active.title}
         </h3>
         <button
           onClick={onClose}
-          className="flex items-center justify-center min-w-[44px] min-h-[44px] -mt-2.5 -mr-2.5 flex-none transition-colors hover:text-[var(--text)]"
-          style={{ color: 'var(--text-muted)' }}
+          className="flex items-center justify-center min-w-[44px] min-h-[44px] -mt-2.5 -mr-2.5 flex-none transition-colors hover:text-[var(--color-text)]"
+          style={{ color: 'var(--color-text-muted)' }}
           aria-label="Затвори детайлите"
         >
           <X size={18} aria-hidden="true" />
         </button>
       </div>
-      <p className="mt-3 text-[14px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+      <p className="mt-3 text-[14px] leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
         {active.description}
       </p>
       <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-1">
         <Link
           to={`/uslugi/${category.slug}`}
           state={{ procedure: active.title }}
-          className="inline-flex items-center gap-2 min-h-[44px] text-[11px] tracking-[0.15em] uppercase transition-colors hover:text-[var(--accent-light)]"
-          style={{ color: 'var(--accent-light)' }}
+          className="inline-flex items-center gap-2 min-h-[44px] text-[11px] tracking-[0.15em] uppercase transition-colors hover:text-[var(--color-action-hover)]"
+          style={{ color: 'var(--color-action-hover)' }}
         >
           Научете повече
           <ArrowRight size={13} aria-hidden="true" />
@@ -67,18 +67,18 @@ export default function ProcedureGrid() {
                 <span
                   aria-hidden="true"
                   className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: 'var(--accent)', boxShadow: '0 0 8px color-mix(in srgb, var(--accent) 45%, transparent)' }}
+                  style={{ background: 'var(--color-action)', boxShadow: '0 0 8px color-mix(in srgb, var(--color-action) 45%, transparent)' }}
                 />
-                <h3 className="text-[11px] tracking-[0.22em] uppercase" style={{ color: 'var(--text-secondary)' }}>
+                <h3 className="text-[11px] tracking-[0.22em] uppercase" style={{ color: 'var(--color-text-secondary)' }}>
                   {cat.label}
                 </h3>
-                <span className="text-[11px] tabular-nums" style={{ color: 'var(--text-muted)' }}>
+                <span className="text-[11px] tabular-nums" style={{ color: 'var(--color-text-muted)' }}>
                   {items.length}
                 </span>
                 <span
                   aria-hidden="true"
                   className="flex-1 h-px"
-                  style={{ background: 'linear-gradient(90deg, var(--secondary), transparent)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--color-secondary), transparent)' }}
                 />
               </div>
               <div className="flex flex-wrap gap-2.5">
@@ -105,8 +105,8 @@ export default function ProcedureGrid() {
           {active ? (
             <div
               style={{
-                background: 'var(--card-bg)',
-                border: '1px solid var(--card-border)',
+                background: 'var(--color-card)',
+                border: '1px solid var(--color-card-border)',
                 borderRadius: '18px',
                 backdropFilter: 'blur(14px)',
                 WebkitBackdropFilter: 'blur(14px)',
@@ -121,13 +121,13 @@ export default function ProcedureGrid() {
           ) : (
             <div
               className="flex flex-col items-center justify-center text-center px-6 py-12 rounded-2xl"
-              style={{ border: '1px dashed var(--border)' }}
+              style={{ border: '1px dashed var(--color-border)' }}
             >
-              <Sparkles size={22} aria-hidden="true" style={{ color: 'color-mix(in srgb, var(--accent) 50%, transparent)' }} />
-              <p className="mt-4 text-[12px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-secondary)' }}>
+              <Sparkles size={22} aria-hidden="true" style={{ color: 'color-mix(in srgb, var(--color-action) 50%, transparent)' }} />
+              <p className="mt-4 text-[12px] tracking-[0.12em] uppercase" style={{ color: 'var(--color-text-secondary)' }}>
                 Изберете процедура
               </p>
-              <p className="mt-2 text-[12px] font-light leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              <p className="mt-2 text-[12px] font-light leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                 Докоснете етикет, за да видите детайли и да запазите час.
               </p>
             </div>
@@ -147,8 +147,8 @@ export default function ProcedureGrid() {
             opacity: active ? 1 : 0,
             transform: active ? 'translateY(0)' : 'translateY(14px)',
             pointerEvents: active ? 'auto' : 'none',
-            background: 'var(--glass-bg)',
-            border: '1px solid var(--card-border)',
+            background: 'var(--color-glass)',
+            border: '1px solid var(--color-card-border)',
             borderRadius: '18px',
             backdropFilter: 'blur(14px)',
             WebkitBackdropFilter: 'blur(14px)',

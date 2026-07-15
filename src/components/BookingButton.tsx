@@ -20,10 +20,10 @@ interface Props {
 
 // Вариантът задава само цветовете, за да работят hover състоянията чрез Tailwind.
 const VARIANT: Record<Variant, string> = {
-  primary: 'bg-[var(--accent)] text-[var(--accent-contrast)] font-medium hover:bg-[var(--accent-light)]',
+  primary: 'bg-[var(--color-action)] text-[var(--color-on-action)] font-medium hover:bg-[var(--color-action-hover)]',
   ghost:
-    'border border-[var(--card-border)] text-[var(--text)] hover:border-[var(--accent)] hover:bg-[color-mix(in srgb, var(--accent) 10%, transparent)] hover:text-[var(--accent-light)]',
-  link: 'text-[var(--text-secondary)] hover:text-[var(--accent-light)]',
+    'border border-[var(--color-card-border)] text-[var(--color-text)] hover:border-[var(--color-action)] hover:bg-[color-mix(in srgb, var(--color-action) 10%, transparent)] hover:text-[var(--color-action-hover)]',
+  link: 'text-[var(--color-text-secondary)] hover:text-[var(--color-action-hover)]',
 }
 
 /**

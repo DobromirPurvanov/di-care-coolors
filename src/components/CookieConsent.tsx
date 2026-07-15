@@ -51,11 +51,11 @@ export default function CookieConsent() {
       <div
         className="pointer-events-auto w-full max-w-2xl max-h-[calc(100svh-1.5rem)] overflow-y-auto overscroll-contain flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 p-4 sm:p-6"
         style={{
-          background: 'var(--glass-bg)',
+          background: 'var(--color-glass)',
           backdropFilter: 'blur(14px)',
           WebkitBackdropFilter: 'blur(14px)',
-          border: '1px solid var(--card-border)',
-          borderLeft: '2px solid var(--accent)',
+          border: '1px solid var(--color-card-border)',
+          borderLeft: '2px solid var(--color-action)',
           boxShadow: 'var(--floating-shadow)',
           borderRadius: '18px',
           transform: shown ? 'translateY(0)' : 'translateY(24px)',
@@ -64,15 +64,15 @@ export default function CookieConsent() {
         }}
       >
         <div className="flex items-start gap-3.5 min-w-0">
-          <Cookie size={20} className="flex-none mt-[2px]" style={{ color: 'var(--accent-light)' }} aria-hidden="true" />
-          <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          <Cookie size={20} className="flex-none mt-[2px]" style={{ color: 'var(--color-action-hover)' }} aria-hidden="true" />
+          <p className="text-[13px] leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
             Използваме бисквитки за коректната работа на сайта. Вградените услуги
             (календар за резервации и карта) се зареждат само със съгласие или когато
             изрично ги използвате. Вижте{' '}
             <Link
               to="/poveritelnost"
-              className="underline underline-offset-2 transition-colors hover:text-[var(--accent-light)]"
-              style={{ color: 'var(--text)' }}
+              className="underline underline-offset-2 transition-colors hover:text-[var(--color-action-hover)]"
+              style={{ color: 'var(--color-text)' }}
             >
               Политиката за поверителност
             </Link>
@@ -85,9 +85,9 @@ export default function CookieConsent() {
             type="button"
             onClick={() => choose('essential')}
             className="w-full min-[420px]:w-auto whitespace-nowrap px-5 min-h-[44px] rounded-full text-[11px] tracking-[0.12em] uppercase transition-all duration-300 border"
-            style={{ borderColor: 'var(--card-border)', color: 'var(--text)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent-light)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; e.currentTarget.style.color = 'var(--text)' }}
+            style={{ borderColor: 'var(--color-card-border)', color: 'var(--color-text)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--color-action)'; e.currentTarget.style.color = 'var(--color-action-hover)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--color-card-border)'; e.currentTarget.style.color = 'var(--color-text)' }}
           >
             Само необходимите
           </button>
@@ -95,9 +95,9 @@ export default function CookieConsent() {
             type="button"
             onClick={() => choose('all')}
             className="w-full min-[420px]:w-auto whitespace-nowrap px-6 min-h-[44px] rounded-full text-[11px] tracking-[0.12em] uppercase font-medium transition-all duration-300"
-            style={{ background: 'var(--accent)', color: 'var(--accent-contrast)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--accent-light)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent)' }}
+            style={{ background: 'var(--color-action)', color: 'var(--color-on-action)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-action-hover)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-action)' }}
           >
             Приемам
           </button>

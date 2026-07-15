@@ -29,10 +29,10 @@ export default function ScrollProgress() {
       aria-hidden="true"
       className="absolute top-0 left-0 w-full h-[2px] will-change-transform"
       style={{
-        background: 'var(--brand-gradient)',
+        background: 'var(--paint-brand)',
         transform: 'scaleX(0)',
         transformOrigin: 'left center',
-        boxShadow: '0 0 8px color-mix(in srgb, var(--accent) 50%, transparent)',
+        boxShadow: '0 0 8px color-mix(in srgb, var(--color-action) 50%, transparent)',
       }}
     />
   )

@@ -143,16 +143,16 @@ export default function ContactForm() {
         <span
           className="w-14 h-14 rounded-full flex items-center justify-center"
           style={{
-            border: '1px solid color-mix(in srgb, var(--accent) 50%, transparent)',
-            background: 'color-mix(in srgb, var(--accent) 8%, transparent)',
+            border: '1px solid color-mix(in srgb, var(--color-action) 50%, transparent)',
+            background: 'color-mix(in srgb, var(--color-action) 8%, transparent)',
             animation: 'successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
           }}
         >
-          <Check size={26} style={{ color: 'var(--accent)' }} aria-hidden="true" />
+          <Check size={26} style={{ color: 'var(--color-action)' }} aria-hidden="true" />
         </span>
         <div>
-          <p className="text-lg" style={{ color: 'var(--text)' }}>Благодарим ви!</p>
-          <p className="text-sm mt-1.5 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-lg" style={{ color: 'var(--color-text)' }}>Благодарим ви!</p>
+          <p className="text-sm mt-1.5 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
             Получихме вашето съобщение{values.procedure ? ` относно „${values.procedure}"` : ''} и ще се
             свържем с вас в рамките на работния ден.
           </p>
@@ -199,7 +199,7 @@ export default function ContactForm() {
           required
         />
         <label htmlFor="cf-name" className="field-label">Име и фамилия *</label>
-        {isValid('name') && <Check size={14} className="absolute right-0 top-6" style={{ color: 'var(--success)' }} aria-hidden="true" />}
+        {isValid('name') && <Check size={14} className="absolute right-0 top-6" style={{ color: 'var(--color-positive)' }} aria-hidden="true" />}
         {touched.name && errors.name && <span id="cf-name-err" className="field-msg" role="alert">{errors.name}</span>}
       </div>
 
@@ -208,7 +208,7 @@ export default function ContactForm() {
         <span
           className="absolute left-0 top-[22px] text-[15px] select-none pointer-events-none"
           aria-hidden="true"
-          style={{ color: 'var(--text-secondary)' }}
+          style={{ color: 'var(--color-text-secondary)' }}
         >
           +359
         </span>
@@ -228,7 +228,7 @@ export default function ContactForm() {
           required
         />
         <label htmlFor="cf-phone" className="field-label pl-12">Телефон *</label>
-        {isValid('phone') && <Check size={14} className="absolute right-0 top-6" style={{ color: 'var(--success)' }} aria-hidden="true" />}
+        {isValid('phone') && <Check size={14} className="absolute right-0 top-6" style={{ color: 'var(--color-positive)' }} aria-hidden="true" />}
         {touched.phone && errors.phone
           ? <span id="cf-phone-err" className="field-msg" role="alert">{errors.phone}</span>
           : <span id="cf-phone-help" className="field-help">Ще ви се обадим за потвърждение на часа.</span>}
@@ -251,7 +251,7 @@ export default function ContactForm() {
           aria-describedby={errors.email ? 'cf-email-err' : undefined}
         />
         <label htmlFor="cf-email" className="field-label">Имейл (по избор)</label>
-        {isValid('email') && <Check size={14} className="absolute right-0 top-6" style={{ color: 'var(--success)' }} aria-hidden="true" />}
+        {isValid('email') && <Check size={14} className="absolute right-0 top-6" style={{ color: 'var(--color-positive)' }} aria-hidden="true" />}
         {touched.email && errors.email && <span id="cf-email-err" className="field-msg" role="alert">{errors.email}</span>}
       </div>
 
@@ -312,15 +312,15 @@ export default function ContactForm() {
             aria-hidden="true"
             className="gdpr-box mt-[2px] w-[18px] h-[18px] flex-none flex items-center justify-center transition-all duration-200"
             style={{
-              border: `1px solid ${values.gdpr ? 'var(--accent)' : touched.gdpr && errors.gdpr ? 'var(--error)' : 'var(--card-border)'}`,
-              background: values.gdpr ? 'color-mix(in srgb, var(--accent) 15%, transparent)' : 'transparent',
+              border: `1px solid ${values.gdpr ? 'var(--color-action)' : touched.gdpr && errors.gdpr ? 'var(--color-negative)' : 'var(--color-card-border)'}`,
+              background: values.gdpr ? 'color-mix(in srgb, var(--color-action) 15%, transparent)' : 'transparent',
             }}
           >
-            {values.gdpr && <Check size={12} style={{ color: 'var(--accent)' }} />}
+            {values.gdpr && <Check size={12} style={{ color: 'var(--color-action)' }} />}
           </span>
-          <span className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+          <span className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
             Съгласен/на съм с{' '}
-            <Link to="/poveritelnost" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 transition-colors hover:text-[var(--accent-light)]" style={{ color: 'var(--text-secondary)' }} onClick={e => e.stopPropagation()}>
+            <Link to="/poveritelnost" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 transition-colors hover:text-[var(--color-action-hover)]" style={{ color: 'var(--color-text-secondary)' }} onClick={e => e.stopPropagation()}>
               политиката за лични данни
             </Link>{' '}*
           </span>
@@ -332,8 +332,7 @@ export default function ContactForm() {
       {status === 'error' && (
         <div
           role="alert"
-          className="flex items-start gap-2.5 p-3.5 text-[13px] leading-relaxed"
-          style={{ border: '1px solid rgba(224,122,106,0.4)', background: 'rgba(224,122,106,0.08)', color: 'var(--error)' }}
+          className="form-error-banner flex items-start gap-2.5 p-3.5 text-[13px] leading-relaxed"
         >
           <AlertCircle size={16} aria-hidden="true" className="mt-[1px] flex-none" />
           <span>
@@ -347,9 +346,9 @@ export default function ContactForm() {
         type="submit"
         disabled={status === 'sending'}
         className="mt-2 w-full sm:w-auto sm:self-start inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100"
-        style={{ background: 'var(--accent)', color: 'var(--accent-contrast)' }}
-        onMouseEnter={e => { if (status !== 'sending') (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent-light)' }}
-        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent)' }}
+        style={{ background: 'var(--color-action)', color: 'var(--color-on-action)' }}
+        onMouseEnter={e => { if (status !== 'sending') (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-action-hover)' }}
+        onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--color-action)' }}
       >
         {status === 'sending' ? (
           <><Loader2 size={15} className="animate-spin" aria-hidden="true" />Изпращане...</>

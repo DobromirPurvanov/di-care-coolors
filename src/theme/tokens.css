@@ -1,0 +1,227 @@
+/*
+ * Di Care semantic color contract
+ *
+ * Components consume only semantic roles from this file. Each concept maps
+ * the supplied palette to the same roles, so a theme change never changes
+ * hierarchy or accessibility — only the art direction.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Matching Gradient — supplied palette */
+  --palette-1: #102423;
+  --palette-2: #25424a;
+  --palette-3: #496074;
+  --palette-4: #7b7c9b;
+  --palette-5: #b698b8;
+  --palette-6: #f0b7ca;
+
+  /* Foundation */
+  --color-canvas: var(--palette-1);
+  --color-section: var(--palette-2);
+  --color-palette-surface: var(--palette-3);
+  --color-card: var(--color-section);
+  --color-card-hover: color-mix(in srgb, var(--color-section) 94%, var(--color-text) 6%);
+  --color-glass: color-mix(in srgb, var(--color-section) 94%, transparent);
+
+  /* Content */
+  --color-text: #f7f4f6;
+  --color-text-secondary: color-mix(in srgb, var(--color-text) 82%, var(--color-canvas));
+  --color-text-muted: color-mix(in srgb, var(--color-text) 72%, var(--color-canvas));
+  --color-heading: var(--palette-6);
+
+  /* Actions and supporting accents */
+  --color-action: var(--palette-5);
+  --color-action-hover: var(--palette-6);
+  --color-action-strong: #f8d8e2;
+  --color-on-action: var(--palette-1);
+  --color-secondary: var(--palette-4);
+  --color-feature: var(--palette-3);
+  --color-on-feature: var(--color-text);
+
+  /* Boundaries and states */
+  --color-border: color-mix(in srgb, var(--color-text) 10%, transparent);
+  --color-card-border: color-mix(in srgb, var(--color-secondary) 46%, var(--color-border));
+  --color-action-border: color-mix(in srgb, var(--color-action) 42%, transparent);
+  --color-action-border-soft: color-mix(in srgb, var(--color-action) 18%, transparent);
+  --color-action-glow: color-mix(in srgb, var(--color-action) 30%, transparent);
+  --color-action-glow-soft: color-mix(in srgb, var(--color-action) 10%, transparent);
+  --color-surface-subtle: color-mix(in srgb, var(--color-feature) 18%, transparent);
+  --color-positive: #8fd0a6;
+  --color-negative: #e58d7e;
+  --color-positive-glow: color-mix(in srgb, var(--color-positive) 60%, transparent);
+  --color-negative-glow: color-mix(in srgb, var(--color-negative) 60%, transparent);
+  --color-negative-border: color-mix(in srgb, var(--color-negative) 42%, transparent);
+  --color-negative-surface: color-mix(in srgb, var(--color-negative) 9%, transparent);
+
+  /* Large-area paints */
+  --color-page-overlay: color-mix(in srgb, var(--color-canvas) 48%, transparent);
+  --paint-brand: linear-gradient(110deg, var(--palette-4), var(--palette-5) 52%, var(--palette-6));
+  --paint-section-primary: var(--color-canvas);
+  --paint-section-secondary: var(--color-section);
+  --paint-hero: linear-gradient(180deg, color-mix(in srgb, var(--color-canvas) 18%, transparent), var(--color-canvas));
+
+  /* Effects */
+  --card-shadow: 0 18px 52px rgba(0, 0, 0, 0.32);
+  --floating-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+  --label-shadow: 0 6px 24px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(0, 0, 0, 0.34);
+  --text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+  --filter-map: grayscale(1) invert(0.92) hue-rotate(180deg) brightness(0.88) contrast(0.92);
+  --effect-shader-opacity: 1;
+  --effect-noise-opacity: 0.018;
+
+  /* Canvas / Three integrations */
+  --color-shader-base: var(--palette-1);
+  --color-shader-action: var(--palette-6);
+  --color-shader-secondary: var(--palette-3);
+  --color-shader-star: var(--color-text);
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+:root[data-theme='spot'] {
+  color-scheme: light;
+
+  /* Spot Palette — supplied palette */
+  --palette-1: #d0c4ab;
+  --palette-2: #998e77;
+  --palette-3: #ffefca;
+  --palette-4: #005b45;
+  --palette-5: #005b45;
+  --palette-6: #005b45;
+
+  --color-canvas: var(--palette-3);
+  --color-section: var(--palette-1);
+  --color-palette-surface: var(--palette-2);
+  --color-card: var(--color-section);
+  --color-card-hover: color-mix(in srgb, var(--color-section) 92%, var(--color-action) 8%);
+  --color-glass: color-mix(in srgb, var(--color-canvas) 94%, transparent);
+
+  --color-text: var(--palette-4);
+  --color-text-secondary: var(--palette-4);
+  --color-text-muted: var(--palette-4);
+  --color-heading: var(--palette-4);
+
+  --color-action: var(--palette-4);
+  --color-action-hover: #004735;
+  --color-action-strong: #003d2e;
+  --color-on-action: var(--palette-3);
+  --color-secondary: var(--palette-2);
+  --color-feature: var(--palette-2);
+  --color-on-feature: #102423;
+
+  --color-card-border: color-mix(in srgb, var(--color-action) 24%, transparent);
+  --color-page-overlay: color-mix(in srgb, var(--color-canvas) 10%, transparent);
+  --paint-brand: var(--color-action);
+  --paint-section-primary: var(--color-canvas);
+  --paint-section-secondary: var(--color-section);
+  --paint-hero: linear-gradient(180deg, color-mix(in srgb, var(--color-canvas) 35%, transparent), var(--color-canvas));
+
+  --card-shadow: 0 18px 48px rgba(0, 91, 69, 0.14);
+  --floating-shadow: 0 24px 60px rgba(0, 91, 69, 0.18);
+  --label-shadow: 0 7px 22px rgba(0, 91, 69, 0.16);
+  --text-shadow: none;
+  --filter-map: grayscale(0.78) sepia(0.14) saturate(0.72) brightness(0.98) contrast(0.9);
+  /* Светлите версии остават чисти и плътни, без мътен nebula слой. */
+  --effect-shader-opacity: 0.06;
+  --effect-noise-opacity: 0.008;
+
+  --color-shader-base: var(--palette-3);
+  --color-shader-action: var(--palette-4);
+  --color-shader-secondary: var(--palette-2);
+  --color-shader-star: var(--palette-4);
+}
+
+:root[data-theme='matching'] {
+  color-scheme: light;
+
+  /* Matching Palette — supplied palette */
+  --palette-1: #d0c4ab;
+  --palette-2: #4d4637;
+  --palette-3: #b3aa99;
+  --palette-4: #a5cdc4;
+  --palette-5: #71978f;
+  --palette-6: #71978f;
+
+  --color-canvas: var(--palette-1);
+  --color-section: var(--palette-4);
+  --color-palette-surface: var(--palette-3);
+  --color-card: var(--color-section);
+  --color-card-hover: color-mix(in srgb, var(--color-section) 92%, var(--color-action) 8%);
+  --color-glass: color-mix(in srgb, var(--color-canvas) 94%, transparent);
+
+  --color-text: var(--palette-2);
+  --color-text-secondary: var(--palette-2);
+  --color-text-muted: var(--palette-2);
+  --color-heading: var(--palette-2);
+
+  --color-action: var(--palette-2);
+  --color-action-hover: #3f392d;
+  --color-action-strong: #342f27;
+  --color-on-action: var(--palette-1);
+  --color-secondary: var(--palette-5);
+  --color-feature: var(--palette-3);
+  --color-on-feature: #322e25;
+
+  --color-card-border: color-mix(in srgb, var(--color-action) 24%, transparent);
+  --color-page-overlay: color-mix(in srgb, var(--color-canvas) 10%, transparent);
+  --paint-brand: var(--color-action);
+  --paint-section-primary: var(--color-canvas);
+  --paint-section-secondary: var(--color-section);
+  --paint-hero: linear-gradient(180deg, color-mix(in srgb, var(--color-canvas) 35%, transparent), var(--color-canvas));
+
+  --card-shadow: 0 18px 48px rgba(77, 70, 55, 0.15);
+  --floating-shadow: 0 24px 60px rgba(77, 70, 55, 0.19);
+  --label-shadow: 0 7px 22px rgba(77, 70, 55, 0.16);
+  --text-shadow: none;
+  --filter-map: grayscale(0.76) sepia(0.18) saturate(0.7) brightness(0.96) contrast(0.88);
+  --effect-shader-opacity: 0.06;
+  --effect-noise-opacity: 0.008;
+
+  --color-shader-base: var(--palette-1);
+  --color-shader-action: var(--palette-2);
+  --color-shader-secondary: var(--palette-5);
+  --color-shader-star: var(--palette-2);
+}
+
+:root[data-theme='dust'] {
+  color-scheme: dark;
+
+  /* Dust Palette — supplied palette; #40486 normalized to #404846 */
+  --palette-1: #404846;
+  --palette-2: #80b5aa;
+  --palette-3: #647c76;
+  --palette-4: #677890;
+  --palette-5: #80b5aa;
+  --palette-6: #b8d9d2;
+
+  --color-canvas: var(--palette-1);
+  --color-section: #353d3b;
+  --color-palette-surface: var(--palette-3);
+  --color-card: var(--color-section);
+  --color-card-hover: color-mix(in srgb, var(--color-section) 94%, var(--color-text) 6%);
+  --color-glass: color-mix(in srgb, var(--color-section) 94%, transparent);
+
+  --color-text: #f1f5f4;
+  --color-text-secondary: color-mix(in srgb, var(--color-text) 82%, var(--color-canvas));
+  --color-text-muted: color-mix(in srgb, var(--color-text) 72%, var(--color-canvas));
+  --color-heading: #a7cbc4;
+
+  --color-action: var(--palette-2);
+  --color-action-hover: var(--palette-6);
+  --color-action-strong: #e2f0ed;
+  --color-on-action: #303a38;
+  --color-secondary: var(--palette-4);
+  --color-feature: var(--palette-3);
+  --color-on-feature: var(--color-text);
+
+  --color-page-overlay: color-mix(in srgb, #2d3432 54%, transparent);
+  --paint-brand: linear-gradient(110deg, var(--palette-4), var(--palette-2) 56%, var(--palette-6));
+
+  --color-shader-base: var(--palette-1);
+  --color-shader-action: var(--palette-2);
+  --color-shader-secondary: var(--palette-4);
+  --color-shader-star: var(--color-text);
+}

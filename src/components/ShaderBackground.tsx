@@ -148,10 +148,10 @@ export default function ShaderBackground() {
     }
 
     const syncThemeColors = () => {
-      gl.uniform3fv(uBg, readCssColor('--shader-bg'))
-      gl.uniform3fv(uAccent, readCssColor('--shader-accent'))
-      gl.uniform3fv(uSecondary, readCssColor('--shader-secondary'))
-      gl.uniform3fv(uStar, readCssColor('--shader-star'))
+      gl.uniform3fv(uBg, readCssColor('--color-shader-base'))
+      gl.uniform3fv(uAccent, readCssColor('--color-shader-action'))
+      gl.uniform3fv(uSecondary, readCssColor('--color-shader-secondary'))
+      gl.uniform3fv(uStar, readCssColor('--color-shader-star'))
     }
     syncThemeColors()
     window.addEventListener('dicare:themechange', syncThemeColors)
@@ -204,7 +204,7 @@ export default function ShaderBackground() {
         width: '100%',
         height: '100%',
         zIndex: 0,
-        opacity: 'var(--shader-opacity)',
+        opacity: 'var(--effect-shader-opacity)',
         transition: 'opacity 320ms ease',
       }}
     />

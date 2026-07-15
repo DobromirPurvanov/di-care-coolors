@@ -70,8 +70,8 @@ export default function ServicePage() {
         <Link
           to="/"
           state={{ scrollTo: '#services' }}
-          className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--accent-light)]"
-          style={{ color: 'var(--text-secondary)' }}
+          className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--color-action-hover)]"
+          style={{ color: 'var(--color-text-secondary)' }}
         >
           <ArrowLeft size={14} aria-hidden="true" />
           Всички услуги
@@ -80,10 +80,10 @@ export default function ServicePage() {
         {/* Четяща повърхност — спокоен фон над анимирания starfield */}
         <article
           style={{
-            background: 'var(--card-bg)',
+            background: 'var(--color-card)',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
-            border: '1px solid var(--card-border)',
+            border: '1px solid var(--color-card-border)',
             borderRadius: '20px',
             boxShadow: 'var(--floating-shadow)',
             padding: 'clamp(1.25rem, 4.5vw, 3.25rem)',
@@ -91,7 +91,7 @@ export default function ServicePage() {
         >
           {/* Заглавие */}
           <header>
-            <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--accent-light)' }}>
+            <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--color-action-hover)' }}>
               {content.tagline}
             </p>
             <h1 className="text-gradient font-serif-luxe leading-[1.1]" style={{ fontSize: 'clamp(2rem, 5.5vw, 3rem)' }}>
@@ -100,9 +100,9 @@ export default function ServicePage() {
             <div
               aria-hidden="true"
               className="mt-5 mb-7"
-              style={{ width: '56px', height: '2px', background: 'var(--brand-gradient)' }}
+              style={{ width: '56px', height: '2px', background: 'var(--paint-brand)' }}
             />
-            <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--text)' }}>
+            <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--color-text)' }}>
               {content.intro}
             </p>
           </header>
@@ -111,8 +111,8 @@ export default function ServicePage() {
           {content.highlights && content.highlights.length > 0 && (
             <ul className="mt-9 grid gap-x-8 gap-y-3.5 sm:grid-cols-2">
               {content.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-3" style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>
-                  <Check size={16} aria-hidden="true" style={{ color: 'var(--accent)', marginTop: '3px', flex: 'none' }} />
+                <li key={h} className="flex items-start gap-3" style={{ fontSize: '15px', color: 'var(--color-text-secondary)' }}>
+                  <Check size={16} aria-hidden="true" style={{ color: 'var(--color-action)', marginTop: '3px', flex: 'none' }} />
                   {h}
                 </li>
               ))}
@@ -121,7 +121,7 @@ export default function ServicePage() {
 
           {/* Списък с процедури */}
           <section className="mt-12" aria-label="Процедури">
-            <h2 className="text-xs tracking-[0.2em] uppercase mb-1" style={{ color: 'var(--accent-light)' }}>
+            <h2 className="text-xs tracking-[0.2em] uppercase mb-1" style={{ color: 'var(--color-action-hover)' }}>
               Процедури
             </h2>
             <ul className="flex flex-col">
@@ -132,20 +132,20 @@ export default function ServicePage() {
                     key={p.title}
                     data-proc={p.title}
                     className="py-7"
-                    style={{ borderBottom: i === items.length - 1 ? 'none' : '1px solid var(--border)' }}
+                    style={{ borderBottom: i === items.length - 1 ? 'none' : '1px solid var(--color-border)' }}
                   >
-                    <h3 className="font-serif-luxe" style={{ fontSize: '21px', lineHeight: 1.3, color: 'var(--accent-soft)' }}>
+                    <h3 className="font-serif-luxe" style={{ fontSize: '21px', lineHeight: 1.3, color: 'var(--color-heading)' }}>
                       {p.title}
                     </h3>
-                    <p className="mt-2.5" style={{ fontSize: '15px', lineHeight: 1.65, color: 'var(--text-secondary)' }}>
+                    <p className="mt-2.5" style={{ fontSize: '15px', lineHeight: 1.65, color: 'var(--color-text-secondary)' }}>
                       {p.description}
                     </p>
 
                     {extra?.benefits && (
                       <ul className="mt-5 grid gap-x-7 gap-y-2.5 sm:grid-cols-2">
                         {extra.benefits.map((b) => (
-                          <li key={b} className="flex items-start gap-2.5" style={{ fontSize: '14px', lineHeight: 1.5, color: 'var(--text-secondary)' }}>
-                            <Check size={14} aria-hidden="true" style={{ color: 'var(--accent)', marginTop: '3px', flex: 'none' }} />
+                          <li key={b} className="flex items-start gap-2.5" style={{ fontSize: '14px', lineHeight: 1.5, color: 'var(--color-text-secondary)' }}>
+                            <Check size={14} aria-hidden="true" style={{ color: 'var(--color-action)', marginTop: '3px', flex: 'none' }} />
                             {b}
                           </li>
                         ))}
@@ -155,7 +155,7 @@ export default function ServicePage() {
                     {extra?.note && (
                       <p
                         className="mt-5 pl-4"
-                        style={{ fontSize: '14px', lineHeight: 1.6, color: 'var(--text-secondary)', borderLeft: '2px solid color-mix(in srgb, var(--accent) 45%, transparent)' }}
+                        style={{ fontSize: '14px', lineHeight: 1.6, color: 'var(--color-text-secondary)', borderLeft: '2px solid color-mix(in srgb, var(--color-action) 45%, transparent)' }}
                       >
                         {extra.note}
                       </p>
@@ -170,7 +170,7 @@ export default function ServicePage() {
           {content.quote && (
             <blockquote
               className="mt-10 pl-6 font-serif-luxe italic"
-              style={{ fontSize: '20px', lineHeight: 1.5, color: 'var(--text)', borderLeft: '3px solid var(--accent)' }}
+              style={{ fontSize: '20px', lineHeight: 1.5, color: 'var(--color-text)', borderLeft: '3px solid var(--color-action)' }}
             >
               {content.quote}
             </blockquote>
@@ -188,8 +188,8 @@ export default function ServicePage() {
             </BookingButton>
             <a
               href="tel:+359882708081"
-              className="inline-flex min-h-[44px] items-center gap-2 text-sm tracking-[0.05em] transition-colors hover:text-[var(--accent-light)]"
-              style={{ color: 'var(--text-secondary)' }}
+              className="inline-flex min-h-[44px] items-center gap-2 text-sm tracking-[0.05em] transition-colors hover:text-[var(--color-action-hover)]"
+              style={{ color: 'var(--color-text-secondary)' }}
             >
               Обади се: +359 88 270 8081
             </a>
@@ -202,7 +202,7 @@ export default function ServicePage() {
           style={{
             fontSize: '15px',
             lineHeight: 1.7,
-            color: 'var(--text-secondary)',
+            color: 'var(--color-text-secondary)',
             maxWidth: '560px',
             textShadow: 'var(--text-shadow)',
           }}

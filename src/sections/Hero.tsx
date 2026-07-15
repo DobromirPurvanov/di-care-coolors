@@ -71,8 +71,8 @@ export default function Hero() {
     >
       {/* Палитрен слой за дълбочина над анимирания shader фон */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute inset-0" style={{ background: 'var(--hero-gradient)' }} />
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 55%)' }} />
+        <div className="absolute inset-0" style={{ background: 'var(--paint-hero)' }} />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--color-action) 8%, transparent) 0%, transparent 55%)' }} />
       </div>
 
       <h1 className="relative w-full max-w-5xl px-4 sm:px-6 m-0" style={{ marginTop: '-2vh' }}>
@@ -115,8 +115,8 @@ export default function Hero() {
           {BRANDS.map(b => (
             <span key={b.name} className="brand-item group relative opacity-0" style={{ transform: 'translateY(10px)' }}>
               <span
-                className="text-[10px] sm:text-[11px] tracking-[0.14em] sm:tracking-[0.2em] uppercase pb-1 cursor-default transition-all duration-300 group-hover:text-[var(--accent-light)]"
-                style={{ color: 'var(--text-muted)', borderBottom: '1px solid var(--border)' }}
+                className="text-[10px] sm:text-[11px] tracking-[0.14em] sm:tracking-[0.2em] uppercase pb-1 cursor-default transition-all duration-300 group-hover:text-[var(--color-action-hover)]"
+                style={{ color: 'var(--color-text-muted)', borderBottom: '1px solid var(--color-border)' }}
               >
                 {b.name}
               </span>
@@ -125,9 +125,9 @@ export default function Hero() {
                 role="tooltip"
                 className="brand-tooltip pointer-events-none absolute left-1/2 bottom-full mb-3 -translate-x-1/2 whitespace-nowrap px-3 py-2 rounded-lg text-[10px] tracking-[0.06em] opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
                 style={{
-                  background: 'var(--glass-bg)',
-                  border: '1px solid var(--card-border)',
-                  color: 'var(--text-secondary)',
+                  background: 'var(--color-glass)',
+                  border: '1px solid var(--color-card-border)',
+                  color: 'var(--color-text-secondary)',
                   backdropFilter: 'blur(8px)',
                 }}
               >
@@ -146,14 +146,14 @@ export default function Hero() {
         onClick={() => scrollToTarget('#procedures')}
         aria-label="Скролни надолу към процедурите"
       >
-        <Mouse size={18} className="transition-colors duration-300 group-hover:!text-[var(--accent)]" style={{ color: 'var(--text-muted)' }} aria-hidden="true" />
-        <span className="text-[9px] tracking-[0.4em] uppercase transition-colors duration-300 group-hover:text-[var(--accent-light)]" style={{ color: 'var(--text-muted)' }}>
+        <Mouse size={18} className="transition-colors duration-300 group-hover:!text-[var(--color-action)]" style={{ color: 'var(--color-text-muted)' }} aria-hidden="true" />
+        <span className="text-[9px] tracking-[0.4em] uppercase transition-colors duration-300 group-hover:text-[var(--color-action-hover)]" style={{ color: 'var(--color-text-muted)' }}>
           Scroll
         </span>
         <ChevronDown
           size={15}
-          className="transition-colors duration-300 group-hover:!text-[var(--accent)]"
-          style={{ color: 'var(--text-muted)', animation: 'heroBounce 1.8s cubic-bezier(0.28, 0.84, 0.42, 1) infinite' }}
+          className="transition-colors duration-300 group-hover:!text-[var(--color-action)]"
+          style={{ color: 'var(--color-text-muted)', animation: 'heroBounce 1.8s cubic-bezier(0.28, 0.84, 0.42, 1) infinite' }}
           aria-hidden="true"
         />
       </button>

@@ -145,9 +145,9 @@ export default function Header() {
           // 1px bleed + safe-area покритие премахват тънкия луфт над header-а
           // при iOS и при subpixel рендериране след show/hide transform.
           paddingTop: 'calc(1px + env(safe-area-inset-top))',
-          backgroundColor: scrolled || menuOpen ? 'var(--glass-bg)' : 'transparent',
+          backgroundColor: scrolled || menuOpen ? 'var(--color-glass)' : 'transparent',
           backdropFilter: scrolled || menuOpen ? 'blur(20px) saturate(1.2)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--card-border)' : '1px solid transparent',
+          borderBottom: scrolled ? '1px solid var(--color-card-border)' : '1px solid transparent',
           transform: hidden && !menuOpen ? 'translateY(-100%)' : 'translateY(0)',
           transition: 'transform 400ms ease, background-color 500ms ease, border-color 500ms ease',
         }}
@@ -172,7 +172,7 @@ export default function Header() {
                   type="button"
                   onClick={() => handleNav(item.href)}
                   className="relative min-h-[44px] text-xs tracking-[0.15em] uppercase cursor-pointer transition-colors duration-300 py-2"
-                  style={{ color: isActive ? 'var(--text)' : 'var(--text-secondary)' }}
+                  style={{ color: isActive ? 'var(--color-text)' : 'var(--color-text-secondary)' }}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   {item.label}
@@ -180,7 +180,7 @@ export default function Header() {
                     aria-hidden="true"
                     className="absolute left-0 -bottom-[2px] h-[1px] w-full transition-transform duration-300"
                     style={{
-                      background: 'var(--brand-gradient)',
+                      background: 'var(--paint-brand)',
                       transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
                       transformOrigin: 'left center',
                     }}
@@ -193,8 +193,8 @@ export default function Header() {
           <div className="flex items-center gap-2 md:gap-3">
             <a
               href="tel:+359882708081"
-              className="hidden md:flex min-h-[44px] items-center gap-2 px-5 py-2 rounded-full text-[11px] tracking-[0.15em] uppercase border transition-all duration-300 hover:border-[var(--accent)]/60 hover:text-[var(--accent-light)]"
-              style={{ borderColor: 'var(--card-border)', color: 'var(--text)' }}
+              className="hidden md:flex min-h-[44px] items-center gap-2 px-5 py-2 rounded-full text-[11px] tracking-[0.15em] uppercase border transition-all duration-300 hover:border-[var(--color-action)]/60 hover:text-[var(--color-action-hover)]"
+              style={{ borderColor: 'var(--color-card-border)', color: 'var(--color-text)' }}
               aria-label="Обади се на клиниката"
             >
               <Phone size={13} aria-hidden="true" />
@@ -221,7 +221,7 @@ export default function Header() {
               ref={burgerRef}
               onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
               className="lg:hidden w-11 h-11 flex-none flex items-center justify-center rounded-full"
-              style={{ border: '1px solid var(--card-border)' }}
+              style={{ border: '1px solid var(--color-card-border)' }}
               aria-label={menuOpen ? 'Затвори менюто' : 'Отвори менюто'}
               aria-expanded={menuOpen}
             >
@@ -244,7 +244,7 @@ export default function Header() {
         className="fixed inset-0 z-[1005] flex flex-col items-center justify-start gap-3 min-[390px]:gap-5 sm:gap-8 overflow-y-auto overscroll-contain px-6 lg:hidden"
         style={{
           clipPath: menuOpen ? 'circle(150% at 95% 5%)' : 'circle(0% at 95% 5%)',
-          background: 'var(--glass-bg)',
+          background: 'var(--color-glass)',
           backdropFilter: 'blur(30px) saturate(1.1)',
           WebkitBackdropFilter: 'blur(30px) saturate(1.1)',
           visibility: menuOpen ? 'visible' : 'hidden',
@@ -268,7 +268,7 @@ export default function Header() {
             onClick={() => handleNav(item.href)}
             className="flex min-h-[44px] items-center text-lg sm:text-xl tracking-[0.16em] sm:tracking-[0.2em] uppercase font-light cursor-pointer transition-all duration-300"
             style={{
-              color: effectiveActive === item.href ? 'var(--accent-light)' : 'var(--text)',
+              color: effectiveActive === item.href ? 'var(--color-action-hover)' : 'var(--color-text)',
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
               transitionDelay: menuOpen ? `${i * 80 + 120}ms` : '0ms',
@@ -297,9 +297,9 @@ export default function Header() {
         <a
           href="tel:+359882708081"
           onClick={() => setMenuOpen(false)}
-          className="inline-flex min-h-[44px] items-center text-sm tracking-[0.12em] transition-colors duration-300 hover:text-[var(--accent-light)]"
+          className="inline-flex min-h-[44px] items-center text-sm tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-action-hover)]"
           style={{
-            color: 'var(--text-secondary)',
+            color: 'var(--color-text-secondary)',
             opacity: menuOpen ? 1 : 0,
             transition: 'opacity 300ms ease',
             transitionDelay: menuOpen ? `${navItems.length * 80 + 200}ms` : '0ms',
@@ -311,7 +311,7 @@ export default function Header() {
         <span
           className="hidden min-[360px]:block mt-1 sm:mt-4 text-center text-[10px] tracking-[0.24em] sm:tracking-[0.3em] uppercase"
           style={{
-            color: 'var(--text-muted)',
+            color: 'var(--color-text-muted)',
             opacity: menuOpen ? 1 : 0,
             transition: 'opacity 300ms ease',
             transitionDelay: menuOpen ? `${navItems.length * 80 + 150}ms` : '0ms',

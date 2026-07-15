@@ -76,7 +76,7 @@ export default function Equipment() {
       className="relative z-10"
       style={{
         padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)',
-        background: 'var(--section-wash)',
+        background: 'var(--paint-section-primary)',
       }}
     >
       <div className="max-w-6xl mx-auto">
@@ -87,7 +87,7 @@ export default function Equipment() {
         >
           Апаратура
         </h2>
-        <p className="text-center text-xs tracking-[0.15em] uppercase mb-10 sm:mb-16" style={{ color: 'var(--text-muted)' }}>
+        <p className="text-center text-xs tracking-[0.15em] uppercase mb-10 sm:mb-16" style={{ color: 'var(--color-text-muted)' }}>
           Световно признати лазерни системи
         </p>
 
@@ -95,20 +95,20 @@ export default function Equipment() {
           {equipment.map((eq, i) => (
             <div
               key={i}
-              className="eq-card group grid grid-cols-[84px_minmax(0,1fr)] sm:flex sm:flex-row overflow-hidden opacity-0 rounded-2xl border transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-[3px]"
+              className="eq-card group grid grid-cols-[84px_minmax(0,1fr)] sm:flex sm:flex-row overflow-hidden opacity-0 rounded-2xl border transition-all duration-300 hover:border-[var(--color-action)] hover:-translate-y-[3px]"
               style={{
-                background: 'var(--card-bg)',
-                borderColor: 'var(--card-border)',
+                background: 'var(--color-card)',
+                borderColor: 'var(--color-card-border)',
                 transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.background = 'var(--card-bg-hover)'
+                el.style.background = 'var(--color-card-hover)'
                 el.style.boxShadow = 'var(--card-shadow)'
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.background = 'var(--card-bg)'
+                el.style.background = 'var(--color-card)'
                 el.style.boxShadow = 'none'
               }}
             >
@@ -125,24 +125,24 @@ export default function Equipment() {
                 </span>
               </div>
               <div className="min-w-0 sm:w-3/5 p-5 sm:p-6 flex flex-col justify-center">
-                <h3 className="font-light text-sm tracking-[0.1em] uppercase group-hover:text-[var(--accent-light)] transition-colors">
+                <h3 className="font-light text-sm tracking-[0.1em] uppercase group-hover:text-[var(--color-action-hover)] transition-colors">
                   {eq.name}
                 </h3>
-                <p className="text-sm mt-2 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                <p className="text-sm mt-2 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
                   {eq.desc}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {eq.features.map((f, j) => (
                     <span
                       key={j}
-                      className="text-[11px] px-2.5 py-1 uppercase border transition-all duration-300 group-hover:border-[var(--accent)]/60"
+                      className="text-[11px] px-2.5 py-1 uppercase border transition-all duration-300 group-hover:border-[var(--color-action)]/60"
                       style={{
                         letterSpacing: '0.08em',
-                        borderColor: 'color-mix(in srgb, var(--secondary) 55%, transparent)',
-                        color: 'var(--text-secondary)',
+                        borderColor: 'color-mix(in srgb, var(--color-secondary) 55%, transparent)',
+                        color: 'var(--color-text-secondary)',
                         background: 'transparent',
                       }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--accent) 9%, transparent)' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--color-action) 9%, transparent)' }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent' }}
                     >
                       {f}

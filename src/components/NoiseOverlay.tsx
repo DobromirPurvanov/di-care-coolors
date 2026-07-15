@@ -6,7 +6,7 @@ export default function NoiseOverlay() {
     <div
       aria-hidden="true"
       className="fixed inset-0 z-[200] pointer-events-none"
-      style={{ backgroundImage: NOISE_SVG, opacity: 0.025 }}
+      style={{ backgroundImage: NOISE_SVG, opacity: 'var(--effect-noise-opacity)' }}
     />
   )
 }

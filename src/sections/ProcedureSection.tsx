@@ -20,7 +20,7 @@ function SphereFallback() {
     >
       <span
         className="w-10 h-10 rounded-full animate-spin"
-        style={{ border: '2px solid color-mix(in srgb, var(--accent) 15%, transparent)', borderTopColor: 'var(--accent)' }}
+        style={{ border: '2px solid color-mix(in srgb, var(--color-action) 15%, transparent)', borderTopColor: 'var(--color-action)' }}
         aria-hidden="true"
       />
     </div>
@@ -119,14 +119,14 @@ export default function ProcedureSection() {
           {/* Заглавие с декоративни странични линии (линиите се крият на мобилно,
               за да не изтласкват заглавието извън екрана) */}
           <div className="flex items-center justify-center gap-5 sm:gap-8 w-full max-w-3xl">
-            <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 40%, transparent))' }} />
+            <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-action) 40%, transparent))' }} />
             <h2
               className="text-gradient text-center font-light uppercase tracking-[0.15em]"
               style={{ fontSize: 'clamp(1.4rem, 3.2vw, 2.4rem)', lineHeight: 1.2 }}
             >
               Изберете процедура
             </h2>
-            <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--accent) 40%, transparent), transparent)' }} />
+            <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--color-action) 40%, transparent), transparent)' }} />
           </div>
 
           {/* Анимиран златен разделител — разтваря се от центъра */}
@@ -137,7 +137,7 @@ export default function ProcedureSection() {
             style={{
               width: '72px',
               height: '1px',
-              background: 'linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 90%, transparent), transparent)',
+              background: 'linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-action) 90%, transparent), transparent)',
               transform: 'scaleX(0)',
               transformOrigin: 'center',
             }}
@@ -145,7 +145,7 @@ export default function ProcedureSection() {
 
           <p
             className="max-w-[30rem] text-center text-[11px] leading-relaxed tracking-[0.15em] sm:tracking-[0.22em] uppercase"
-            style={{ color: 'var(--text-secondary)', textShadow: 'var(--text-shadow)' }}
+            style={{ color: 'var(--color-text-secondary)', textShadow: 'var(--text-shadow)' }}
           >
             {hint}
           </p>

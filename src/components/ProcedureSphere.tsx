@@ -29,9 +29,9 @@ export default function ProcedureSphere() {
 
     const rootStyles = getComputedStyle(document.documentElement)
     const themeColor = (token: string) => rootStyles.getPropertyValue(token).trim()
-    const accent = themeColor('--accent')
-    const accentLight = themeColor('--accent-light')
-    const accentBright = themeColor('--accent-bright')
+    const accent = themeColor('--color-action')
+    const accentLight = themeColor('--color-action-hover')
+    const accentBright = themeColor('--color-action-strong')
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
