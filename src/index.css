@@ -154,7 +154,9 @@
   }
 
   .text-gradient {
-    background: var(--paint-brand);
+    /* Заглавна рампа „слонова кост/мастило → акцент" (моделът на оригинала);
+       --paint-brand остава за лого, ленти и underline-и. */
+    background: var(--paint-title, var(--paint-brand));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
