@@ -176,7 +176,7 @@ export default function Contact() {
         </div>
 
         {/* Контактни блокове */}
-        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: 'var(--card-border)' }}>
+        <div className="palette-cycle mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: 'var(--card-border)' }}>
           {[
             { icon: MapPin, label: 'Адрес', value: 'гр. Варна, ул. Любен Каравелов № 71, Партер', href: undefined as string | undefined },
             { icon: Phone, label: 'Телефон', value: '+359 882 708 081', href: 'tel:+359882708081' },
@@ -185,10 +185,12 @@ export default function Contact() {
           ].map((item, i) => (
             <div
               key={i}
-              className="ct-reveal flex items-start gap-4 p-5 sm:p-6 lg:p-7 opacity-0"
+              className="ct-reveal contact-card relative flex items-start gap-4 p-5 sm:p-6 lg:p-7 opacity-0"
               style={{ background: 'var(--card-bg)', transform: 'translateY(25px)' }}
             >
-              <item.icon size={18} className="flex-none mt-[2px]" style={{ color: 'var(--accent-light)' }} aria-hidden="true" />
+              <span className="contact-icon flex h-9 w-9 flex-none items-center justify-center rounded-full">
+                <item.icon size={17} aria-hidden="true" />
+              </span>
               <div className="min-w-0">
                 <p className="text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: 'color-mix(in srgb, var(--text) 55%, transparent)' }}>
                   {item.label}

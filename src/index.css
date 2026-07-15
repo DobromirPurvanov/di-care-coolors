@@ -16,6 +16,8 @@
     --accent-soft: #d8bad0;
     --accent-bright: #f8d8e2;
     --accent-contrast: #102423;
+    --tone-ink: #102423;
+    --surface-ink: #f7f4f6;
     --secondary: #7b7c9b;
     --surface-accent: #496074;
     --accent-glow: color-mix(in srgb, var(--accent) 30%, transparent);
@@ -28,47 +30,19 @@
     --brand-gradient: linear-gradient(110deg, var(--secondary), var(--accent) 52%, var(--accent-light));
     --card-bg: linear-gradient(
       145deg,
-      color-mix(in srgb, var(--bg-elevated) 88%, var(--bg-card) 12%),
-      color-mix(in srgb, var(--bg) 72%, var(--bg-card) 28%)
+      var(--bg-elevated),
+      var(--bg)
     );
     --card-bg-hover: linear-gradient(
       145deg,
-      color-mix(in srgb, var(--bg-elevated) 80%, var(--bg-card) 20%),
-      color-mix(in srgb, var(--bg) 62%, var(--bg-card) 38%)
+      color-mix(in srgb, var(--bg-elevated) 94%, var(--text) 6%),
+      var(--bg-elevated)
     );
     --card-border: color-mix(in srgb, var(--secondary) 46%, var(--border));
     --glass-bg: color-mix(in srgb, var(--bg-elevated) 90%, transparent);
-    --section-wash: radial-gradient(
-        ellipse at 12% 22%,
-        color-mix(in srgb, var(--surface-accent) 16%, transparent),
-        transparent 42%
-      ),
-      radial-gradient(
-        ellipse at 88% 72%,
-        color-mix(in srgb, var(--secondary) 13%, transparent),
-        transparent 44%
-      );
-    --section-wash-alt: radial-gradient(
-        ellipse at 84% 18%,
-        color-mix(in srgb, var(--surface-accent) 14%, transparent),
-        transparent 42%
-      ),
-      radial-gradient(
-        ellipse at 18% 76%,
-        color-mix(in srgb, var(--secondary) 11%, transparent),
-        transparent 46%
-      );
-    --hero-gradient: radial-gradient(
-        ellipse at 50% 42%,
-        color-mix(in srgb, var(--surface-accent) 22%, transparent),
-        transparent 52%
-      ),
-      radial-gradient(
-        ellipse at 50% 100%,
-        color-mix(in srgb, var(--secondary) 16%, transparent),
-        transparent 58%
-      ),
-      linear-gradient(180deg, color-mix(in srgb, var(--bg) 24%, transparent), var(--bg));
+    --section-wash: linear-gradient(180deg, var(--bg), var(--bg-elevated));
+    --section-wash-alt: linear-gradient(180deg, var(--bg-elevated), var(--bg));
+    --hero-gradient: linear-gradient(180deg, color-mix(in srgb, var(--bg) 18%, transparent), var(--bg));
     --success: #8fd0a6;
     --error: #e58d7e;
     --shader-bg: #102423;
@@ -89,6 +63,8 @@
     --accent-soft: #e4d6b7;
     --accent-bright: #fff7e4;
     --accent-contrast: #005b45;
+    --tone-ink: #102423;
+    --surface-ink: #102423;
     --secondary: #998e77;
     --surface-accent: #998e77;
     --page-overlay: color-mix(in srgb, #003c2e 56%, transparent);
@@ -108,6 +84,8 @@
     --accent-soft: #c7dcd5;
     --accent-bright: #edf5f1;
     --accent-contrast: #3c3a30;
+    --tone-ink: #26312f;
+    --surface-ink: #322e25;
     --secondary: #71978f;
     --surface-accent: #b3aa99;
     --page-overlay: color-mix(in srgb, #302c23 54%, transparent);
@@ -127,6 +105,8 @@
     --accent-soft: #a7cbc4;
     --accent-bright: #e2f0ed;
     --accent-contrast: #303a38;
+    --tone-ink: #202927;
+    --surface-ink: #f1f5f4;
     --secondary: #677890;
     --surface-accent: #647c76;
     --page-overlay: color-mix(in srgb, #2d3432 54%, transparent);
@@ -219,6 +199,52 @@
 @layer components {
   .font-serif-luxe { font-family: var(--font-serif); }
   .font-mono-luxe { font-family: var(--font-mono); }
+
+  /* Точните цветове от палитрата се редуват като ясни акценти, без да се
+     размиват в големи полупрозрачни повърхности. */
+  .palette-cycle > :nth-child(4n + 1) {
+    --item-color: var(--accent);
+    --item-ink: var(--accent-contrast);
+  }
+
+  .palette-cycle > :nth-child(4n + 2) {
+    --item-color: var(--secondary);
+    --item-ink: var(--tone-ink);
+  }
+
+  .palette-cycle > :nth-child(4n + 3) {
+    --item-color: var(--accent-light);
+    --item-ink: var(--accent-contrast);
+  }
+
+  .palette-cycle > :nth-child(4n + 4) {
+    --item-color: var(--bg-card);
+    --item-ink: var(--surface-ink);
+  }
+
+  .svc-card::before,
+  .pillar-card::before,
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 20;
+    height: 4px;
+    background: var(--item-color, var(--accent));
+  }
+
+  .eq-color-panel {
+    background: var(--item-color, var(--accent));
+    color: var(--item-ink, var(--accent-contrast));
+  }
+
+  .eq-color-icon,
+  .pillar-icon,
+  .contact-icon {
+    color: var(--item-ink, var(--accent-contrast));
+    background: var(--item-color, var(--accent));
+    border: 1px solid color-mix(in srgb, currentColor 38%, transparent);
+  }
 
   .theme-logo {
     display: block;

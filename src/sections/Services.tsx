@@ -53,14 +53,14 @@ export default function Services() {
           Нашите услуги
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="palette-cycle grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map((cat, i) => {
             const count = procedures.filter((p) => p.category === cat.id).length
             const tagline = serviceContent[cat.id].tagline
             return (
               <div
                 key={cat.id}
-                className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border transition-all duration-[400ms] hover:border-[var(--accent)]/40 hover:-translate-y-1"
+                className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border transition-all duration-[400ms] hover:border-[var(--item-color)] hover:-translate-y-1"
                 style={{
                   minHeight: '260px',
                   background: 'var(--card-bg)',
@@ -84,14 +84,14 @@ export default function Services() {
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--secondary) 22%, transparent), transparent 58%)' }}
+                  style={{ background: 'radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--item-color) 16%, transparent), transparent 58%)' }}
                 />
 
                 {/* Златен номер */}
                 <span
                   aria-hidden="true"
                   className="font-mono-luxe absolute top-5 left-6 z-10 text-sm tracking-[0.1em] transition-opacity duration-[400ms] opacity-40 group-hover:opacity-90"
-                  style={{ color: 'var(--accent)' }}
+                  style={{ color: 'var(--item-color)' }}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>

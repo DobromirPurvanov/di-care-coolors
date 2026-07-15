@@ -57,7 +57,7 @@ export default function ProcedureGrid() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_340px] lg:gap-12">
       {/* Списък с процедури, групиран по категория */}
-      <div className="lg:order-first">
+      <div className="palette-cycle lg:order-first">
         {categories.map((cat) => {
           const items = procedures.filter((p) => p.category === cat.id)
           if (items.length === 0) return null
@@ -67,7 +67,7 @@ export default function ProcedureGrid() {
                 <span
                   aria-hidden="true"
                   className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: 'var(--accent)', boxShadow: '0 0 8px color-mix(in srgb, var(--accent) 60%, transparent)' }}
+                  style={{ background: 'var(--item-color)', boxShadow: '0 0 8px color-mix(in srgb, var(--item-color) 55%, transparent)' }}
                 />
                 <h3 className="text-[11px] tracking-[0.22em] uppercase" style={{ color: 'color-mix(in srgb, var(--text) 70%, transparent)' }}>
                   {cat.label}
@@ -78,7 +78,7 @@ export default function ProcedureGrid() {
                 <span
                   aria-hidden="true"
                   className="flex-1 h-px"
-                  style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--accent) 25%, transparent), transparent)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--item-color), transparent)' }}
                 />
               </div>
               <div className="flex flex-wrap gap-2.5">

@@ -96,19 +96,18 @@ export default function WhyUs() {
         </div>
 
         {/* Стълбове */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-9 sm:mt-12">
+        <div className="palette-cycle grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-9 sm:mt-12">
           {pillars.map((p, i) => (
             <div
               key={i}
               ref={el => { if (el) cardsRef.current[i] = el }}
-              className="rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)]/40"
+              className="pillar-card relative overflow-hidden rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--item-color)]"
               style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
             >
               <span
-                className="flex items-center justify-center w-12 h-12 rounded-full mb-5"
-                style={{ border: '1px solid color-mix(in srgb, var(--accent) 38%, transparent)', background: 'color-mix(in srgb, var(--bg-elevated) 76%, var(--secondary) 24%)' }}
+                className="pillar-icon flex items-center justify-center w-12 h-12 rounded-full mb-5"
               >
-                <p.icon size={22} strokeWidth={1.5} aria-hidden="true" style={{ color: 'var(--accent-light)' }} />
+                <p.icon size={22} strokeWidth={1.5} aria-hidden="true" />
               </span>
               <h3 className="font-serif-luxe" style={{ fontSize: '20px', lineHeight: 1.3, color: 'var(--accent-soft)' }}>
                 {p.title}

@@ -91,11 +91,11 @@ export default function Equipment() {
           Световно признати лазерни системи
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="palette-cycle grid grid-cols-1 md:grid-cols-2 gap-4">
           {equipment.map((eq, i) => (
             <div
               key={i}
-              className="eq-card group grid grid-cols-[84px_minmax(0,1fr)] sm:flex sm:flex-row overflow-hidden opacity-0 rounded-2xl border transition-all duration-[400ms] hover:border-[var(--accent)]/40 hover:-translate-y-[3px]"
+              className="eq-card group grid grid-cols-[84px_minmax(0,1fr)] sm:flex sm:flex-row overflow-hidden opacity-0 rounded-2xl border transition-all duration-[400ms] hover:border-[var(--item-color)] hover:-translate-y-[3px]"
               style={{
                 background: 'var(--card-bg)',
                 borderColor: 'var(--card-border)',
@@ -113,17 +113,15 @@ export default function Equipment() {
               }}
             >
               <div
-                className="min-w-0 sm:w-2/5 overflow-hidden flex items-center justify-center p-3 sm:p-4 border-r"
+                className="eq-color-panel min-w-0 sm:w-2/5 overflow-hidden flex items-center justify-center p-3 sm:p-4 border-r"
                 style={{
-                  background: 'radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--surface-accent) 35%, transparent), color-mix(in srgb, var(--secondary) 12%, transparent))',
-                  borderColor: 'var(--card-border)',
+                  borderColor: 'color-mix(in srgb, currentColor 24%, transparent)',
                 }}
               >
                 <span
-                  className="flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-full transition-transform duration-500 group-hover:scale-110"
-                  style={{ border: '1px solid color-mix(in srgb, var(--accent) 38%, transparent)', background: 'color-mix(in srgb, var(--bg-elevated) 76%, var(--secondary) 24%)' }}
+                  className="eq-color-icon flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-full transition-transform duration-500 group-hover:scale-110"
                 >
-                  <eq.Icon className="w-6 h-6 sm:w-[34px] sm:h-[34px]" strokeWidth={1.4} aria-hidden="true" style={{ color: 'var(--accent-light)' }} />
+                  <eq.Icon className="w-6 h-6 sm:w-[34px] sm:h-[34px]" strokeWidth={1.4} aria-hidden="true" />
                 </span>
               </div>
               <div className="min-w-0 sm:w-3/5 p-5 sm:p-6 flex flex-col justify-center">
@@ -140,11 +138,11 @@ export default function Equipment() {
                       className="text-[11px] px-2.5 py-1 uppercase border transition-all duration-300 group-hover:border-[var(--accent)]/60"
                       style={{
                         letterSpacing: '0.08em',
-                        borderColor: 'color-mix(in srgb, var(--accent) 30%, transparent)',
+                        borderColor: 'color-mix(in srgb, var(--item-color) 55%, transparent)',
                         color: 'color-mix(in srgb, var(--accent-light) 85%, transparent)',
                         background: 'transparent',
                       }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--accent) 8%, transparent)' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--item-color) 12%, transparent)' }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent' }}
                     >
                       {f}
