@@ -160,8 +160,10 @@
     -webkit-text-fill-color: transparent;
   }
 
+  /* По-тесни и тихи ореоли — широките дифузни сияния се четяха като мъгла
+     около буквите, вместо като блясък. */
   .glow-text {
-    text-shadow: 0 0 60px color-mix(in srgb, var(--color-action) 40%, transparent), 0 0 120px color-mix(in srgb, var(--color-action) 15%, transparent);
+    text-shadow: 0 0 34px color-mix(in srgb, var(--color-action) 26%, transparent), 0 0 90px color-mix(in srgb, var(--color-action) 10%, transparent);
   }
 
   .glow-pulse {
@@ -185,8 +187,8 @@
   }
 
   @keyframes glowPulse {
-    0%, 100% { text-shadow: 0 0 50px color-mix(in srgb, var(--color-action) 35%, transparent), 0 0 110px color-mix(in srgb, var(--color-action) 12%, transparent); }
-    50% { text-shadow: 0 0 70px color-mix(in srgb, var(--color-action) 55%, transparent), 0 0 140px color-mix(in srgb, var(--color-action) 22%, transparent); }
+    0%, 100% { text-shadow: 0 0 30px color-mix(in srgb, var(--color-action) 22%, transparent), 0 0 80px color-mix(in srgb, var(--color-action) 8%, transparent); }
+    50% { text-shadow: 0 0 42px color-mix(in srgb, var(--color-action) 34%, transparent), 0 0 100px color-mix(in srgb, var(--color-action) 14%, transparent); }
   }
 
   /* ------- Етикети на 3D сферата ------- */
@@ -786,7 +788,7 @@
   /* По-спокойно и по-икономично на тъч устройства, без да губим сиянието. */
   .glow-pulse {
     animation: none;
-    text-shadow: 0 0 44px color-mix(in srgb, var(--color-action) 35%, transparent), 0 0 90px color-mix(in srgb, var(--color-action) 12%, transparent);
+    text-shadow: 0 0 28px color-mix(in srgb, var(--color-action) 24%, transparent), 0 0 70px color-mix(in srgb, var(--color-action) 9%, transparent);
   }
 
   :root[data-theme='spot'] .glow-pulse,

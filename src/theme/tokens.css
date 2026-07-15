@@ -61,14 +61,17 @@
   --color-action-glow-soft: color-mix(in srgb, var(--color-action) 10%, transparent);
   --color-surface-subtle: color-mix(in srgb, var(--color-feature) 18%, transparent);
   --color-positive: #8fd0a6;
-  --color-negative: #e58d7e;
+  /* Достатъчно светъл за 4.5:1 и върху секцията, където живее формата. */
+  --color-negative: #ec9c8d;
   --color-positive-glow: color-mix(in srgb, var(--color-positive) 60%, transparent);
   --color-negative-glow: color-mix(in srgb, var(--color-negative) 60%, transparent);
   --color-negative-border: color-mix(in srgb, var(--color-negative) 42%, transparent);
   --color-negative-surface: color-mix(in srgb, var(--color-negative) 9%, transparent);
 
   /* Large-area paints */
-  --color-page-overlay: color-mix(in srgb, var(--color-canvas) 48%, transparent);
+  /* Тънък воал: 48% беше полупрозрачна „мъгла" върху цялото небе — при 24%
+     звездите остават ясни, а шейдърът сам си държи атмосферата през atmo. */
+  --color-page-overlay: color-mix(in srgb, var(--color-canvas) 24%, transparent);
   --paint-brand: linear-gradient(110deg, var(--palette-4), var(--palette-5) 52%, var(--palette-6));
   --paint-section-primary: var(--color-canvas);
   --paint-section-secondary: var(--color-section);
@@ -81,9 +84,10 @@
   --text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
   --filter-map: grayscale(1) invert(0.92) hue-rotate(180deg) brightness(0.88) contrast(0.92);
   --effect-shader-opacity: 1;
-  /* Сияния + мъглявина в шейдъра: 1 = пълна атмосфера (звездно небе върху
-     почти черен канвас); по-светлите теми я гасят, за да няма „мъгла". */
-  --effect-shader-atmo: 1;
+  /* Сияния + мъглявина в шейдъра (0..1). С изтънения page-overlay небето се
+     вижда директно, затова атмосферата е леко снижена — ясна нощ, не мъгла;
+     по-светлите теми я гасят напълно. */
+  --effect-shader-atmo: 0.7;
   --effect-noise-opacity: 0.018;
 
   /* Canvas / Three integrations */
@@ -242,10 +246,11 @@
   --palette-5: #80b5aa;
   --palette-6: #b8d9d2;
 
-  /* Секциите/картите се вдигат НАД канваса с polek морско стъкло — картите
-     бяха по-тъмни „дупки" върху фона и всичко се сливаше в кал. */
-  --color-canvas: var(--palette-1);
-  --color-section: color-mix(in srgb, var(--palette-2) 18%, #48504d);
+  /* Дълбочина срещу „мъглата": канвасът пада под палитрения графит, а самият
+     #404846 става повърхността на картите и стените. Иначе всичко живееше в
+     един среден полутон и се четеше като сива пелена. */
+  --color-canvas: #333a38;
+  --color-section: var(--palette-1);
   --color-palette-surface: var(--palette-3);
   --color-card: var(--color-section);
   --color-card-hover: color-mix(in srgb, var(--color-section) 92%, var(--color-text) 8%);
@@ -274,7 +279,8 @@
      живее контактната форма. */
   --color-negative: #ffd2c6;
 
-  --color-page-overlay: color-mix(in srgb, #2d3432 54%, transparent);
+  /* Тънък воал (беше 54% пушек) — дълбокият канвас вече носи контраста. */
+  --color-page-overlay: color-mix(in srgb, var(--color-canvas) 26%, transparent);
   --paint-brand: linear-gradient(110deg, var(--palette-4), var(--palette-2) 56%, var(--palette-6));
 
   /* Графитът е доста по-светъл от почти черния канвас на основната тема —
@@ -282,7 +288,7 @@
      звездите не зависят от това и остават чисти. */
   --effect-shader-atmo: 0.22;
 
-  --color-shader-base: var(--palette-1);
+  --color-shader-base: var(--color-canvas);
   --color-shader-action: var(--palette-2);
   --color-shader-secondary: var(--palette-4);
   --color-shader-star: var(--color-text);
