@@ -88,7 +88,7 @@ export default function WhyUs() {
             className="mt-5 mb-6"
             style={{ width: '56px', height: '2px', background: 'var(--brand-gradient)' }}
           />
-          <p style={{ fontSize: '16px', lineHeight: 1.8, color: 'color-mix(in srgb, var(--text) 78%, transparent)' }}>
+          <p style={{ fontSize: '16px', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
             В Dr. Di Clinic гледаме на красотата през погледа на медицината. Съчетаваме диагностика,
             опит и внимание към детайла, за да се погрижим за кожата ви меко и осмислено. Всеки план е
             личен, а целта ни е естествен и траен резултат, който изглежда просто като по-отпочиналата версия на вас.
@@ -96,12 +96,12 @@ export default function WhyUs() {
         </div>
 
         {/* Стълбове */}
-        <div className="palette-cycle grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-9 sm:mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-9 sm:mt-12">
           {pillars.map((p, i) => (
             <div
               key={i}
               ref={el => { if (el) cardsRef.current[i] = el }}
-              className="pillar-card relative overflow-hidden rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--item-color)]"
+              className="pillar-card relative overflow-hidden rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[var(--card-shadow)]"
               style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)' }}
             >
               <span
@@ -112,7 +112,7 @@ export default function WhyUs() {
               <h3 className="font-serif-luxe" style={{ fontSize: '20px', lineHeight: 1.3, color: 'var(--accent-soft)' }}>
                 {p.title}
               </h3>
-              <p className="mt-3" style={{ fontSize: '15px', lineHeight: 1.7, color: 'color-mix(in srgb, var(--text) 76%, transparent)' }}>
+              <p className="mt-3" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)' }}>
                 {p.text}
               </p>
             </div>

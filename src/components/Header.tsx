@@ -172,7 +172,7 @@ export default function Header() {
                   type="button"
                   onClick={() => handleNav(item.href)}
                   className="relative min-h-[44px] text-xs tracking-[0.15em] uppercase cursor-pointer transition-colors duration-300 py-2"
-                  style={{ color: isActive ? 'var(--text)' : 'color-mix(in srgb, var(--text) 72%, transparent)' }}
+                  style={{ color: isActive ? 'var(--text)' : 'var(--text-secondary)' }}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   {item.label}
@@ -194,7 +194,7 @@ export default function Header() {
             <a
               href="tel:+359882708081"
               className="hidden md:flex min-h-[44px] items-center gap-2 px-5 py-2 rounded-full text-[11px] tracking-[0.15em] uppercase border transition-all duration-300 hover:border-[var(--accent)]/60 hover:text-[var(--accent-light)]"
-              style={{ borderColor: 'color-mix(in srgb, var(--text) 45%, transparent)', color: 'var(--text)' }}
+              style={{ borderColor: 'var(--card-border)', color: 'var(--text)' }}
               aria-label="Обади се на клиниката"
             >
               <Phone size={13} aria-hidden="true" />
@@ -221,7 +221,7 @@ export default function Header() {
               ref={burgerRef}
               onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
               className="lg:hidden w-11 h-11 flex-none flex items-center justify-center rounded-full"
-              style={{ border: '1px solid color-mix(in srgb, var(--text) 15%, transparent)' }}
+              style={{ border: '1px solid var(--card-border)' }}
               aria-label={menuOpen ? 'Затвори менюто' : 'Отвори менюто'}
               aria-expanded={menuOpen}
             >
@@ -299,7 +299,7 @@ export default function Header() {
           onClick={() => setMenuOpen(false)}
           className="inline-flex min-h-[44px] items-center text-sm tracking-[0.12em] transition-colors duration-300 hover:text-[var(--accent-light)]"
           style={{
-            color: 'color-mix(in srgb, var(--text) 70%, transparent)',
+            color: 'var(--text-secondary)',
             opacity: menuOpen ? 1 : 0,
             transition: 'opacity 300ms ease',
             transitionDelay: menuOpen ? `${navItems.length * 80 + 200}ms` : '0ms',
@@ -311,7 +311,7 @@ export default function Header() {
         <span
           className="hidden min-[360px]:block mt-1 sm:mt-4 text-center text-[10px] tracking-[0.24em] sm:tracking-[0.3em] uppercase"
           style={{
-            color: 'color-mix(in srgb, var(--text) 25%, transparent)',
+            color: 'var(--text-muted)',
             opacity: menuOpen ? 1 : 0,
             transition: 'opacity 300ms ease',
             transitionDelay: menuOpen ? `${navItems.length * 80 + 150}ms` : '0ms',

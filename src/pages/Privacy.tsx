@@ -116,7 +116,7 @@ export default function Privacy() {
         <Link
           to="/"
           className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--accent-light)]"
-          style={{ color: 'color-mix(in srgb, var(--text) 70%, transparent)' }}
+          style={{ color: 'var(--text-secondary)' }}
         >
           <ArrowLeft size={14} aria-hidden="true" />
           Обратно към сайта
@@ -130,7 +130,7 @@ export default function Privacy() {
             WebkitBackdropFilter: 'blur(10px)',
             border: '1px solid var(--card-border)',
             borderRadius: '20px',
-            boxShadow: '0 24px 70px rgba(0,0,0,0.5)',
+            boxShadow: 'var(--floating-shadow)',
             padding: 'clamp(1.25rem, 4.5vw, 3.25rem)',
           }}
         >
@@ -146,7 +146,7 @@ export default function Privacy() {
               className="mt-5 mb-6"
               style={{ width: '56px', height: '2px', background: 'var(--brand-gradient)' }}
             />
-            <p className="text-xs tracking-[0.06em]" style={{ color: 'color-mix(in srgb, var(--text) 50%, transparent)' }}>
+            <p className="text-xs tracking-[0.06em]" style={{ color: 'var(--text-muted)' }}>
               Последна актуализация: {UPDATED}
             </p>
           </header>
@@ -160,7 +160,7 @@ export default function Privacy() {
                 </h2>
 
                 {s.paragraphs?.map((p, i) => (
-                  <p key={i} className="mt-4" style={{ fontSize: '15px', lineHeight: 1.7, color: 'color-mix(in srgb, var(--text) 82%, transparent)' }}>
+                  <p key={i} className="mt-4" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)' }}>
                     {p}
                   </p>
                 ))}
@@ -171,7 +171,7 @@ export default function Privacy() {
                       <li
                         key={i}
                         className="flex gap-3"
-                        style={{ fontSize: '15px', lineHeight: 1.6, color: 'color-mix(in srgb, var(--text) 82%, transparent)' }}
+                        style={{ fontSize: '15px', lineHeight: 1.6, color: 'var(--text-secondary)' }}
                       >
                         <span aria-hidden="true" className="mt-[9px] flex-none" style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--accent)' }} />
                         <span>
@@ -184,7 +184,7 @@ export default function Privacy() {
                 )}
 
                 {extra?.map((p, i) => (
-                  <p key={i} className="mt-4" style={{ fontSize: '15px', lineHeight: 1.7, color: 'color-mix(in srgb, var(--text) 82%, transparent)' }}>
+                  <p key={i} className="mt-4" style={{ fontSize: '15px', lineHeight: 1.7, color: 'var(--text-secondary)' }}>
                     {p}
                   </p>
                 ))}

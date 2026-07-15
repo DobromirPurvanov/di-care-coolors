@@ -71,7 +71,7 @@ export default function ServicePage() {
           to="/"
           state={{ scrollTo: '#services' }}
           className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--accent-light)]"
-          style={{ color: 'color-mix(in srgb, var(--text) 70%, transparent)' }}
+          style={{ color: 'var(--text-secondary)' }}
         >
           <ArrowLeft size={14} aria-hidden="true" />
           Всички услуги
@@ -85,7 +85,7 @@ export default function ServicePage() {
             WebkitBackdropFilter: 'blur(10px)',
             border: '1px solid var(--card-border)',
             borderRadius: '20px',
-            boxShadow: '0 24px 70px rgba(0,0,0,0.5)',
+            boxShadow: 'var(--floating-shadow)',
             padding: 'clamp(1.25rem, 4.5vw, 3.25rem)',
           }}
         >
@@ -102,7 +102,7 @@ export default function ServicePage() {
               className="mt-5 mb-7"
               style={{ width: '56px', height: '2px', background: 'var(--brand-gradient)' }}
             />
-            <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'color-mix(in srgb, var(--text) 92%, transparent)' }}>
+            <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'var(--text)' }}>
               {content.intro}
             </p>
           </header>
@@ -111,7 +111,7 @@ export default function ServicePage() {
           {content.highlights && content.highlights.length > 0 && (
             <ul className="mt-9 grid gap-x-8 gap-y-3.5 sm:grid-cols-2">
               {content.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-3" style={{ fontSize: '15px', color: 'color-mix(in srgb, var(--text) 90%, transparent)' }}>
+                <li key={h} className="flex items-start gap-3" style={{ fontSize: '15px', color: 'var(--text-secondary)' }}>
                   <Check size={16} aria-hidden="true" style={{ color: 'var(--accent)', marginTop: '3px', flex: 'none' }} />
                   {h}
                 </li>
@@ -137,14 +137,14 @@ export default function ServicePage() {
                     <h3 className="font-serif-luxe" style={{ fontSize: '21px', lineHeight: 1.3, color: 'var(--accent-soft)' }}>
                       {p.title}
                     </h3>
-                    <p className="mt-2.5" style={{ fontSize: '15px', lineHeight: 1.65, color: 'color-mix(in srgb, var(--text) 82%, transparent)' }}>
+                    <p className="mt-2.5" style={{ fontSize: '15px', lineHeight: 1.65, color: 'var(--text-secondary)' }}>
                       {p.description}
                     </p>
 
                     {extra?.benefits && (
                       <ul className="mt-5 grid gap-x-7 gap-y-2.5 sm:grid-cols-2">
                         {extra.benefits.map((b) => (
-                          <li key={b} className="flex items-start gap-2.5" style={{ fontSize: '14px', lineHeight: 1.5, color: 'color-mix(in srgb, var(--text) 82%, transparent)' }}>
+                          <li key={b} className="flex items-start gap-2.5" style={{ fontSize: '14px', lineHeight: 1.5, color: 'var(--text-secondary)' }}>
                             <Check size={14} aria-hidden="true" style={{ color: 'var(--accent)', marginTop: '3px', flex: 'none' }} />
                             {b}
                           </li>
@@ -155,7 +155,7 @@ export default function ServicePage() {
                     {extra?.note && (
                       <p
                         className="mt-5 pl-4"
-                        style={{ fontSize: '14px', lineHeight: 1.6, color: 'color-mix(in srgb, var(--text) 72%, transparent)', borderLeft: '2px solid color-mix(in srgb, var(--accent) 45%, transparent)' }}
+                        style={{ fontSize: '14px', lineHeight: 1.6, color: 'var(--text-secondary)', borderLeft: '2px solid color-mix(in srgb, var(--accent) 45%, transparent)' }}
                       >
                         {extra.note}
                       </p>
@@ -189,7 +189,7 @@ export default function ServicePage() {
             <a
               href="tel:+359882708081"
               className="inline-flex min-h-[44px] items-center gap-2 text-sm tracking-[0.05em] transition-colors hover:text-[var(--accent-light)]"
-              style={{ color: 'color-mix(in srgb, var(--text) 80%, transparent)' }}
+              style={{ color: 'var(--text-secondary)' }}
             >
               Обади се: +359 88 270 8081
             </a>
@@ -202,9 +202,9 @@ export default function ServicePage() {
           style={{
             fontSize: '15px',
             lineHeight: 1.7,
-            color: 'color-mix(in srgb, var(--text) 70%, transparent)',
+            color: 'var(--text-secondary)',
             maxWidth: '560px',
-            textShadow: '0 2px 24px rgba(0,0,0,0.95), 0 0 8px rgba(0,0,0,0.8)',
+            textShadow: 'var(--text-shadow)',
           }}
         >
           {clinicPhilosophy}

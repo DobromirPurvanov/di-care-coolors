@@ -145,7 +145,7 @@ export default function ProcedureSection() {
 
           <p
             className="max-w-[30rem] text-center text-[11px] leading-relaxed tracking-[0.15em] sm:tracking-[0.22em] uppercase"
-            style={{ color: 'color-mix(in srgb, var(--text) 70%, transparent)', textShadow: '0 1px 12px rgba(0,0,0,0.5)' }}
+            style={{ color: 'var(--text-secondary)', textShadow: 'var(--text-shadow)' }}
           >
             {hint}
           </p>

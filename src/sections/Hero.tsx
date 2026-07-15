@@ -90,7 +90,7 @@ export default function Hero() {
             fontSize: 'clamp(1.3rem, 6vw, 3.9rem)',
             fontWeight: 500,
             transform: 'translateY(50px)',
-            textShadow: '0 0 40px color-mix(in srgb, var(--text) 12%, transparent)',
+            textShadow: 'var(--text-shadow)',
           }}
         >
           НА ВАШАТА КРАСОТА
@@ -116,7 +116,7 @@ export default function Hero() {
             <span key={b.name} className="brand-item group relative opacity-0" style={{ transform: 'translateY(10px)' }}>
               <span
                 className="text-[10px] sm:text-[11px] tracking-[0.14em] sm:tracking-[0.2em] uppercase pb-1 cursor-default transition-all duration-300 group-hover:text-[var(--accent-light)]"
-                style={{ color: 'color-mix(in srgb, var(--text) 60%, transparent)', borderBottom: '1px solid color-mix(in srgb, var(--text) 12%, transparent)' }}
+                style={{ color: 'var(--text-muted)', borderBottom: '1px solid var(--border)' }}
               >
                 {b.name}
               </span>
@@ -127,7 +127,7 @@ export default function Hero() {
                 style={{
                   background: 'var(--glass-bg)',
                   border: '1px solid var(--card-border)',
-                  color: 'color-mix(in srgb, var(--text) 85%, transparent)',
+                  color: 'var(--text-secondary)',
                   backdropFilter: 'blur(8px)',
                 }}
               >
@@ -146,14 +146,14 @@ export default function Hero() {
         onClick={() => scrollToTarget('#procedures')}
         aria-label="Скролни надолу към процедурите"
       >
-        <Mouse size={18} className="transition-colors duration-300 group-hover:!text-[var(--accent)]" style={{ color: 'color-mix(in srgb, var(--text) 55%, transparent)' }} aria-hidden="true" />
-        <span className="text-[9px] tracking-[0.4em] uppercase transition-colors duration-300 group-hover:text-[var(--accent-light)]" style={{ color: 'color-mix(in srgb, var(--text) 50%, transparent)' }}>
+        <Mouse size={18} className="transition-colors duration-300 group-hover:!text-[var(--accent)]" style={{ color: 'var(--text-muted)' }} aria-hidden="true" />
+        <span className="text-[9px] tracking-[0.4em] uppercase transition-colors duration-300 group-hover:text-[var(--accent-light)]" style={{ color: 'var(--text-muted)' }}>
           Scroll
         </span>
         <ChevronDown
           size={15}
           className="transition-colors duration-300 group-hover:!text-[var(--accent)]"
-          style={{ color: 'color-mix(in srgb, var(--text) 55%, transparent)', animation: 'heroBounce 1.8s cubic-bezier(0.28, 0.84, 0.42, 1) infinite' }}
+          style={{ color: 'var(--text-muted)', animation: 'heroBounce 1.8s cubic-bezier(0.28, 0.84, 0.42, 1) infinite' }}
           aria-hidden="true"
         />
       </button>

@@ -87,7 +87,7 @@ export default function Contact() {
               </h2>
               <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--accent) 50%, transparent), transparent)' }} />
             </div>
-            <p className="text-sm mb-8" style={{ color: 'color-mix(in srgb, var(--text) 70%, transparent)', lineHeight: 1.6 }}>
+            <p className="text-sm mb-8" style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
               Изберете свободен час директно в календара ни или ни оставете съобщение и ще се свържем с вас.
             </p>
 
@@ -100,7 +100,7 @@ export default function Contact() {
                 <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--accent-light)', marginTop: '2px', flex: 'none' }} />
                 <div>
                   <p className="text-sm" style={{ color: 'var(--text)' }}>Запазете час онлайн</p>
-                  <p className="text-[13px] mt-1 leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 62%, transparent)' }}>
+                  <p className="text-[13px] mt-1 leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                     Вижте свободните часове в реално време и потвърдете за минута.
                   </p>
                 </div>
@@ -143,10 +143,10 @@ export default function Contact() {
                   style={{ minHeight: '300px', background: 'var(--card-bg)' }}
                 >
                   <MapPin size={26} aria-hidden="true" style={{ color: 'var(--accent-light)' }} />
-                  <p className="text-sm font-light" style={{ color: 'color-mix(in srgb, var(--text) 80%, transparent)', lineHeight: 1.6 }}>
+                  <p className="text-sm font-light" style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                     гр. Варна, ул. „Любен Каравелов" № 71, Партер
                   </p>
-                  <p className="text-[12px] max-w-[300px]" style={{ color: 'color-mix(in srgb, var(--text) 55%, transparent)', lineHeight: 1.6 }}>
+                  <p className="text-[12px] max-w-[300px]" style={{ color: 'var(--text-muted)', lineHeight: 1.6 }}>
                     Картата се зарежда от Google Maps след вашето изрично действие.
                   </p>
                   <div className="flex flex-wrap items-center justify-center gap-3 mt-1">
@@ -163,7 +163,7 @@ export default function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 min-h-[44px] px-4 text-[11px] tracking-[0.12em] uppercase transition-colors hover:text-[var(--accent-light)]"
-                      style={{ color: 'color-mix(in srgb, var(--text) 75%, transparent)' }}
+                      style={{ color: 'var(--text-secondary)' }}
                     >
                       Отвори в Google Maps
                       <ExternalLink size={12} aria-hidden="true" />
@@ -176,7 +176,7 @@ export default function Contact() {
         </div>
 
         {/* Контактни блокове */}
-        <div className="palette-cycle mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: 'var(--card-border)' }}>
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: 'var(--card-border)' }}>
           {[
             { icon: MapPin, label: 'Адрес', value: 'гр. Варна, ул. Любен Каравелов № 71, Партер', href: undefined as string | undefined },
             { icon: Phone, label: 'Телефон', value: '+359 882 708 081', href: 'tel:+359882708081' },
@@ -192,11 +192,11 @@ export default function Contact() {
                 <item.icon size={17} aria-hidden="true" />
               </span>
               <div className="min-w-0">
-                <p className="text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: 'color-mix(in srgb, var(--text) 55%, transparent)' }}>
+                <p className="text-[10px] tracking-[0.2em] uppercase mb-2" style={{ color: 'var(--text-muted)' }}>
                   {item.label}
                 </p>
                 {item.label === 'Работно време' ? (
-                  <div className="text-sm font-light" style={{ color: 'color-mix(in srgb, var(--text) 80%, transparent)', lineHeight: 1.7 }}>
+                  <div className="text-sm font-light" style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
                     <p>Пон – Пет: 10:00 – 17:00</p>
                     <p>Събота: 10:00 – 14:00</p>
                     <p>Неделя: Затворено</p>
@@ -217,12 +217,12 @@ export default function Contact() {
                   <a
                     href={item.href}
                     className="inline-flex min-h-[44px] max-w-full items-center text-sm font-light break-words transition-colors duration-300 hover:text-[var(--accent-light)]"
-                    style={{ color: 'color-mix(in srgb, var(--text) 80%, transparent)' }}
+                    style={{ color: 'var(--text-secondary)' }}
                   >
                     {item.value}
                   </a>
                 ) : (
-                  <p className="text-sm font-light" style={{ color: 'color-mix(in srgb, var(--text) 80%, transparent)', lineHeight: 1.6 }}>{item.value}</p>
+                  <p className="text-sm font-light" style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>{item.value}</p>
                 )}
               </div>
             </div>
@@ -231,7 +231,7 @@ export default function Contact() {
 
         {/* Социални мрежи */}
         <div className="ct-reveal mt-10 flex items-center gap-4 opacity-0" style={{ transform: 'translateY(20px)' }}>
-          <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: 'color-mix(in srgb, var(--text) 55%, transparent)' }}>
+          <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: 'var(--text-muted)' }}>
             Последвайте ни
           </span>
           {SOCIALS.map(s => (
@@ -241,16 +241,16 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               className="group relative w-11 h-11 flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--accent)]/50"
-              style={{ borderColor: 'color-mix(in srgb, var(--text) 10%, transparent)' }}
+              style={{ borderColor: 'var(--border)' }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--accent) 10%, transparent)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent' }}
               aria-label={`Последвайте ни в ${s.name}`}
             >
-              <s.icon size={18} className="transition-colors duration-300 group-hover:!text-[var(--accent)]" style={{ color: 'color-mix(in srgb, var(--text) 55%, transparent)' }} aria-hidden="true" />
+              <s.icon size={18} className="transition-colors duration-300 group-hover:!text-[var(--accent)]" style={{ color: 'var(--text-muted)' }} aria-hidden="true" />
               <span
                 role="tooltip"
                 className="social-tooltip pointer-events-none absolute left-1/2 bottom-full mb-2 -translate-x-1/2 whitespace-nowrap px-2.5 py-1.5 text-[10px] tracking-[0.08em] opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
-                style={{ background: 'var(--glass-bg)', border: '1px solid var(--card-border)', color: 'color-mix(in srgb, var(--text) 85%, transparent)' }}
+                style={{ background: 'var(--glass-bg)', border: '1px solid var(--card-border)', color: 'var(--text-secondary)' }}
               >
                 {s.name}
               </span>

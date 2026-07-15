@@ -152,7 +152,7 @@ export default function ContactForm() {
         </span>
         <div>
           <p className="text-lg" style={{ color: 'var(--text)' }}>Благодарим ви!</p>
-          <p className="text-sm mt-1.5 leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 70%, transparent)' }}>
+          <p className="text-sm mt-1.5 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Получихме вашето съобщение{values.procedure ? ` относно „${values.procedure}"` : ''} и ще се
             свържем с вас в рамките на работния ден.
           </p>
@@ -208,7 +208,7 @@ export default function ContactForm() {
         <span
           className="absolute left-0 top-[22px] text-[15px] select-none pointer-events-none"
           aria-hidden="true"
-          style={{ color: 'color-mix(in srgb, var(--text) 70%, transparent)' }}
+          style={{ color: 'var(--text-secondary)' }}
         >
           +359
         </span>
@@ -312,15 +312,15 @@ export default function ContactForm() {
             aria-hidden="true"
             className="gdpr-box mt-[2px] w-[18px] h-[18px] flex-none flex items-center justify-center transition-all duration-200"
             style={{
-              border: `1px solid ${values.gdpr ? 'var(--accent)' : touched.gdpr && errors.gdpr ? 'var(--error)' : 'color-mix(in srgb, var(--text) 25%, transparent)'}`,
+              border: `1px solid ${values.gdpr ? 'var(--accent)' : touched.gdpr && errors.gdpr ? 'var(--error)' : 'var(--card-border)'}`,
               background: values.gdpr ? 'color-mix(in srgb, var(--accent) 15%, transparent)' : 'transparent',
             }}
           >
             {values.gdpr && <Check size={12} style={{ color: 'var(--accent)' }} />}
           </span>
-          <span className="text-xs leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 65%, transparent)' }}>
+          <span className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
             Съгласен/на съм с{' '}
-            <Link to="/poveritelnost" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 transition-colors hover:text-[var(--accent-light)]" style={{ color: 'color-mix(in srgb, var(--text) 85%, transparent)' }} onClick={e => e.stopPropagation()}>
+            <Link to="/poveritelnost" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 transition-colors hover:text-[var(--accent-light)]" style={{ color: 'var(--text-secondary)' }} onClick={e => e.stopPropagation()}>
               политиката за лични данни
             </Link>{' '}*
           </span>

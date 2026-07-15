@@ -204,6 +204,8 @@ export default function ShaderBackground() {
         width: '100%',
         height: '100%',
         zIndex: 0,
+        opacity: 'var(--shader-opacity)',
+        transition: 'opacity 320ms ease',
       }}
     />
   )

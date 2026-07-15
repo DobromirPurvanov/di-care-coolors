@@ -15,6 +15,13 @@
         try { stored = localStorage.getItem('dicare-color-theme') } catch {}
         const theme = allowed.includes(fromUrl) ? fromUrl : allowed.includes(stored) ? stored : 'matching-gradient'
         document.documentElement.dataset.theme = theme
+        const themeColors = {
+          'matching-gradient': '#102423',
+          spot: '#FFEFCA',
+          matching: '#D0C4AB',
+          dust: '#404846',
+        }
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', themeColors[theme])
       })()
     </script>
     <title>Dr. Di Clinic | Клиника за естетика и красота</title>

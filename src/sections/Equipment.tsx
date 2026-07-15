@@ -87,15 +87,15 @@ export default function Equipment() {
         >
           Апаратура
         </h2>
-        <p className="text-center text-xs tracking-[0.15em] uppercase mb-10 sm:mb-16" style={{ color: 'color-mix(in srgb, var(--text) 60%, transparent)' }}>
+        <p className="text-center text-xs tracking-[0.15em] uppercase mb-10 sm:mb-16" style={{ color: 'var(--text-muted)' }}>
           Световно признати лазерни системи
         </p>
 
-        <div className="palette-cycle grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {equipment.map((eq, i) => (
             <div
               key={i}
-              className="eq-card group grid grid-cols-[84px_minmax(0,1fr)] sm:flex sm:flex-row overflow-hidden opacity-0 rounded-2xl border transition-all duration-[400ms] hover:border-[var(--item-color)] hover:-translate-y-[3px]"
+              className="eq-card group grid grid-cols-[84px_minmax(0,1fr)] sm:flex sm:flex-row overflow-hidden opacity-0 rounded-2xl border transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-[3px]"
               style={{
                 background: 'var(--card-bg)',
                 borderColor: 'var(--card-border)',
@@ -104,7 +104,7 @@ export default function Equipment() {
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement
                 el.style.background = 'var(--card-bg-hover)'
-                el.style.boxShadow = '0 12px 34px rgba(0,0,0,0.38)'
+                el.style.boxShadow = 'var(--card-shadow)'
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement
@@ -128,7 +128,7 @@ export default function Equipment() {
                 <h3 className="font-light text-sm tracking-[0.1em] uppercase group-hover:text-[var(--accent-light)] transition-colors">
                   {eq.name}
                 </h3>
-                <p className="text-sm mt-2 leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 74%, transparent)' }}>
+                <p className="text-sm mt-2 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                   {eq.desc}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
@@ -138,11 +138,11 @@ export default function Equipment() {
                       className="text-[11px] px-2.5 py-1 uppercase border transition-all duration-300 group-hover:border-[var(--accent)]/60"
                       style={{
                         letterSpacing: '0.08em',
-                        borderColor: 'color-mix(in srgb, var(--item-color) 55%, transparent)',
-                        color: 'color-mix(in srgb, var(--accent-light) 85%, transparent)',
+                        borderColor: 'color-mix(in srgb, var(--secondary) 55%, transparent)',
+                        color: 'var(--text-secondary)',
                         background: 'transparent',
                       }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--item-color) 12%, transparent)' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--accent) 9%, transparent)' }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent' }}
                     >
                       {f}

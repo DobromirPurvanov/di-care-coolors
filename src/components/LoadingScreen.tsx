@@ -60,7 +60,7 @@ export default function LoadingScreen() {
       <div className="mt-6 flex items-center gap-2">
         <span
           className="text-[10px] tracking-[0.45em] uppercase"
-          style={{ color: 'color-mix(in srgb, var(--text) 35%, transparent)' }}
+          style={{ color: 'var(--text-muted)' }}
         >
           Dr. Di Clinic
         </span>

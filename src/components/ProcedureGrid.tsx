@@ -17,13 +17,13 @@ function DetailBody({ active, onClose }: { active: Procedure; onClose: () => voi
         <button
           onClick={onClose}
           className="flex items-center justify-center min-w-[44px] min-h-[44px] -mt-2.5 -mr-2.5 flex-none transition-colors hover:text-[var(--text)]"
-          style={{ color: 'color-mix(in srgb, var(--text) 55%, transparent)' }}
+          style={{ color: 'var(--text-muted)' }}
           aria-label="Затвори детайлите"
         >
           <X size={18} aria-hidden="true" />
         </button>
       </div>
-      <p className="mt-3 text-[14px] leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 82%, transparent)' }}>
+      <p className="mt-3 text-[14px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
         {active.description}
       </p>
       <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-1">
@@ -57,7 +57,7 @@ export default function ProcedureGrid() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_340px] lg:gap-12">
       {/* Списък с процедури, групиран по категория */}
-      <div className="palette-cycle lg:order-first">
+      <div className="lg:order-first">
         {categories.map((cat) => {
           const items = procedures.filter((p) => p.category === cat.id)
           if (items.length === 0) return null
@@ -67,9 +67,9 @@ export default function ProcedureGrid() {
                 <span
                   aria-hidden="true"
                   className="w-1.5 h-1.5 rounded-full"
-                  style={{ background: 'var(--item-color)', boxShadow: '0 0 8px color-mix(in srgb, var(--item-color) 55%, transparent)' }}
+                  style={{ background: 'var(--accent)', boxShadow: '0 0 8px color-mix(in srgb, var(--accent) 45%, transparent)' }}
                 />
-                <h3 className="text-[11px] tracking-[0.22em] uppercase" style={{ color: 'color-mix(in srgb, var(--text) 70%, transparent)' }}>
+                <h3 className="text-[11px] tracking-[0.22em] uppercase" style={{ color: 'var(--text-secondary)' }}>
                   {cat.label}
                 </h3>
                 <span className="text-[11px] tabular-nums" style={{ color: 'var(--text-muted)' }}>
@@ -78,7 +78,7 @@ export default function ProcedureGrid() {
                 <span
                   aria-hidden="true"
                   className="flex-1 h-px"
-                  style={{ background: 'linear-gradient(90deg, var(--item-color), transparent)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--secondary), transparent)' }}
                 />
               </div>
               <div className="flex flex-wrap gap-2.5">
@@ -110,7 +110,7 @@ export default function ProcedureGrid() {
                 borderRadius: '18px',
                 backdropFilter: 'blur(14px)',
                 WebkitBackdropFilter: 'blur(14px)',
-                boxShadow: '0 12px 40px rgba(0,0,0,0.45)',
+                boxShadow: 'var(--card-shadow)',
               }}
               role="region"
               aria-live="polite"
@@ -152,7 +152,7 @@ export default function ProcedureGrid() {
             borderRadius: '18px',
             backdropFilter: 'blur(14px)',
             WebkitBackdropFilter: 'blur(14px)',
-            boxShadow: '0 12px 40px rgba(0,0,0,0.5)',
+            boxShadow: 'var(--floating-shadow)',
             WebkitOverflowScrolling: 'touch',
           }}
           role="region"

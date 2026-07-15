@@ -56,7 +56,7 @@ export default function CookieConsent() {
           WebkitBackdropFilter: 'blur(14px)',
           border: '1px solid var(--card-border)',
           borderLeft: '2px solid var(--accent)',
-          boxShadow: '0 24px 70px rgba(0,0,0,0.55)',
+          boxShadow: 'var(--floating-shadow)',
           borderRadius: '18px',
           transform: shown ? 'translateY(0)' : 'translateY(24px)',
           opacity: shown ? 1 : 0,
@@ -65,14 +65,14 @@ export default function CookieConsent() {
       >
         <div className="flex items-start gap-3.5 min-w-0">
           <Cookie size={20} className="flex-none mt-[2px]" style={{ color: 'var(--accent-light)' }} aria-hidden="true" />
-          <p className="text-[13px] leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 75%, transparent)' }}>
+          <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Използваме бисквитки за коректната работа на сайта. Вградените услуги
             (календар за резервации и карта) се зареждат само със съгласие или когато
             изрично ги използвате. Вижте{' '}
             <Link
               to="/poveritelnost"
               className="underline underline-offset-2 transition-colors hover:text-[var(--accent-light)]"
-              style={{ color: 'color-mix(in srgb, var(--text) 95%, transparent)' }}
+              style={{ color: 'var(--text)' }}
             >
               Политиката за поверителност
             </Link>
@@ -85,9 +85,9 @@ export default function CookieConsent() {
             type="button"
             onClick={() => choose('essential')}
             className="w-full min-[420px]:w-auto whitespace-nowrap px-5 min-h-[44px] rounded-full text-[11px] tracking-[0.12em] uppercase transition-all duration-300 border"
-            style={{ borderColor: 'color-mix(in srgb, var(--text) 45%, transparent)', color: 'var(--text)' }}
+            style={{ borderColor: 'var(--card-border)', color: 'var(--text)' }}
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent-light)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'color-mix(in srgb, var(--text) 45%, transparent)'; e.currentTarget.style.color = 'var(--text)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--card-border)'; e.currentTarget.style.color = 'var(--text)' }}
           >
             Само необходимите
           </button>

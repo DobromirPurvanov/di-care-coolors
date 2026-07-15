@@ -53,45 +53,45 @@ export default function Services() {
           Нашите услуги
         </h2>
 
-        <div className="palette-cycle grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map((cat, i) => {
             const count = procedures.filter((p) => p.category === cat.id).length
             const tagline = serviceContent[cat.id].tagline
             return (
               <div
                 key={cat.id}
-                className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border transition-all duration-[400ms] hover:border-[var(--item-color)] hover:-translate-y-1"
+                className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-1"
                 style={{
                   minHeight: '260px',
                   background: 'var(--card-bg)',
                   borderColor: 'var(--card-border)',
                   transform: 'translateY(60px)',
                   transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  boxShadow: '0 0 0 rgba(0,0,0,0)',
+                  boxShadow: 'none',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement
                   el.style.background = 'var(--card-bg-hover)'
-                  el.style.boxShadow = '0 14px 40px rgba(0,0,0,0.4)'
+                  el.style.boxShadow = 'var(--card-shadow)'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement
                   el.style.background = 'var(--card-bg)'
-                  el.style.boxShadow = '0 0 0 rgba(0,0,0,0)'
+                  el.style.boxShadow = 'none'
                 }}
               >
                 {/* Дискретно златно сияние при hover */}
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--item-color) 16%, transparent), transparent 58%)' }}
+                  style={{ background: 'linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 48%)' }}
                 />
 
                 {/* Златен номер */}
                 <span
                   aria-hidden="true"
                   className="font-mono-luxe absolute top-5 left-6 z-10 text-sm tracking-[0.1em] transition-opacity duration-[400ms] opacity-40 group-hover:opacity-90"
-                  style={{ color: 'var(--item-color)' }}
+                  style={{ color: 'var(--accent-soft)' }}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
@@ -109,7 +109,7 @@ export default function Services() {
                     <h3 className="font-light text-lg tracking-wider uppercase group-hover:text-[var(--accent-light)] transition-colors duration-300">
                       {cat.label}
                     </h3>
-                    <p className="text-[15px] mt-2 font-light leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 72%, transparent)' }}>
+                    <p className="text-[15px] mt-2 font-light leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                       {tagline}
                     </p>
                   </Link>
@@ -124,7 +124,7 @@ export default function Services() {
                       Научете повече
                       <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-[4px]" aria-hidden="true" />
                     </Link>
-                    <span aria-hidden="true" className="hidden min-[360px]:block w-px h-3.5" style={{ background: 'color-mix(in srgb, var(--text) 15%, transparent)' }} />
+                    <span aria-hidden="true" className="hidden min-[360px]:block w-px h-3.5" style={{ background: 'var(--border)' }} />
                     <BookingButton
                       variant="link"
                       service={cat.label}

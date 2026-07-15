@@ -20,13 +20,19 @@ export const CAL_LINK: string = import.meta.env.VITE_CAL_LINK ?? 'dobromir-purva
 export const CAL_NAMESPACE = 'zapazi-chas'
 
 /** Брандова тема на календара — наследява избраната цветова версия. */
+function getCalTheme(): 'light' | 'dark' {
+  if (typeof document === 'undefined') return 'dark'
+  const theme = document.documentElement.dataset.theme
+  return theme === 'spot' || theme === 'matching' ? 'light' : 'dark'
+}
+
 function getCalUiConfig() {
   const accent = typeof document === 'undefined'
     ? '#B698B8'
     : getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#B698B8'
 
   return {
-    theme: 'dark' as const,
+    theme: getCalTheme(),
     hideEventTypeDetails: false,
     layout: 'month_view' as const,
     cssVarsPerTheme: {
@@ -115,11 +121,12 @@ export function openBooking(service?: string): boolean {
   loadCalScript()
   if (scriptFailed) return false
 
-  const config: Record<string, string> = { theme: 'dark' }
+  const config: Record<string, string> = { theme: getCalTheme() }
   if (service) config.notes = `Услуга: ${service}`
 
   const ns = window.Cal?.ns?.[CAL_NAMESPACE]
   if (!ns) return false
+  ns('ui', getCalUiConfig())
   ns('modal', { calLink: CAL_LINK, config })
   return true
 }

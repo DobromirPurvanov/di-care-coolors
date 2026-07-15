@@ -63,7 +63,10 @@ export default function ThemeSwitcher() {
                   }}
                 >
                   <span className="theme-option-copy">
-                    <strong>{item.name}</strong>
+                    <span className="theme-option-title">
+                      <strong>{item.name}</strong>
+                      <span className="theme-option-mode">{item.mode}</span>
+                    </span>
                     <small>{item.description}</small>
                   </span>
                   <span className="theme-swatches" aria-hidden="true">
