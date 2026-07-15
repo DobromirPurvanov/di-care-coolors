@@ -80,10 +80,10 @@ export default function ServicePage() {
         {/* Четяща повърхност — спокоен фон над анимирания starfield */}
         <article
           style={{
-            background: 'color-mix(in srgb, var(--bg-elevated) 90%, transparent)',
+            background: 'var(--card-bg)',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
-            border: '1px solid color-mix(in srgb, var(--accent) 16%, transparent)',
+            border: '1px solid var(--card-border)',
             borderRadius: '20px',
             boxShadow: '0 24px 70px rgba(0,0,0,0.5)',
             padding: 'clamp(1.25rem, 4.5vw, 3.25rem)',
@@ -100,7 +100,7 @@ export default function ServicePage() {
             <div
               aria-hidden="true"
               className="mt-5 mb-7"
-              style={{ width: '56px', height: '2px', background: 'linear-gradient(90deg, var(--accent), transparent)' }}
+              style={{ width: '56px', height: '2px', background: 'var(--brand-gradient)' }}
             />
             <p style={{ fontSize: '17px', lineHeight: 1.7, color: 'color-mix(in srgb, var(--text) 92%, transparent)' }}>
               {content.intro}
@@ -121,7 +121,7 @@ export default function ServicePage() {
 
           {/* Списък с процедури */}
           <section className="mt-12" aria-label="Процедури">
-            <h2 className="text-xs tracking-[0.2em] uppercase mb-1" style={{ color: 'var(--accent)' }}>
+            <h2 className="text-xs tracking-[0.2em] uppercase mb-1" style={{ color: 'var(--accent-light)' }}>
               Процедури
             </h2>
             <ul className="flex flex-col">

@@ -347,7 +347,7 @@ export default function ContactForm() {
         type="submit"
         disabled={status === 'sending'}
         className="mt-2 w-full sm:w-auto sm:self-start inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full text-[11px] tracking-[0.15em] uppercase font-medium transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100"
-        style={{ background: 'var(--accent)', color: 'var(--bg)' }}
+        style={{ background: 'var(--accent)', color: 'var(--accent-contrast)' }}
         onMouseEnter={e => { if (status !== 'sending') (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent-light)' }}
         onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent)' }}
       >

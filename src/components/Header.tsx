@@ -145,9 +145,9 @@ export default function Header() {
           // 1px bleed + safe-area покритие премахват тънкия луфт над header-а
           // при iOS и при subpixel рендериране след show/hide transform.
           paddingTop: 'calc(1px + env(safe-area-inset-top))',
-          backgroundColor: scrolled || menuOpen ? 'color-mix(in srgb, var(--bg) 90%, transparent)' : 'transparent',
+          backgroundColor: scrolled || menuOpen ? 'var(--glass-bg)' : 'transparent',
           backdropFilter: scrolled || menuOpen ? 'blur(20px) saturate(1.2)' : 'none',
-          borderBottom: scrolled ? '1px solid color-mix(in srgb, var(--text) 5%, transparent)' : '1px solid transparent',
+          borderBottom: scrolled ? '1px solid var(--card-border)' : '1px solid transparent',
           transform: hidden && !menuOpen ? 'translateY(-100%)' : 'translateY(0)',
           transition: 'transform 400ms ease, background-color 500ms ease, border-color 500ms ease',
         }}
@@ -180,7 +180,7 @@ export default function Header() {
                     aria-hidden="true"
                     className="absolute left-0 -bottom-[2px] h-[1px] w-full transition-transform duration-300"
                     style={{
-                      background: 'linear-gradient(90deg, var(--accent), var(--accent-light))',
+                      background: 'var(--brand-gradient)',
                       transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
                       transformOrigin: 'left center',
                     }}
@@ -244,7 +244,7 @@ export default function Header() {
         className="fixed inset-0 z-[1005] flex flex-col items-center justify-start gap-3 min-[390px]:gap-5 sm:gap-8 overflow-y-auto overscroll-contain px-6 lg:hidden"
         style={{
           clipPath: menuOpen ? 'circle(150% at 95% 5%)' : 'circle(0% at 95% 5%)',
-          background: 'color-mix(in srgb, var(--bg) 92%, transparent)',
+          background: 'var(--glass-bg)',
           backdropFilter: 'blur(30px) saturate(1.1)',
           WebkitBackdropFilter: 'blur(30px) saturate(1.1)',
           visibility: menuOpen ? 'visible' : 'hidden',

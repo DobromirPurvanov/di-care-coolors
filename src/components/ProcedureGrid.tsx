@@ -31,7 +31,7 @@ function DetailBody({ active, onClose }: { active: Procedure; onClose: () => voi
           to={`/uslugi/${category.slug}`}
           state={{ procedure: active.title }}
           className="inline-flex items-center gap-2 min-h-[44px] text-[11px] tracking-[0.15em] uppercase transition-colors hover:text-[var(--accent-light)]"
-          style={{ color: 'var(--accent)' }}
+          style={{ color: 'var(--accent-light)' }}
         >
           Научете повече
           <ArrowRight size={13} aria-hidden="true" />
@@ -105,8 +105,8 @@ export default function ProcedureGrid() {
           {active ? (
             <div
               style={{
-                background: 'color-mix(in srgb, var(--bg) 88%, transparent)',
-                border: '1px solid color-mix(in srgb, var(--accent) 35%, transparent)',
+                background: 'var(--card-bg)',
+                border: '1px solid var(--card-border)',
                 borderRadius: '18px',
                 backdropFilter: 'blur(14px)',
                 WebkitBackdropFilter: 'blur(14px)',
@@ -147,8 +147,8 @@ export default function ProcedureGrid() {
             opacity: active ? 1 : 0,
             transform: active ? 'translateY(0)' : 'translateY(14px)',
             pointerEvents: active ? 'auto' : 'none',
-            background: 'color-mix(in srgb, var(--bg) 92%, transparent)',
-            border: '1px solid color-mix(in srgb, var(--accent) 35%, transparent)',
+            background: 'var(--glass-bg)',
+            border: '1px solid var(--card-border)',
             borderRadius: '18px',
             backdropFilter: 'blur(14px)',
             WebkitBackdropFilter: 'blur(14px)',

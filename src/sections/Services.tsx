@@ -60,22 +60,31 @@ export default function Services() {
             return (
               <div
                 key={cat.id}
-                className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border border-[color-mix(in srgb, var(--accent) 14%, transparent)] transition-all duration-[400ms] hover:border-[var(--accent)]/40 hover:-translate-y-1"
+                className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border transition-all duration-[400ms] hover:border-[var(--accent)]/40 hover:-translate-y-1"
                 style={{
                   minHeight: '260px',
-                  background: 'var(--bg)',
+                  background: 'var(--card-bg)',
+                  borderColor: 'var(--card-border)',
                   transform: 'translateY(60px)',
                   transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
                   boxShadow: '0 0 0 rgba(0,0,0,0)',
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 14px 40px rgba(0,0,0,0.4)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 0 rgba(0,0,0,0)' }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.background = 'var(--card-bg-hover)'
+                  el.style.boxShadow = '0 14px 40px rgba(0,0,0,0.4)'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.background = 'var(--card-bg)'
+                  el.style.boxShadow = '0 0 0 rgba(0,0,0,0)'
+                }}
               >
                 {/* Дискретно златно сияние при hover */}
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 55%)' }}
+                  style={{ background: 'radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--secondary) 22%, transparent), transparent 58%)' }}
                 />
 
                 {/* Златен номер */}
@@ -120,7 +129,7 @@ export default function Services() {
                       variant="link"
                       service={cat.label}
                       className="inline-flex min-h-[44px] text-xs tracking-wider uppercase font-medium"
-                      style={{ color: 'var(--accent)' }}
+                      style={{ color: 'var(--accent-light)' }}
                     >
                       Запази час
                     </BookingButton>

@@ -24,12 +24,18 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative z-10" style={{ padding: 'clamp(3.5rem, 8vh, 4rem) clamp(1rem, 4vw, 3rem)' }}>
+    <footer
+      className="relative z-10"
+      style={{
+        padding: 'clamp(3.5rem, 8vh, 4rem) clamp(1rem, 4vw, 3rem)',
+        background: 'linear-gradient(180deg, color-mix(in srgb, var(--bg-elevated) 78%, transparent), color-mix(in srgb, var(--bg) 94%, transparent))',
+      }}
+    >
       {/* Gradient top border */}
       <div
         aria-hidden="true"
         className="absolute top-0 left-0 w-full h-[1px]"
-        style={{ background: 'linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--accent) 60%, transparent) 50%, transparent 100%)' }}
+        style={{ background: 'linear-gradient(90deg, transparent 0%, var(--secondary) 30%, var(--accent) 50%, var(--accent-light) 70%, transparent 100%)' }}
       />
 
       <div className="max-w-6xl mx-auto">

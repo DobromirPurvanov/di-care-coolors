@@ -69,10 +69,10 @@ export default function Hero() {
       className="relative z-10 flex flex-col items-center justify-center text-center overflow-hidden"
       style={{ height: '100svh', minHeight: 'min(600px, 100svh)' }}
     >
-      {/* Двоен gradient за дълбочина над анимирания shader фон */}
+      {/* Палитрен слой за дълбочина над анимирания shader фон */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, color-mix(in srgb, var(--bg) 62%, transparent) 0%, var(--bg) 72%)' }} />
-        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--accent) 6%, transparent) 0%, transparent 55%)' }} />
+        <div className="absolute inset-0" style={{ background: 'var(--hero-gradient)' }} />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 55%)' }} />
       </div>
 
       <h1 className="relative w-full max-w-5xl px-4 sm:px-6 m-0" style={{ marginTop: '-2vh' }}>
@@ -125,8 +125,8 @@ export default function Hero() {
                 role="tooltip"
                 className="brand-tooltip pointer-events-none absolute left-1/2 bottom-full mb-3 -translate-x-1/2 whitespace-nowrap px-3 py-2 rounded-lg text-[10px] tracking-[0.06em] opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
                 style={{
-                  background: 'color-mix(in srgb, var(--bg) 92%, transparent)',
-                  border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)',
+                  background: 'var(--glass-bg)',
+                  border: '1px solid var(--card-border)',
                   color: 'color-mix(in srgb, var(--text) 85%, transparent)',
                   backdropFilter: 'blur(8px)',
                 }}

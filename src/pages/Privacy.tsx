@@ -125,10 +125,10 @@ export default function Privacy() {
         {/* Четяща повърхност — спокоен фон над анимирания starfield */}
         <article
           style={{
-            background: 'color-mix(in srgb, var(--bg-elevated) 90%, transparent)',
+            background: 'var(--card-bg)',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
-            border: '1px solid color-mix(in srgb, var(--accent) 16%, transparent)',
+            border: '1px solid var(--card-border)',
             borderRadius: '20px',
             boxShadow: '0 24px 70px rgba(0,0,0,0.5)',
             padding: 'clamp(1.25rem, 4.5vw, 3.25rem)',
@@ -144,7 +144,7 @@ export default function Privacy() {
             <div
               aria-hidden="true"
               className="mt-5 mb-6"
-              style={{ width: '56px', height: '2px', background: 'linear-gradient(90deg, var(--accent), transparent)' }}
+              style={{ width: '56px', height: '2px', background: 'var(--brand-gradient)' }}
             />
             <p className="text-xs tracking-[0.06em]" style={{ color: 'color-mix(in srgb, var(--text) 50%, transparent)' }}>
               Последна актуализация: {UPDATED}

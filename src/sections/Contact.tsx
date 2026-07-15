@@ -71,7 +71,7 @@ export default function Contact() {
       id="contact"
       ref={sectionRef}
       className="relative z-10"
-      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)' }}
+      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)', background: 'var(--section-wash-alt)' }}
     >
       <div className="max-w-6xl mx-auto">
         {/* Двуколонен layout: форма | карта */}
@@ -94,10 +94,10 @@ export default function Contact() {
             {/* Основен път: онлайн запазване на час в реално време */}
             <div
               className="mb-9 p-5 sm:p-6 rounded-2xl"
-              style={{ border: '1px solid color-mix(in srgb, var(--accent) 28%, transparent)', background: 'color-mix(in srgb, var(--accent) 5%, transparent)' }}
+              style={{ border: '1px solid var(--card-border)', background: 'var(--card-bg)' }}
             >
               <div className="flex items-start gap-3">
-                <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--accent)', marginTop: '2px', flex: 'none' }} />
+                <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--accent-light)', marginTop: '2px', flex: 'none' }} />
                 <div>
                   <p className="text-sm" style={{ color: 'var(--text)' }}>Запазете час онлайн</p>
                   <p className="text-[13px] mt-1 leading-relaxed" style={{ color: 'color-mix(in srgb, var(--text) 62%, transparent)' }}>
@@ -124,7 +124,7 @@ export default function Contact() {
           <div className="ct-reveal opacity-0 order-2" style={{ transform: 'translateY(40px)' }}>
             <div
               className="w-full h-full overflow-hidden rounded-2xl"
-              style={{ border: '1px solid color-mix(in srgb, var(--accent) 25%, transparent)', minHeight: '300px' }}
+              style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', minHeight: '300px' }}
             >
               {mapAllowed ? (
                 <iframe
@@ -140,7 +140,7 @@ export default function Contact() {
                 /* Placeholder до съгласие: адрес + изрично зареждане на картата */
                 <div
                   className="w-full h-full flex flex-col items-center justify-center text-center gap-4 p-5 sm:p-8"
-                  style={{ minHeight: '300px', background: 'color-mix(in srgb, var(--bg) 55%, transparent)' }}
+                  style={{ minHeight: '300px', background: 'var(--card-bg)' }}
                 >
                   <MapPin size={26} aria-hidden="true" style={{ color: 'var(--accent-light)' }} />
                   <p className="text-sm font-light" style={{ color: 'color-mix(in srgb, var(--text) 80%, transparent)', lineHeight: 1.6 }}>
@@ -154,7 +154,7 @@ export default function Contact() {
                       type="button"
                       onClick={() => setMapAllowed(true)}
                       className="inline-flex items-center gap-2 px-6 min-h-[44px] rounded-full text-[11px] tracking-[0.14em] uppercase font-medium transition-all duration-300 hover:bg-[var(--accent-light)]"
-                      style={{ background: 'var(--accent)', color: 'var(--bg)' }}
+                      style={{ background: 'var(--accent)', color: 'var(--accent-contrast)' }}
                     >
                       Покажи картата
                     </button>
@@ -176,7 +176,7 @@ export default function Contact() {
         </div>
 
         {/* Контактни блокове */}
-        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: 'color-mix(in srgb, var(--text) 6%, transparent)' }}>
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: 'var(--card-border)' }}>
           {[
             { icon: MapPin, label: 'Адрес', value: 'гр. Варна, ул. Любен Каравелов № 71, Партер', href: undefined as string | undefined },
             { icon: Phone, label: 'Телефон', value: '+359 882 708 081', href: 'tel:+359882708081' },
@@ -186,7 +186,7 @@ export default function Contact() {
             <div
               key={i}
               className="ct-reveal flex items-start gap-4 p-5 sm:p-6 lg:p-7 opacity-0"
-              style={{ background: 'var(--bg)', transform: 'translateY(25px)' }}
+              style={{ background: 'var(--card-bg)', transform: 'translateY(25px)' }}
             >
               <item.icon size={18} className="flex-none mt-[2px]" style={{ color: 'var(--accent-light)' }} aria-hidden="true" />
               <div className="min-w-0">
@@ -248,7 +248,7 @@ export default function Contact() {
               <span
                 role="tooltip"
                 className="social-tooltip pointer-events-none absolute left-1/2 bottom-full mb-2 -translate-x-1/2 whitespace-nowrap px-2.5 py-1.5 text-[10px] tracking-[0.08em] opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
-                style={{ background: 'color-mix(in srgb, var(--bg) 92%, transparent)', border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)', color: 'color-mix(in srgb, var(--text) 85%, transparent)' }}
+                style={{ background: 'var(--glass-bg)', border: '1px solid var(--card-border)', color: 'color-mix(in srgb, var(--text) 85%, transparent)' }}
               >
                 {s.name}
               </span>

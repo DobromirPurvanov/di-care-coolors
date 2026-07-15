@@ -76,7 +76,7 @@ export default function Equipment() {
       className="relative z-10"
       style={{
         padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)',
-        background: 'linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--accent) 3%, transparent) 40%, transparent 100%)',
+        background: 'var(--section-wash)',
       }}
     >
       <div className="max-w-6xl mx-auto">
@@ -97,31 +97,31 @@ export default function Equipment() {
               key={i}
               className="eq-card group grid grid-cols-[84px_minmax(0,1fr)] sm:flex sm:flex-row overflow-hidden opacity-0 rounded-2xl border transition-all duration-[400ms] hover:border-[var(--accent)]/40 hover:-translate-y-[3px]"
               style={{
-                background: 'color-mix(in srgb, var(--text) 4%, transparent)',
-                borderColor: 'color-mix(in srgb, var(--text) 6%, transparent)',
+                background: 'var(--card-bg)',
+                borderColor: 'var(--card-border)',
                 transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.background = 'color-mix(in srgb, var(--text) 6%, transparent)'
+                el.style.background = 'var(--card-bg-hover)'
                 el.style.boxShadow = '0 12px 34px rgba(0,0,0,0.38)'
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement
-                el.style.background = 'color-mix(in srgb, var(--text) 4%, transparent)'
+                el.style.background = 'var(--card-bg)'
                 el.style.boxShadow = 'none'
               }}
             >
               <div
                 className="min-w-0 sm:w-2/5 overflow-hidden flex items-center justify-center p-3 sm:p-4 border-r"
                 style={{
-                  background: 'radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--accent) 8%, transparent), color-mix(in srgb, var(--text) 2%, transparent))',
-                  borderColor: 'color-mix(in srgb, var(--text) 5%, transparent)',
+                  background: 'radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--surface-accent) 35%, transparent), color-mix(in srgb, var(--secondary) 12%, transparent))',
+                  borderColor: 'var(--card-border)',
                 }}
               >
                 <span
                   className="flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 rounded-full transition-transform duration-500 group-hover:scale-110"
-                  style={{ border: '1px solid color-mix(in srgb, var(--accent) 30%, transparent)', background: 'color-mix(in srgb, var(--bg) 40%, transparent)' }}
+                  style={{ border: '1px solid color-mix(in srgb, var(--accent) 38%, transparent)', background: 'color-mix(in srgb, var(--bg-elevated) 76%, var(--secondary) 24%)' }}
                 >
                   <eq.Icon className="w-6 h-6 sm:w-[34px] sm:h-[34px]" strokeWidth={1.4} aria-hidden="true" style={{ color: 'var(--accent-light)' }} />
                 </span>

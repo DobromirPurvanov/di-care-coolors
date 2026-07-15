@@ -51,10 +51,10 @@ export default function CookieConsent() {
       <div
         className="pointer-events-auto w-full max-w-2xl max-h-[calc(100svh-1.5rem)] overflow-y-auto overscroll-contain flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 p-4 sm:p-6"
         style={{
-          background: 'color-mix(in srgb, var(--bg) 92%, transparent)',
+          background: 'var(--glass-bg)',
           backdropFilter: 'blur(14px)',
           WebkitBackdropFilter: 'blur(14px)',
-          border: '1px solid color-mix(in srgb, var(--accent) 28%, transparent)',
+          border: '1px solid var(--card-border)',
           borderLeft: '2px solid var(--accent)',
           boxShadow: '0 24px 70px rgba(0,0,0,0.55)',
           borderRadius: '18px',
@@ -95,7 +95,7 @@ export default function CookieConsent() {
             type="button"
             onClick={() => choose('all')}
             className="w-full min-[420px]:w-auto whitespace-nowrap px-6 min-h-[44px] rounded-full text-[11px] tracking-[0.12em] uppercase font-medium transition-all duration-300"
-            style={{ background: 'var(--accent)', color: 'var(--bg)' }}
+            style={{ background: 'var(--accent)', color: 'var(--accent-contrast)' }}
             onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--accent-light)' }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--accent)' }}
           >

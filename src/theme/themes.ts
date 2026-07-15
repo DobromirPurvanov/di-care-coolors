@@ -25,7 +25,7 @@ export const THEMES = [
     name: 'Dust Palette',
     description: 'Прашен графит, морско стъкло и синьо-сиво',
     palette: ['#404846', '#80B5AA', '#647C76', '#677890'],
-    background: '#343C3A',
+    background: '#404846',
   },
 ] as const
 
