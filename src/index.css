@@ -413,7 +413,9 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-action);
+    /* action-hover е „четимият акцент" на всяка тема (тъмен на светло,
+       светъл на тъмно) — чистото action пада под 4.5:1 върху секциите. */
+    color: var(--color-action-hover);
   }
 
   .field-msg {
