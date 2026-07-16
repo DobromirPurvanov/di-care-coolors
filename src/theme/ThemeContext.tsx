@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useLayoutEffect, useMemo, useState, type ReactNode } from 'react'
 import {
   DEFAULT_THEME,
   DEFAULT_THEME_FOR_MODE,
@@ -32,7 +32,10 @@ function getInitialTheme(): ThemeId {
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<ThemeId>(getInitialTheme)
 
-  useEffect(() => {
+  // useLayoutEffect (не useEffect): смяната на data-theme трябва да е
+  // СИНХРОННА при flushSync, за да влезе в кадъра на View Transition
+  // ефекта „лампа" от ModeToggle.
+  useLayoutEffect(() => {
     const root = document.documentElement
     const selectedTheme = getTheme(theme)
     root.dataset.theme = theme

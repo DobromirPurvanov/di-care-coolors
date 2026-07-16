@@ -587,6 +587,23 @@
     padding: 14px;
   }
 
+  /* ------- „Лампа" преход между версиите (View Transitions) ------- */
+  /* Изключваме дефолтния crossfade — единствената анимация е разширяващият
+     се кръг светлина (clip-path върху new), пуснат от ModeToggle. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  ::view-transition-new(root) {
+    z-index: 2147483646;
+  }
+
   /* ------- Тъмно/светло превключвател в header-а ------- */
   .mode-toggle {
     position: relative;
