@@ -197,6 +197,20 @@
   .procedure-sphere {
     width: 100%;
     height: min(80svh, 800px);
+    /* 3D полето потъва меко в секцията, вместо мрежата/звездите да се
+       режат от правоъгълника на канваса. */
+    mask-image: linear-gradient(180deg, transparent, black 8%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(180deg, transparent, black 8%, black 90%, transparent);
+  }
+
+  /* Тематичен дъх зад сферата — свързва я със страницата, особено в
+     светлите теми, където WebGL сиянието е почти изключено. */
+  .procedure-sphere::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 58% 50% at 50% 50%, var(--color-action-glow-soft), transparent 72%);
+    pointer-events: none;
   }
 
   .procedure-section,
@@ -210,7 +224,9 @@
     --color-card-hover: color-mix(in srgb, var(--color-section) 94%, var(--color-text) 6%);
   }
 
-  .procedure-section { background: var(--color-canvas); }
+  /* Същата „дъх" боя като services — hero → процедури → услуги е един
+     непрекъснат свят, без резки смени на фона. */
+  .procedure-section { background: var(--paint-section-primary); }
 
   #about,
   #contact {
