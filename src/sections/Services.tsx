@@ -106,7 +106,7 @@ export default function Services() {
 
                 <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-6" style={{ minHeight: '260px' }}>
                   <Link to={`/uslugi/${cat.slug}`} className="block" aria-label={`${cat.label}: ${tagline}`}>
-                    <h3 className="font-light text-lg tracking-wider uppercase group-hover:text-[var(--color-action-hover)] transition-colors duration-300">
+                    <h3 className="font-light text-lg tracking-wider uppercase group-hover:text-[var(--color-accent-text,var(--color-action-hover))] transition-colors duration-300">
                       {cat.label}
                     </h3>
                     <p className="text-[15px] mt-2 font-light leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
@@ -118,7 +118,7 @@ export default function Services() {
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-4">
                     <Link
                       to={`/uslugi/${cat.slug}`}
-                      className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-wider uppercase transition-colors hover:text-[var(--color-action-hover)]"
+                      className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-wider uppercase transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]"
                       style={{ color: 'var(--color-text-secondary)' }}
                     >
                       Научете повече
@@ -129,7 +129,7 @@ export default function Services() {
                       variant="link"
                       service={cat.label}
                       className="inline-flex min-h-[44px] text-xs tracking-wider uppercase font-medium"
-                      style={{ color: 'var(--color-action-hover)' }}
+                      style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}
                     >
                       Запази час
                     </BookingButton>

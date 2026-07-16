@@ -11,7 +11,7 @@ function DetailBody({ active, onClose }: { active: Procedure; onClose: () => voi
   return (
     <div className="p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
-        <h3 className="text-sm tracking-[0.12em] uppercase font-medium" style={{ color: 'var(--color-action-hover)' }}>
+        <h3 className="text-sm tracking-[0.12em] uppercase font-medium" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>
           {active.title}
         </h3>
         <button
@@ -30,8 +30,8 @@ function DetailBody({ active, onClose }: { active: Procedure; onClose: () => voi
         <Link
           to={`/uslugi/${category.slug}`}
           state={{ procedure: active.title }}
-          className="inline-flex items-center gap-2 min-h-[44px] text-[11px] tracking-[0.15em] uppercase transition-colors hover:text-[var(--color-action-hover)]"
-          style={{ color: 'var(--color-action-hover)' }}
+          className="inline-flex items-center gap-2 min-h-[44px] text-[11px] tracking-[0.15em] uppercase transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]"
+          style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}
         >
           Научете повече
           <ArrowRight size={13} aria-hidden="true" />

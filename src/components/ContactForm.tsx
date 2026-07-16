@@ -320,7 +320,7 @@ export default function ContactForm() {
           </span>
           <span className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
             Съгласен/на съм с{' '}
-            <Link to="/poveritelnost" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 transition-colors hover:text-[var(--color-action-hover)]" style={{ color: 'var(--color-text-secondary)' }} onClick={e => e.stopPropagation()}>
+            <Link to="/poveritelnost" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]" style={{ color: 'var(--color-text-secondary)' }} onClick={e => e.stopPropagation()}>
               политиката за лични данни
             </Link>{' '}*
           </span>

@@ -4,6 +4,7 @@ import Hero from '../sections/Hero'
 import ProcedureSection from '../sections/ProcedureSection'
 import Services from '../sections/Services'
 import WhyUs from '../sections/WhyUs'
+import Gallery from '../sections/Gallery'
 import Equipment from '../sections/Equipment'
 import Contact from '../sections/Contact'
 import { scrollToTarget } from '../lib/scroll'
@@ -34,6 +35,7 @@ export default function Home() {
       <ProcedureSection />
       <Services />
       <WhyUs />
+      <Gallery />
       <Equipment />
       <Contact />
     </main>

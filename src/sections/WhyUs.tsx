@@ -77,7 +77,7 @@ export default function WhyUs() {
       <div className="max-w-6xl mx-auto">
         {/* Въведение */}
         <div className="max-w-2xl">
-          <p className="text-xs tracking-[0.25em] uppercase mb-4" style={{ color: 'var(--color-action-hover)' }}>
+          <p className="text-xs tracking-[0.25em] uppercase mb-4" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>
             За нас
           </p>
           <h2 className="font-serif-luxe text-gradient leading-[1.12]" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>

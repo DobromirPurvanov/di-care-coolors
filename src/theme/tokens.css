@@ -48,6 +48,9 @@
   --color-action: var(--palette-5);
   --color-action-hover: var(--palette-6);
   --color-action-strong: #f8d8e2;
+  /* Четимият текстов акцент (kickers, link hover, икони) — отделен от
+     hover-фона на бутоните, за да може всяка тема да ги разкачи. */
+  --color-accent-text: var(--palette-6);
   --color-on-action: var(--palette-1);
   --color-secondary: var(--palette-4);
   /* Панелът сяда в зеления свят (слабото синьо е само дъх), а иконата носи
@@ -145,6 +148,7 @@
   --color-action: var(--palette-4);
   --color-action-hover: #04503d;
   --color-action-strong: #003527;
+  --color-accent-text: #04503d;
   --color-on-action: #fff6e2;
   --color-secondary: var(--palette-2);
   /* Апаратурните панели носят чистото марково зелено — кремава икона върху
@@ -201,43 +205,48 @@
   --palette-5: #71978f;
   --palette-6: #71978f;
 
-  /* Тан канвас, ментови стени (леко стоплени), а картите са една обща
-     „хартия" и върху тан, и върху мента — така двата тона спират да се бият. */
+  /* По брошурата: повече зелено в стените, злато за действията, кафяво в
+     мастилата. Картите остават една обща „хартия". */
   --color-canvas: var(--palette-1);
-  --color-section: color-mix(in srgb, var(--palette-4) 72%, var(--palette-1));
+  --color-section: color-mix(in srgb, var(--palette-5) 42%, var(--palette-4));
   --color-palette-surface: var(--palette-3);
-  --color-card: #e4ddce;
-  --color-card-hover: color-mix(in srgb, #e4ddce 93%, var(--color-action) 7%);
-  --color-glass: color-mix(in srgb, #e4ddce 90%, transparent);
+  --color-card: #e6dfd0;
+  --color-card-hover: color-mix(in srgb, #e6dfd0 93%, var(--color-action) 7%);
+  --color-glass: color-mix(in srgb, #e6dfd0 90%, transparent);
 
-  /* Кафявото е тялото на текста, дълбокият евкалипт — характерът на
-     заглавията и действията. Двете мастила носят йерархията. */
+  /* Кафявото (от брошурата) е тялото на текста, дълбокият евкалипт —
+     заглавията. Златото носи действията. */
   --color-text: #3b342a;
   --color-text-secondary: #4c4436;
-  --color-text-muted: #544c3a;
-  --color-heading: #3a574e;
+  --color-text-muted: #5a4c36;
+  --color-heading: #33504a;
 
-  --color-action: #47635a;
-  --color-action-hover: #324d45;
-  --color-action-strong: #263b35;
-  --color-on-action: #f0ede2;
-  --color-secondary: var(--palette-3);
+  /* Злато от брошурата — бутони с тъмнозелени букви. */
+  --color-action: #cfa95f;
+  --color-action-hover: #bf9a48;
+  --color-action-strong: #6f5322;
+  --color-accent-text: #2f4a41;
+  --color-on-action: #22372e;
+  /* Топло кафяво за поддържащите акценти (чипове, футър). */
+  --color-secondary: #8a6f52;
   /* По-дълбок евкалипт: панелът е по-богат, а хартиената икона чете ≥4.5:1. */
-  --color-feature: color-mix(in srgb, var(--palette-5) 66%, #1d2823);
+  --color-feature: color-mix(in srgb, var(--palette-5) 62%, #1d2823);
   --color-on-feature: #eef2ec;
 
   --color-border: color-mix(in srgb, var(--color-text) 15%, transparent);
-  --color-card-border: color-mix(in srgb, var(--palette-2) 26%, transparent);
-  --color-action-glow: color-mix(in srgb, var(--color-action) 18%, transparent);
-  --color-action-glow-soft: color-mix(in srgb, var(--color-action) 8%, transparent);
+  /* Кафяви хеърлайни с дъх злато. */
+  --color-card-border: color-mix(in srgb, #8a6f52 34%, transparent);
+  --color-action-glow: color-mix(in srgb, var(--color-action) 22%, transparent);
+  --color-action-glow-soft: color-mix(in srgb, var(--color-action) 10%, transparent);
   --color-surface-subtle: color-mix(in srgb, var(--palette-3) 24%, transparent);
   --color-positive: #2a5641;
   --color-negative: #813a28;
 
   --color-page-overlay: color-mix(in srgb, var(--color-canvas) 10%, transparent);
-  --paint-brand: linear-gradient(110deg, #2b453e, #3d5a51 55%, #4f6b61);
+  /* Кафяво → злато → евкалипт: трите гласа на брошурата в една рампа. */
+  --paint-brand: linear-gradient(110deg, #5a4632, #a8834a 48%, #4e6a61);
   /* Светлият аналог на „слонова кост → злато": мастило → дълбок евкалипт. */
-  --paint-title: linear-gradient(135deg, var(--color-text) 28%, #4c6a60 78%);
+  --paint-title: linear-gradient(135deg, var(--color-text) 28%, #47665c 78%);
   --paint-section-primary: var(--color-canvas);
   --paint-section-secondary: var(--color-section);
   --paint-hero: linear-gradient(180deg, color-mix(in srgb, var(--color-canvas) 35%, transparent), var(--color-canvas));
@@ -257,10 +266,10 @@
   --color-shader-action: #3d5a51;
   --color-shader-secondary: var(--palette-5);
   --color-shader-star: var(--palette-2);
-  /* Евкалиптова клетка върху тан — нормално смесване. */
-  --color-sphere-wire: #4e6a61;
-  --color-sphere-orbit: #3d5a51;
-  --color-sphere-node: var(--palette-5);
+  /* По-тъмна евкалиптова клетка върху тан — нормално смесване. */
+  --color-sphere-wire: #33463e;
+  --color-sphere-orbit: #2a3b34;
+  --color-sphere-node: #4e6a61;
 }
 
 :root[data-theme='dust'] {
@@ -293,6 +302,7 @@
   /* Едва доловимо по-светло от palette-6 — като текст върху секциите пада
      под 4.5:1 с чистия тон. */
   --color-action-hover: color-mix(in srgb, var(--palette-6) 86%, white);
+  --color-accent-text: color-mix(in srgb, var(--palette-6) 86%, white);
   --color-action-strong: #ddefe9;
   --color-on-action: #26312f;
   --color-secondary: var(--palette-4);
@@ -344,8 +354,21 @@
 :root[data-theme='matching'] #equipment,
 :root[data-theme='matching'] #about,
 :root[data-theme='matching'] #contact {
-  --color-card: #e4ddce;
-  --color-card-hover: color-mix(in srgb, #e4ddce 93%, var(--color-action) 7%);
+  --color-card: #e6dfd0;
+  --color-card-hover: color-mix(in srgb, #e6dfd0 93%, var(--color-action) 7%);
+}
+
+/* Matching: върху дълбоките зелени стени мастилата стъпват едно ниво
+   по-тъмно, за да държат ≥4.5:1 (на тан канваса и хартията важат базовите). */
+:root[data-theme='matching'] #about,
+:root[data-theme='matching'] #gallery,
+:root[data-theme='matching'] #contact,
+:root[data-theme='matching'] footer {
+  --color-text-secondary: #3f382b;
+  --color-text-muted: #443d2d;
+  --color-accent-text: #263c34;
+  --color-heading: #2b4741;
+  --color-negative: #68301e;
 }
 
 /* Dust: картите са палитреният графит върху ВСИЧКИ секции — index.css ги

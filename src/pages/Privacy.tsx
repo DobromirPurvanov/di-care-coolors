@@ -115,7 +115,7 @@ export default function Privacy() {
         {/* Обратна навигация */}
         <Link
           to="/"
-          className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--color-action-hover)]"
+          className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]"
           style={{ color: 'var(--color-text-secondary)' }}
         >
           <ArrowLeft size={14} aria-hidden="true" />
@@ -135,7 +135,7 @@ export default function Privacy() {
           }}
         >
           <header>
-            <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--color-action-hover)' }}>
+            <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>
               Защита на личните данни
             </p>
             <h1 className="text-gradient font-serif-luxe leading-[1.1]" style={{ fontSize: 'clamp(2rem, 5.5vw, 3rem)' }}>

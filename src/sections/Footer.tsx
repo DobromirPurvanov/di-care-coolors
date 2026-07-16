@@ -44,7 +44,7 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start gap-5">
             <div className="flex items-center gap-2">
               <span className="font-light text-sm tracking-[0.3em] uppercase text-[var(--color-text)]">Dr. Di</span>
-              <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--color-action-hover)' }}>Clinic</span>
+              <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>Clinic</span>
             </div>
             <div className="flex items-center gap-3">
               {[
@@ -76,7 +76,7 @@ export default function Footer() {
                 key={l.href}
                 type="button"
                 onClick={() => goToAnchor(l.href)}
-                className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] uppercase cursor-pointer transition-colors duration-300 hover:text-[var(--color-action-hover)] text-left"
+                className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] uppercase cursor-pointer transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))] text-left"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
                 {l.label}
@@ -89,13 +89,13 @@ export default function Footer() {
             <span className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: 'var(--color-text-muted)' }}>
               Информация
             </span>
-            <Link to="/poveritelnost" className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-action-hover)]" style={{ color: 'var(--color-text-secondary)' }}>
+            <Link to="/poveritelnost" className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))]" style={{ color: 'var(--color-text-secondary)' }}>
               Политика за лични данни
             </Link>
             <button
               type="button"
               onClick={openConsentBanner}
-              className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] cursor-pointer transition-colors duration-300 hover:text-[var(--color-action-hover)] text-center md:text-left"
+              className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] cursor-pointer transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))] text-center md:text-left"
               style={{ color: 'var(--color-text-secondary)' }}
             >
               Настройки на бисквитките

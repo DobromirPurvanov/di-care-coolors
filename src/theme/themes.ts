@@ -20,8 +20,8 @@ export const THEMES = [
     id: 'matching',
     name: 'Matching Palette',
     mode: 'Светла',
-    description: 'Светла земна основа с евкалиптови детайли',
-    palette: ['#D0C4AB', '#4D4637', '#B3AA99', '#A5CDC4', '#71978F'],
+    description: 'Земно зелено, злато и кафяво от брошурата',
+    palette: ['#D0C4AB', '#4D4637', '#CFA95F', '#A5CDC4', '#71978F'],
     background: '#D0C4AB',
   },
   {
@@ -36,8 +36,16 @@ export const THEMES = [
 ] as const
 
 export type ThemeId = (typeof THEMES)[number]['id']
+export type ThemeMode = 'dark' | 'light'
 
 export const DEFAULT_THEME: ThemeId = 'matching-gradient'
+
+/* Тъмно/светло превключвателят помни последната палитра за всеки режим;
+   това са отправните точки, преди потребителят да е избирал. */
+export const DEFAULT_THEME_FOR_MODE: Record<ThemeMode, ThemeId> = {
+  dark: 'matching-gradient',
+  light: 'spot',
+}
 
 export function isThemeId(value: string | null): value is ThemeId {
   return THEMES.some(theme => theme.id === value)
@@ -45,4 +53,8 @@ export function isThemeId(value: string | null): value is ThemeId {
 
 export function getTheme(themeId: ThemeId) {
   return THEMES.find(theme => theme.id === themeId) ?? THEMES[0]
+}
+
+export function getThemeMode(themeId: ThemeId): ThemeMode {
+  return getTheme(themeId).mode === 'Светла' ? 'light' : 'dark'
 }

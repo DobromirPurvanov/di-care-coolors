@@ -70,7 +70,7 @@ export default function ServicePage() {
         <Link
           to="/"
           state={{ scrollTo: '#services' }}
-          className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--color-action-hover)]"
+          className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-[0.14em] uppercase mb-6 transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]"
           style={{ color: 'var(--color-text-secondary)' }}
         >
           <ArrowLeft size={14} aria-hidden="true" />
@@ -91,7 +91,7 @@ export default function ServicePage() {
         >
           {/* Заглавие */}
           <header>
-            <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--color-action-hover)' }}>
+            <p className="text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>
               {content.tagline}
             </p>
             <h1 className="text-gradient font-serif-luxe leading-[1.1]" style={{ fontSize: 'clamp(2rem, 5.5vw, 3rem)' }}>
@@ -121,7 +121,7 @@ export default function ServicePage() {
 
           {/* Списък с процедури */}
           <section className="mt-12" aria-label="Процедури">
-            <h2 className="text-xs tracking-[0.2em] uppercase mb-1" style={{ color: 'var(--color-action-hover)' }}>
+            <h2 className="text-xs tracking-[0.2em] uppercase mb-1" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>
               Процедури
             </h2>
             <ul className="flex flex-col">
@@ -188,7 +188,7 @@ export default function ServicePage() {
             </BookingButton>
             <a
               href="tel:+359882708081"
-              className="inline-flex min-h-[44px] items-center gap-2 text-sm tracking-[0.05em] transition-colors hover:text-[var(--color-action-hover)]"
+              className="inline-flex min-h-[44px] items-center gap-2 text-sm tracking-[0.05em] transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]"
               style={{ color: 'var(--color-text-secondary)' }}
             >
               Обади се: +359 88 270 8081

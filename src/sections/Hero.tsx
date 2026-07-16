@@ -115,7 +115,7 @@ export default function Hero() {
           {BRANDS.map(b => (
             <span key={b.name} className="brand-item group relative opacity-0" style={{ transform: 'translateY(10px)' }}>
               <span
-                className="text-[10px] sm:text-[11px] tracking-[0.14em] sm:tracking-[0.2em] uppercase pb-1 cursor-default transition-all duration-300 group-hover:text-[var(--color-action-hover)]"
+                className="text-[10px] sm:text-[11px] tracking-[0.14em] sm:tracking-[0.2em] uppercase pb-1 cursor-default transition-all duration-300 group-hover:text-[var(--color-accent-text,var(--color-action-hover))]"
                 style={{ color: 'var(--color-text-muted)', borderBottom: '1px solid var(--color-border)' }}
               >
                 {b.name}
@@ -147,7 +147,7 @@ export default function Hero() {
         aria-label="Скролни надолу към процедурите"
       >
         <Mouse size={18} className="transition-colors duration-300 group-hover:!text-[var(--color-action)]" style={{ color: 'var(--color-text-muted)' }} aria-hidden="true" />
-        <span className="text-[9px] tracking-[0.4em] uppercase transition-colors duration-300 group-hover:text-[var(--color-action-hover)]" style={{ color: 'var(--color-text-muted)' }}>
+        <span className="text-[9px] tracking-[0.4em] uppercase transition-colors duration-300 group-hover:text-[var(--color-accent-text,var(--color-action-hover))]" style={{ color: 'var(--color-text-muted)' }}>
           Scroll
         </span>
         <ChevronDown

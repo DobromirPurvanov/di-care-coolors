@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router'
 import { Menu, X, Phone } from 'lucide-react'
 import ScrollProgress from './ScrollProgress'
 import BookingButton from './BookingButton'
+import ModeToggle from './ModeToggle'
 import { getLenis, scrollToTarget } from '../lib/scroll'
 
 // Z-скала на фиксираните слоеве (използва се тук и в другите компоненти):
@@ -191,9 +192,11 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-2 md:gap-3">
+            {/* Тъмна/светла версия — винаги видим, на всички размери */}
+            <ModeToggle />
             <a
               href="tel:+359882708081"
-              className="hidden md:flex min-h-[44px] items-center gap-2 px-5 py-2 rounded-full text-[11px] tracking-[0.15em] uppercase border transition-all duration-300 hover:border-[var(--color-action)]/60 hover:text-[var(--color-action-hover)]"
+              className="hidden md:flex min-h-[44px] items-center gap-2 px-5 py-2 rounded-full text-[11px] tracking-[0.15em] uppercase border transition-all duration-300 hover:border-[var(--color-action)]/60 hover:text-[var(--color-accent-text,var(--color-action-hover))]"
               style={{ borderColor: 'var(--color-card-border)', color: 'var(--color-text)' }}
               aria-label="Обади се на клиниката"
             >
@@ -268,7 +271,7 @@ export default function Header() {
             onClick={() => handleNav(item.href)}
             className="flex min-h-[44px] items-center text-lg sm:text-xl tracking-[0.16em] sm:tracking-[0.2em] uppercase font-light cursor-pointer transition-all duration-300"
             style={{
-              color: effectiveActive === item.href ? 'var(--color-action-hover)' : 'var(--color-text)',
+              color: effectiveActive === item.href ? 'var(--color-accent-text, var(--color-action-hover))' : 'var(--color-text)',
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
               transitionDelay: menuOpen ? `${i * 80 + 120}ms` : '0ms',
@@ -297,7 +300,7 @@ export default function Header() {
         <a
           href="tel:+359882708081"
           onClick={() => setMenuOpen(false)}
-          className="inline-flex min-h-[44px] items-center text-sm tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-action-hover)]"
+          className="inline-flex min-h-[44px] items-center text-sm tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))]"
           style={{
             color: 'var(--color-text-secondary)',
             opacity: menuOpen ? 1 : 0,

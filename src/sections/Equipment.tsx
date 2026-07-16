@@ -125,7 +125,7 @@ export default function Equipment() {
                 </span>
               </div>
               <div className="min-w-0 sm:w-3/5 p-5 sm:p-6 flex flex-col justify-center">
-                <h3 className="font-light text-sm tracking-[0.1em] uppercase group-hover:text-[var(--color-action-hover)] transition-colors">
+                <h3 className="font-light text-sm tracking-[0.1em] uppercase group-hover:text-[var(--color-accent-text,var(--color-action-hover))] transition-colors">
                   {eq.name}
                 </h3>
                 <p className="text-sm mt-2 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>

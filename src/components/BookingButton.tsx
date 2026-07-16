@@ -22,8 +22,8 @@ interface Props {
 const VARIANT: Record<Variant, string> = {
   primary: 'bg-[var(--color-action)] text-[var(--color-on-action)] font-medium hover:bg-[var(--color-action-hover)]',
   ghost:
-    'border border-[var(--color-card-border)] text-[var(--color-text)] hover:border-[var(--color-action)] hover:bg-[color-mix(in srgb, var(--color-action) 10%, transparent)] hover:text-[var(--color-action-hover)]',
-  link: 'text-[var(--color-text-secondary)] hover:text-[var(--color-action-hover)]',
+    'border border-[var(--color-card-border)] text-[var(--color-text)] hover:border-[var(--color-action)] hover:bg-[color-mix(in srgb, var(--color-action) 10%, transparent)] hover:text-[var(--color-accent-text,var(--color-action-hover))]',
+  link: 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent-text,var(--color-action-hover))]',
 }
 
 /**

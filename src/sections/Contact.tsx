@@ -97,7 +97,7 @@ export default function Contact() {
               style={{ border: '1px solid var(--color-card-border)', background: 'var(--color-card)' }}
             >
               <div className="flex items-start gap-3">
-                <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--color-action-hover)', marginTop: '2px', flex: 'none' }} />
+                <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--color-accent-text, var(--color-action-hover))', marginTop: '2px', flex: 'none' }} />
                 <div>
                   <p className="text-sm" style={{ color: 'var(--color-text)' }}>Запазете час онлайн</p>
                   <p className="text-[13px] mt-1 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
@@ -142,7 +142,7 @@ export default function Contact() {
                   className="w-full h-full flex flex-col items-center justify-center text-center gap-4 p-5 sm:p-8"
                   style={{ minHeight: '300px', background: 'var(--color-card)' }}
                 >
-                  <MapPin size={26} aria-hidden="true" style={{ color: 'var(--color-action-hover)' }} />
+                  <MapPin size={26} aria-hidden="true" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }} />
                   <p className="text-sm font-light" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
                     гр. Варна, ул. „Любен Каравелов" № 71, Партер
                   </p>
@@ -162,7 +162,7 @@ export default function Contact() {
                       href={MAPS_LINK}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 min-h-[44px] px-4 text-[11px] tracking-[0.12em] uppercase transition-colors hover:text-[var(--color-action-hover)]"
+                      className="inline-flex items-center gap-2 min-h-[44px] px-4 text-[11px] tracking-[0.12em] uppercase transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]"
                       style={{ color: 'var(--color-text-secondary)' }}
                     >
                       Отвори в Google Maps
@@ -216,7 +216,7 @@ export default function Contact() {
                 ) : item.href ? (
                   <a
                     href={item.href}
-                    className="inline-flex min-h-[44px] max-w-full items-center text-sm font-light break-words transition-colors duration-300 hover:text-[var(--color-action-hover)]"
+                    className="inline-flex min-h-[44px] max-w-full items-center text-sm font-light break-words transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))]"
                     style={{ color: 'var(--color-text-secondary)' }}
                   >
                     {item.value}

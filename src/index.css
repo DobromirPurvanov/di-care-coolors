@@ -341,7 +341,7 @@
     transition: color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .proc-toggle-btn:hover { color: var(--color-action-hover); }
+  .proc-toggle-btn:hover { color: var(--color-accent-text, var(--color-action-hover)); }
 
   .proc-toggle-btn.is-active {
     color: var(--color-on-action);
@@ -443,7 +443,7 @@
     text-transform: uppercase;
     /* action-hover е „четимият акцент" на всяка тема (тъмен на светло,
        светъл на тъмно) — чистото action пада под 4.5:1 върху секциите. */
-    color: var(--color-action-hover);
+    color: var(--color-accent-text, var(--color-action-hover));
   }
 
   .field-msg {
@@ -493,8 +493,8 @@
 
   select.field-input {
     background-image:
-      linear-gradient(45deg, transparent 50%, var(--color-action-hover) 50%),
-      linear-gradient(135deg, var(--color-action-hover) 50%, transparent 50%);
+      linear-gradient(45deg, transparent 50%, var(--color-accent-text, var(--color-action-hover)) 50%),
+      linear-gradient(135deg, var(--color-accent-text, var(--color-action-hover)) 50%, transparent 50%);
     background-repeat: no-repeat;
     background-position:
       calc(100% - 8px) calc(50% + 1px),
@@ -511,6 +511,138 @@
   /* Тъмна Google Maps чрез CSS филтър */
   .map-dark {
     filter: var(--filter-map);
+  }
+
+  /* ------- Галерия слайдър ------- */
+  .gallery-track {
+    display: flex;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    padding: 0 clamp(1rem, 8vw, 6rem);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-track::-webkit-scrollbar { display: none; }
+
+  .gallery-slide {
+    flex: 0 0 min(78vw, 860px);
+    scroll-snap-align: center;
+    overflow: hidden;
+    border: 1px solid var(--color-card-border);
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    opacity: 0.55;
+    transform: scale(0.97);
+    transition: opacity 400ms ease, transform 400ms ease;
+  }
+
+  .gallery-slide[data-active] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .gallery-slide img {
+    display: block;
+    width: 100%;
+    height: clamp(280px, 52vh, 520px);
+    object-fit: cover;
+  }
+
+  .gallery-nav-btn {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-card-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: border-color 250ms ease, color 250ms ease, background-color 250ms ease, opacity 250ms ease;
+  }
+
+  .gallery-nav-btn:hover:not(:disabled),
+  .gallery-nav-btn:focus-visible {
+    border-color: var(--color-action);
+    background: var(--color-action-glow-soft);
+    color: var(--color-accent-text, var(--color-action-hover));
+  }
+
+  .gallery-nav-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-text) 22%, transparent);
+    cursor: pointer;
+    transition: background-color 250ms ease, transform 250ms ease;
+  }
+
+  .gallery-dot[data-active] {
+    background: var(--color-action);
+    transform: scale(1.25);
+  }
+
+  /* По-голяма тъч цел за точките, без да раздуваме визуалния размер. */
+  .gallery-dot::before {
+    content: '';
+    display: block;
+    margin: -14px;
+    padding: 14px;
+  }
+
+  /* ------- Тъмно/светло превключвател в header-а ------- */
+  .mode-toggle {
+    position: relative;
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-card-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 250ms ease, color 250ms ease, background-color 250ms ease;
+  }
+
+  .mode-toggle:hover,
+  .mode-toggle:focus-visible {
+    border-color: var(--color-action);
+    background: var(--color-action-glow-soft);
+    color: var(--color-accent-text, var(--color-action-hover));
+  }
+
+  .mode-toggle-icon {
+    position: absolute;
+    display: inline-flex;
+    transition: opacity 300ms ease, transform 450ms cubic-bezier(0.34, 1.3, 0.5, 1);
+  }
+
+  /* Иконата показва накъде води кликът: слънце в тъмен режим, луна в светъл. */
+  .mode-toggle[data-mode='dark'] .mode-toggle-sun,
+  .mode-toggle[data-mode='light'] .mode-toggle-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  .mode-toggle[data-mode='dark'] .mode-toggle-moon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.4);
+  }
+
+  .mode-toggle[data-mode='light'] .mode-toggle-sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.4);
   }
 
   /* ------- Preview switcher for the four requested color editions ------- */
@@ -555,7 +687,7 @@
   .theme-switcher-trigger:focus-visible {
     border-color: var(--color-action);
     background: var(--color-section);
-    color: var(--color-action-hover);
+    color: var(--color-accent-text, var(--color-action-hover));
   }
 
   .theme-trigger-swatches {
@@ -597,7 +729,7 @@
   .theme-switcher-kicker {
     display: block;
     margin-bottom: 0.25rem;
-    color: var(--color-action-hover);
+    color: var(--color-accent-text, var(--color-action-hover));
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -626,7 +758,7 @@
   .theme-switcher-close:hover,
   .theme-switcher-close:focus-visible {
     background: var(--color-action-glow-soft);
-    color: var(--color-action-hover);
+    color: var(--color-accent-text, var(--color-action-hover));
   }
 
   .theme-switcher-options {
@@ -723,7 +855,7 @@
     position: absolute;
     right: 0.5rem;
     top: 0.45rem;
-    color: var(--color-action-hover);
+    color: var(--color-accent-text, var(--color-action-hover));
   }
 
   @keyframes themePanelIn {

@@ -64,14 +64,14 @@ export default function CookieConsent() {
         }}
       >
         <div className="flex items-start gap-3.5 min-w-0">
-          <Cookie size={20} className="flex-none mt-[2px]" style={{ color: 'var(--color-action-hover)' }} aria-hidden="true" />
+          <Cookie size={20} className="flex-none mt-[2px]" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }} aria-hidden="true" />
           <p className="text-[13px] leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
             Използваме бисквитки за коректната работа на сайта. Вградените услуги
             (календар за резервации и карта) се зареждат само със съгласие или когато
             изрично ги използвате. Вижте{' '}
             <Link
               to="/poveritelnost"
-              className="underline underline-offset-2 transition-colors hover:text-[var(--color-action-hover)]"
+              className="underline underline-offset-2 transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]"
               style={{ color: 'var(--color-text)' }}
             >
               Политиката за поверителност
@@ -86,7 +86,7 @@ export default function CookieConsent() {
             onClick={() => choose('essential')}
             className="w-full min-[420px]:w-auto whitespace-nowrap px-5 min-h-[44px] rounded-full text-[11px] tracking-[0.12em] uppercase transition-all duration-300 border"
             style={{ borderColor: 'var(--color-card-border)', color: 'var(--color-text)' }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--color-action)'; e.currentTarget.style.color = 'var(--color-action-hover)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--color-action)'; e.currentTarget.style.color = 'var(--color-accent-text, var(--color-action-hover))' }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--color-card-border)'; e.currentTarget.style.color = 'var(--color-text)' }}
           >
             Само необходимите
