@@ -7,7 +7,6 @@ import Header from './components/Header'
 import LoadingScreen from './components/LoadingScreen'
 import NoiseOverlay from './components/NoiseOverlay'
 import CookieConsent from './components/CookieConsent'
-import ThemeSwitcher from './components/ThemeSwitcher'
 import Footer from './sections/Footer'
 import Home from './pages/Home'
 import ServicePage from './pages/ServicePage'
@@ -123,7 +122,6 @@ export default function App() {
       </Routes>
       <Footer />
       <CookieConsent />
-      <ThemeSwitcher />
       <NoiseOverlay />
     </div>
   )

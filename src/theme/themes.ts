@@ -1,22 +1,5 @@
 export const THEMES = [
   {
-    id: 'matching-gradient',
-    name: 'Matching Gradient',
-    mode: 'Тъмна',
-    description: 'Тъмно зелено, графит и нежно розово',
-    palette: ['#102423', '#25424A', '#496074', '#7B7C9B', '#B698B8', '#F0B7CA'],
-    // Канвасът на темата (по-дълбок от палитрения тон, който е повърхност)
-    background: '#0D1B1A',
-  },
-  {
-    id: 'spot',
-    name: 'Spot Palette',
-    mode: 'Светла',
-    description: 'Светъл крем с характерен зелен акцент',
-    palette: ['#D0C4AB', '#998E77', '#FFEFCA', '#005B45'],
-    background: '#FFEFCA',
-  },
-  {
     id: 'matching',
     name: 'Matching Palette',
     mode: 'Светла',
@@ -25,26 +8,24 @@ export const THEMES = [
     background: '#D0C4AB',
   },
   {
-    id: 'dust',
-    name: 'Dust Palette',
+    id: 'brown',
+    name: 'Brown',
     mode: 'Тъмна',
-    description: 'Прашен графит, морско стъкло и синьо-сиво',
-    palette: ['#404846', '#80B5AA', '#647C76', '#677890'],
-    // Канвасът на темата (по-дълбок от палитрения графит, който е повърхност)
-    background: '#2B3231',
+    description: 'Тъмната корица на брошурата: кафяво, злато и зелено',
+    palette: ['#14100D', '#C9A35C', '#DDBD82', '#4E6A61', '#FFE9B8'],
+    background: '#14100D',
   },
 ] as const
 
 export type ThemeId = (typeof THEMES)[number]['id']
 export type ThemeMode = 'dark' | 'light'
 
-export const DEFAULT_THEME: ThemeId = 'matching-gradient'
+export const DEFAULT_THEME: ThemeId = 'matching'
 
-/* Тъмно/светло превключвателят помни последната палитра за всеки режим;
-   това са отправните точки, преди потребителят да е избирал. */
+/* Тъмно/светло превключвателят в header-а сменя двете версии. */
 export const DEFAULT_THEME_FOR_MODE: Record<ThemeMode, ThemeId> = {
-  dark: 'matching-gradient',
-  light: 'spot',
+  dark: 'brown',
+  light: 'matching',
 }
 
 export function isThemeId(value: string | null): value is ThemeId {

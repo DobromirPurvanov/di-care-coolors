@@ -1,75 +1,70 @@
 /*
  * Di Care semantic color contract
  *
- * Components consume only semantic roles from this file. Each concept maps
- * the supplied palette to the same roles, so a theme change never changes
- * hierarchy or accessibility — only the art direction.
+ * Две версии по брошурата: тъмна КАФЯВА (корицата — почти черно топло
+ * кафяво + злато) и светла MATCHING (тан, зелено, злато, кафяво).
+ * Компонентите консумират само семантични роли; превключвателят в header-а
+ * сменя режима, без да пипа йерархията или достъпността.
  *
- * Правила на картата (валидни за всяка тема):
- *  - Мастилата имат 4 нива: heading (характер) > text (титли/акцентен текст)
- *    > text-secondary (параграфи) > text-muted (микро-етикети). Всички нива
- *    държат ≥4.5:1 върху повърхностите, на които се появяват.
+ * Правила на картата (валидни за двете версии):
+ *  - Мастилата имат 4 нива: heading (характер) > text (титли) >
+ *    text-secondary (параграфи) > text-muted (микро-етикети), всички ≥4.5:1.
  *  - Канвас → секция → карта са леки стъпки на СЪЩАТА температура; чистите
- *    палитрени тонове живеят в акцентите (бутони, панели, градиенти), не в
- *    кални големи слабове.
- *  - --paint-brand е жив градиент във всяка тема (лого, топ-ленти на карти,
- *    hero ред, underline-и) — започва достатъчно тъмен за четим текст.
+ *    акцентни тонове живеят в бутоните, панелите и градиентите.
+ *  - --paint-brand е жива метална рампа (лого, ленти, underline-и);
+ *    --paint-title е „слонова кост/мастило → акцент" за големите заглавия.
  */
 
 :root {
   color-scheme: dark;
 
-  /* Matching Gradient — supplied palette */
-  --palette-1: #102423;
-  --palette-2: #25424a;
-  --palette-3: #496074;
-  --palette-4: #7b7c9b;
-  --palette-5: #b698b8;
-  --palette-6: #f0b7ca;
+  /* Brown — тъмната корица на брошурата: топло черно-кафяво + злато,
+     с евкалиптово зелено като втори глас (мостът към светлата версия). */
+  --palette-1: #14100d;
+  --palette-2: #c9a35c;
+  --palette-3: #ddbd82;
+  --palette-4: #4e6a61;
+  --palette-5: #3b342a;
+  --palette-6: #ffe9b8;
 
-  /* Foundation — „кутия за бижута" по модела на оригинала: канвас, стени и
-     карти на шепот разстояние в тъмното, а разделянето носят розовите
-     хеърлайни. Плътният #25424a вече не е гигантски слаб, а живее в стъклото,
-     панелите и дълбоките акценти. */
-  --color-canvas: #0d1b1a;
-  --color-section: var(--palette-1);
-  --color-palette-surface: var(--palette-2);
-  --color-card: #16292a;
+  /* Foundation — „кутия за бижута": канвас, стени и карти на шепот
+     разстояние в тъмното; разделянето носят златните хеърлайни. */
+  --color-canvas: #14100d;
+  --color-section: #1b1611;
+  --color-palette-surface: #241d15;
+  --color-card: #211a13;
   --color-card-hover: color-mix(in srgb, var(--color-card) 94%, var(--color-text) 6%);
-  --color-glass: color-mix(in srgb, color-mix(in srgb, var(--palette-2) 55%, var(--color-canvas)) 92%, transparent);
+  --color-glass: color-mix(in srgb, #241d15 92%, transparent);
 
   /* Content */
-  --color-text: #f7f4f6;
+  --color-text: #f2ede2;
   --color-text-secondary: color-mix(in srgb, var(--color-text) 82%, var(--color-canvas));
   --color-text-muted: color-mix(in srgb, var(--color-text) 72%, var(--color-canvas));
-  --color-heading: var(--palette-6);
+  --color-heading: var(--palette-3);
 
-  /* Actions and supporting accents */
-  --color-action: var(--palette-5);
-  --color-action-hover: var(--palette-6);
-  --color-action-strong: #f8d8e2;
-  /* Четимият текстов акцент (kickers, link hover, икони) — отделен от
-     hover-фона на бутоните, за да може всяка тема да ги разкачи. */
-  --color-accent-text: var(--palette-6);
-  --color-on-action: var(--palette-1);
-  --color-secondary: var(--palette-4);
-  /* Панелът сяда в зеления свят (слабото синьо е само дъх), а иконата носи
-     розовата нишка — синият слаб дърпаше окото извън хармонията. */
-  --color-feature: color-mix(in srgb, var(--palette-3) 30%, var(--color-section));
-  --color-on-feature: var(--palette-6);
-  /* Сияние около hero реда — в тона на розовия край на заглавния градиент. */
-  --color-glow: var(--palette-6);
+  /* Actions and supporting accents — златната рампа на брошурата,
+     бутоните са злато с тъмнозелени букви (както в светлата версия). */
+  --color-action: var(--palette-2);
+  --color-action-hover: var(--palette-3);
+  --color-action-strong: var(--palette-6);
+  --color-accent-text: var(--palette-3);
+  --color-on-action: #22372e;
+  --color-secondary: #6f8d83;
+  /* Дълбоко зелен панел със златна икона — двата гласа на брошурата. */
+  --color-feature: #24352f;
+  --color-on-feature: var(--palette-3);
+  /* Сияние около hero реда — в тона на златния край на заглавната рампа. */
+  --color-glow: var(--palette-3);
 
-  /* Boundaries and states — розови хеърлайни като златните 14% на оригинала */
+  /* Boundaries and states — златни хеърлайни като в оригинала. */
   --color-border: color-mix(in srgb, var(--color-text) 8%, transparent);
-  --color-card-border: color-mix(in srgb, var(--palette-6) 15%, transparent);
+  --color-card-border: color-mix(in srgb, var(--palette-2) 16%, transparent);
   --color-action-border: color-mix(in srgb, var(--color-action) 42%, transparent);
   --color-action-border-soft: color-mix(in srgb, var(--color-action) 18%, transparent);
   --color-action-glow: color-mix(in srgb, var(--color-action) 30%, transparent);
   --color-action-glow-soft: color-mix(in srgb, var(--color-action) 10%, transparent);
   --color-surface-subtle: color-mix(in srgb, var(--color-feature) 18%, transparent);
   --color-positive: #8fd0a6;
-  /* Достатъчно светъл за 4.5:1 и върху секцията, където живее формата. */
   --color-negative: #ec9c8d;
   --color-positive-glow: color-mix(in srgb, var(--color-positive) 60%, transparent);
   --color-negative-glow: color-mix(in srgb, var(--color-negative) 60%, transparent);
@@ -77,121 +72,40 @@
   --color-negative-surface: color-mix(in srgb, var(--color-negative) 9%, transparent);
 
   /* Large-area paints */
-  /* Тънък воал: 48% беше полупрозрачна „мъгла" върху цялото небе — при 24%
-     звездите остават ясни, а шейдърът сам си държи атмосферата през atmo. */
   --color-page-overlay: color-mix(in srgb, var(--color-canvas) 24%, transparent);
-  /* Металната рампа е само от розовото семейство (сивото я гасеше). */
-  --paint-brand: linear-gradient(110deg, var(--palette-5), var(--palette-6) 55%, var(--color-action-strong));
-  /* Заглавен градиент по модела на оригинала: слонова кост → акцент. */
-  --paint-title: linear-gradient(135deg, var(--color-text) 30%, var(--palette-6) 70%);
-  /* Топъл розов „дъх" по дългите секции — като златния 3% на оригинала. */
-  --paint-section-primary: linear-gradient(180deg, var(--color-canvas), color-mix(in srgb, var(--palette-6) 2.5%, var(--color-canvas)) 45%, var(--color-canvas));
+  /* Металната рампа на брошурата: злато → шампанско → златен връх. */
+  --paint-brand: linear-gradient(110deg, var(--palette-2), var(--palette-3) 55%, var(--palette-6));
+  /* Заглавен градиент: слонова кост → шампанско (моделът на оригинала). */
+  --paint-title: linear-gradient(135deg, var(--color-text) 30%, var(--palette-3) 70%);
+  /* Топъл златен „дъх" по дългите секции. */
+  --paint-section-primary: linear-gradient(180deg, var(--color-canvas), color-mix(in srgb, var(--palette-2) 2.5%, var(--color-canvas)) 45%, var(--color-canvas));
   --paint-section-secondary: var(--color-section);
   /* Радиална винетка към плътния канвас — дълбочина без воал. */
   --paint-hero: radial-gradient(ellipse at center, color-mix(in srgb, var(--color-canvas) 62%, transparent) 0%, var(--color-canvas) 74%);
 
   /* Effects */
-  --card-shadow: 0 18px 52px rgba(0, 0, 0, 0.32);
-  --floating-shadow: 0 24px 70px rgba(0, 0, 0, 0.48);
+  --card-shadow: 0 18px 52px rgba(0, 0, 0, 0.36);
+  --floating-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
   --label-shadow: 0 6px 24px rgba(0, 0, 0, 0.58), 0 0 0 1px rgba(0, 0, 0, 0.34);
   --text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
   --filter-map: grayscale(1) invert(0.92) hue-rotate(180deg) brightness(0.88) contrast(0.92);
   --effect-shader-opacity: 1;
-  /* Сияния + мъглявина в шейдъра (0..1). С изтънения page-overlay небето се
-     вижда директно, затова атмосферата е леко снижена — ясна нощ, не мъгла;
-     по-светлите теми я гасят напълно. */
+  /* Сияния + мъглявина в шейдъра (0..1): ясна нощ, не мъгла. */
   --effect-shader-atmo: 0.7;
   --effect-noise-opacity: 0.018;
 
   /* Canvas / Three integrations */
   --color-shader-base: var(--color-canvas);
-  --color-shader-action: var(--palette-6);
-  --color-shader-secondary: var(--palette-3);
+  --color-shader-action: var(--palette-3);
+  --color-shader-secondary: var(--palette-4);
   --color-shader-star: var(--color-text);
-  /* 3D сферата: клетка, орбити, звезди — розовата рампа на темата. */
-  --color-sphere-wire: var(--palette-5);
-  --color-sphere-orbit: var(--palette-6);
-  --color-sphere-node: var(--color-action-strong);
+  /* 3D сферата: златна клетка, шампанско орбити, златни звезди. */
+  --color-sphere-wire: var(--palette-2);
+  --color-sphere-orbit: var(--palette-3);
+  --color-sphere-node: var(--palette-6);
 
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
-}
-
-:root[data-theme='spot'] {
-  color-scheme: light;
-
-  /* Spot Palette — supplied palette */
-  --palette-1: #d0c4ab;
-  --palette-2: #998e77;
-  --palette-3: #ffefca;
-  --palette-4: #005b45;
-  --palette-5: #005b45;
-  --palette-6: #005b45;
-
-  /* Кремав канвас, пясъчни секции (омекотен тан), карти „хартия" малко над
-     канваса. Чистият тан живее в бордюри и панели, не като кален слаб. */
-  --color-canvas: var(--palette-3);
-  --color-section: color-mix(in srgb, var(--palette-1) 55%, var(--palette-3));
-  --color-palette-surface: var(--palette-1);
-  --color-card: #fff6e2;
-  --color-card-hover: color-mix(in srgb, #fff6e2 93%, var(--color-action) 7%);
-  --color-glass: color-mix(in srgb, var(--palette-3) 88%, transparent);
-
-  /* Мастилена йерархия: дълбоко зелено-черно за титли, сиво-зелено за
-     параграфи, топъл камък (от таупа) за микро-етикети. Марковото зелено
-     остава запазено за heading/action, за да не удавя всичко. */
-  --color-text: #21372c;
-  --color-text-secondary: #43584a;
-  --color-text-muted: #57503d;
-  --color-heading: var(--palette-4);
-
-  --color-action: var(--palette-4);
-  --color-action-hover: #04503d;
-  --color-action-strong: #003527;
-  --color-accent-text: #04503d;
-  --color-on-action: #fff6e2;
-  --color-secondary: var(--palette-2);
-  /* Апаратурните панели носят чистото марково зелено — кремава икона върху
-     плътен тъмнозелен блок. */
-  --color-feature: var(--palette-4);
-  --color-on-feature: var(--palette-3);
-
-  --color-border: color-mix(in srgb, var(--color-text) 14%, transparent);
-  --color-card-border: color-mix(in srgb, var(--palette-2) 48%, transparent);
-  --color-action-glow: color-mix(in srgb, var(--color-action) 18%, transparent);
-  --color-action-glow-soft: color-mix(in srgb, var(--color-action) 8%, transparent);
-  --color-surface-subtle: color-mix(in srgb, var(--palette-1) 26%, transparent);
-  --color-positive: #276b4b;
-  /* Достатъчно тъмен за 4.5:1 и върху пясъчните секции с формата. */
-  --color-negative: #963d29;
-
-  --color-page-overlay: color-mix(in srgb, var(--color-canvas) 10%, transparent);
-  --paint-brand: linear-gradient(110deg, #003a2c, var(--palette-4) 55%, #0f7a5b);
-  /* Светлият аналог на „слонова кост → злато": мастило → марково зелено. */
-  --paint-title: linear-gradient(135deg, var(--color-text) 28%, #0f7a5b 78%);
-  --paint-section-primary: var(--color-canvas);
-  --paint-section-secondary: var(--color-section);
-  --paint-hero: linear-gradient(180deg, color-mix(in srgb, var(--color-canvas) 35%, transparent), var(--color-canvas));
-
-  --card-shadow: 0 16px 40px rgba(0, 59, 44, 0.10);
-  --floating-shadow: 0 24px 60px rgba(0, 59, 44, 0.16);
-  --label-shadow: 0 6px 18px rgba(0, 59, 44, 0.12);
-  --text-shadow: none;
-  --filter-map: grayscale(0.78) sepia(0.14) saturate(0.72) brightness(0.98) contrast(0.9);
-  /* Светлите версии са чисти и плътни: шейдърът е изцяло изключен — дори на
-     6% облачният шум оставяше мръсни петна по крема. */
-  --effect-shader-opacity: 0;
-  --effect-shader-atmo: 0;
-  --effect-noise-opacity: 0.008;
-
-  --color-shader-base: var(--palette-3);
-  --color-shader-action: var(--palette-4);
-  --color-shader-secondary: var(--palette-2);
-  --color-shader-star: var(--palette-4);
-  /* Мастилена клетка върху крем — нормално смесване, зелена рампа. */
-  --color-sphere-wire: #0b6b52;
-  --color-sphere-orbit: var(--palette-4);
-  --color-sphere-node: #12775c;
 }
 
 :root[data-theme='matching'] {
@@ -232,6 +146,7 @@
   /* По-дълбок евкалипт: панелът е по-богат, а хартиената икона чете ≥4.5:1. */
   --color-feature: color-mix(in srgb, var(--palette-5) 62%, #1d2823);
   --color-on-feature: #eef2ec;
+  --color-glow: var(--color-action);
 
   --color-border: color-mix(in srgb, var(--color-text) 15%, transparent);
   /* Кафяви хеърлайни с дъх злато. */
@@ -256,8 +171,7 @@
   --label-shadow: 0 6px 18px rgba(59, 52, 42, 0.12);
   --text-shadow: none;
   --filter-map: grayscale(0.76) sepia(0.18) saturate(0.7) brightness(0.96) contrast(0.88);
-  /* Светлите версии са чисти и плътни: шейдърът е изцяло изключен — дори на
-     6% облачният шум оставяше мръсни петна по тана. */
+  /* Светлата версия е чиста и плътна: шейдърът е изцяло изключен. */
   --effect-shader-opacity: 0;
   --effect-shader-atmo: 0;
   --effect-noise-opacity: 0.008;
@@ -270,92 +184,6 @@
   --color-sphere-wire: #33463e;
   --color-sphere-orbit: #2a3b34;
   --color-sphere-node: #4e6a61;
-}
-
-:root[data-theme='dust'] {
-  color-scheme: dark;
-
-  /* Dust Palette — supplied palette; #40486 normalized to #404846 */
-  --palette-1: #404846;
-  --palette-2: #80b5aa;
-  --palette-3: #647c76;
-  --palette-4: #677890;
-  --palette-5: #80b5aa;
-  --palette-6: #b8d9d2;
-
-  /* „Кутия за бижута" в графит: канвас → стени → карти на шепот разстояние,
-     а палитреният #404846 е най-видимата повърхност — картите. Разделянето
-     носят морско-стъклените хеърлайни, не скокове в светлината. */
-  --color-canvas: #2b3231;
-  --color-section: #343b3a;
-  --color-palette-surface: var(--palette-3);
-  --color-card: var(--palette-1);
-  --color-card-hover: color-mix(in srgb, var(--color-card) 92%, var(--color-text) 8%);
-  --color-glass: color-mix(in srgb, var(--palette-1) 90%, transparent);
-
-  --color-text: #eef4f2;
-  --color-text-secondary: color-mix(in srgb, var(--color-text) 88%, var(--color-canvas));
-  --color-text-muted: color-mix(in srgb, var(--color-text) 85%, var(--color-canvas));
-  --color-heading: var(--palette-6);
-
-  --color-action: var(--palette-2);
-  /* Едва доловимо по-светло от palette-6 — като текст върху секциите пада
-     под 4.5:1 с чистия тон. */
-  --color-action-hover: color-mix(in srgb, var(--palette-6) 86%, white);
-  --color-accent-text: color-mix(in srgb, var(--palette-6) 86%, white);
-  --color-action-strong: #ddefe9;
-  --color-on-action: #26312f;
-  --color-secondary: var(--palette-4);
-  --color-feature: color-mix(in srgb, var(--palette-3) 82%, #2c3331);
-  --color-on-feature: var(--color-text);
-
-  --color-card-border: color-mix(in srgb, var(--palette-2) 20%, transparent);
-  /* Каналите от :root са настройвани за по-тъмния канвас на подразбиращата
-     се тема — върху графита имат нужда от по-светли стойности. */
-  --color-positive: #9ed8b4;
-  /* Достатъчно светъл, за да чете 4.5:1 и върху всички повърхности. */
-  --color-negative: #ffd2c6;
-
-  /* Тънък воал (беше 54% пушек) — дълбокият канвас вече носи контраста. */
-  --color-page-overlay: color-mix(in srgb, var(--color-canvas) 26%, transparent);
-  /* Сребърната рампа е само от морското семейство (синьо-сивото я гасеше);
-     то остава в чиповете, футъра и шейдъра като втори глас. */
-  --paint-brand: linear-gradient(110deg, #6f9a90, var(--palette-2) 52%, var(--palette-6));
-  --paint-title: linear-gradient(135deg, var(--color-text) 30%, var(--palette-6) 70%);
-  --paint-section-primary: linear-gradient(180deg, var(--color-canvas), color-mix(in srgb, var(--palette-2) 3%, var(--color-canvas)) 45%, var(--color-canvas));
-  --paint-section-secondary: var(--color-section);
-  --paint-hero: radial-gradient(ellipse at center, color-mix(in srgb, var(--color-canvas) 62%, transparent) 0%, var(--color-canvas) 74%);
-
-  /* Върху дълбокия канвас лек дъх атмосфера връща дълбочината, без пушек. */
-  --effect-shader-atmo: 0.3;
-
-  --color-shader-base: var(--color-canvas);
-  --color-shader-action: var(--palette-2);
-  --color-shader-secondary: var(--palette-4);
-  --color-shader-star: var(--color-text);
-  /* Сребърна клетка от морско стъкло върху графит. */
-  --color-sphere-wire: var(--palette-2);
-  --color-sphere-orbit: var(--palette-6);
-  --color-sphere-node: var(--color-action-strong);
-}
-
-/*
- * Светли теми: картите са обща „хартия" и в редуващите се секции.
- * index.css (в @layer components) връзва --color-card към section/canvas за
- * тъмните теми; тук — без layer и на същия елемент — печели каскадата.
- */
-:root[data-theme='spot'] .services-section,
-:root[data-theme='spot'] #equipment {
-  --color-card: #fff6e2;
-  --color-card-hover: color-mix(in srgb, #fff6e2 93%, var(--color-action) 7%);
-}
-
-:root[data-theme='matching'] .services-section,
-:root[data-theme='matching'] #equipment,
-:root[data-theme='matching'] #about,
-:root[data-theme='matching'] #contact {
-  --color-card: #e6dfd0;
-  --color-card-hover: color-mix(in srgb, #e6dfd0 93%, var(--color-action) 7%);
 }
 
 /* Matching: върху дълбоките зелени стени мастилата стъпват едно ниво
@@ -371,12 +199,12 @@
   --color-negative: #68301e;
 }
 
-/* Dust: картите са палитреният графит върху ВСИЧКИ секции — index.css ги
-   връзва към section/canvas, което би върнало плоската сива супа. */
-:root[data-theme='dust'] .services-section,
-:root[data-theme='dust'] #equipment,
-:root[data-theme='dust'] #about,
-:root[data-theme='dust'] #contact {
-  --color-card: var(--palette-1);
-  --color-card-hover: color-mix(in srgb, var(--palette-1) 92%, var(--color-text) 8%);
+/* Matching: картите са обща „хартия" във всички секции — index.css (в
+   @layer components) ги връзва към section/canvas за тъмната версия. */
+:root[data-theme='matching'] .services-section,
+:root[data-theme='matching'] #equipment,
+:root[data-theme='matching'] #about,
+:root[data-theme='matching'] #contact {
+  --color-card: #e6dfd0;
+  --color-card-hover: color-mix(in srgb, #e6dfd0 93%, var(--color-action) 7%);
 }
