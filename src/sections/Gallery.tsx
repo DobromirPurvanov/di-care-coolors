@@ -18,47 +18,80 @@ const slides = [
 export default function Gallery() {
   const trackRef = useRef<HTMLDivElement>(null)
   const [index, setIndex] = useState(0)
+  const tweeningRef = useRef(false)
+  const tweenRafRef = useRef(0)
 
-  // Активният слайд се извежда от позицията на скрола (работи и при суайп).
+  // Ръчен туийн само на track.scrollLeft: smooth scrollIntoView/scrollTo и
+  // CSS scroll-snap се бият с Lenis (замразяват скрола на страницата).
+  const tweenTo = (targetIndex: number) => {
+    const track = trackRef.current
+    if (!track) return
+    const clamped = Math.max(0, Math.min(slides.length - 1, targetIndex))
+    const el = track.children[clamped] as HTMLElement | undefined
+    if (!el) return
+    const targetLeft = Math.max(
+      0,
+      Math.min(track.scrollWidth - track.clientWidth, el.offsetLeft - (track.clientWidth - el.offsetWidth) / 2)
+    )
+    const start = track.scrollLeft
+    const delta = targetLeft - start
+    if (Math.abs(delta) < 2) return
+    cancelAnimationFrame(tweenRafRef.current)
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) {
+      track.scrollLeft = targetLeft
+      return
+    }
+    tweeningRef.current = true
+    const duration = 420
+    const t0 = performance.now()
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
+    const step = (now: number) => {
+      const progress = Math.min(1, (now - t0) / duration)
+      track.scrollLeft = start + delta * easeOutCubic(progress)
+      if (progress < 1) tweenRafRef.current = requestAnimationFrame(step)
+      else tweeningRef.current = false
+    }
+    tweenRafRef.current = requestAnimationFrame(step)
+  }
+
+  // Активният слайд се извежда от позицията на скрола; след края на суайп
+  // дебоунснат туийн прилепва най-близкия слайд към центъра (JS „snap").
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
     let raf = 0
+    let snapTimer = 0
+    const nearestIndex = () => {
+      const slideElements = Array.from(track.children) as HTMLElement[]
+      const center = track.scrollLeft + track.clientWidth / 2
+      let best = 0
+      let bestDist = Infinity
+      slideElements.forEach((el, i) => {
+        const dist = Math.abs(el.offsetLeft + el.offsetWidth / 2 - center)
+        if (dist < bestDist) { bestDist = dist; best = i }
+      })
+      return best
+    }
     const onScroll = () => {
       cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        const slideElements = Array.from(track.children) as HTMLElement[]
-        if (!slideElements.length) return
-        const center = track.scrollLeft + track.clientWidth / 2
-        let best = 0
-        let bestDist = Infinity
-        slideElements.forEach((el, i) => {
-          const mid = el.offsetLeft + el.offsetWidth / 2
-          const dist = Math.abs(mid - center)
-          if (dist < bestDist) { bestDist = dist; best = i }
-        })
-        setIndex(best)
-      })
+      raf = requestAnimationFrame(() => setIndex(nearestIndex()))
+      if (!tweeningRef.current) {
+        window.clearTimeout(snapTimer)
+        snapTimer = window.setTimeout(() => tweenTo(nearestIndex()), 150)
+      }
     }
     track.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       track.removeEventListener('scroll', onScroll)
       cancelAnimationFrame(raf)
+      window.clearTimeout(snapTimer)
+      cancelAnimationFrame(tweenRafRef.current)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const goTo = (target: number) => {
-    const track = trackRef.current
-    if (!track) return
-    const clamped = Math.max(0, Math.min(slides.length - 1, target))
-    const el = track.children[clamped] as HTMLElement | undefined
-    if (!el) return
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    // scrollIntoView с inline:center се разбира със scroll-snap: mandatory
-    // (програмният scrollTo се прекъсваше от снапа); block:nearest пази
-    // вертикалния скрол на страницата (Lenis) недокоснат.
-    el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', inline: 'center', block: 'nearest' })
-  }
+  const goTo = (target: number) => tweenTo(target)
 
   return (
     <section

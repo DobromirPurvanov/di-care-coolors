@@ -507,7 +507,9 @@
     gap: clamp(0.75rem, 2vw, 1.25rem);
     padding: 0 clamp(1rem, 8vw, 6rem);
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    /* БЕЗ CSS scroll-snap: Lenis официално не го поддържа — snap контейнер
+       във viewport-а замразява целия скрол на страницата. Прилепването се
+       прави в Gallery.tsx с дебоунснат JS туийн. */
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
   }
@@ -516,7 +518,6 @@
 
   .gallery-slide {
     flex: 0 0 min(78vw, 860px);
-    scroll-snap-align: center;
     overflow: hidden;
     border: 1px solid var(--color-card-border);
     border-radius: 20px;

@@ -189,9 +189,7 @@
 /* Matching: върху дълбоките зелени стени мастилата стъпват едно ниво
    по-тъмно, за да държат ≥4.5:1 (на тан канваса и хартията важат базовите). */
 :root[data-theme='matching'] #about,
-:root[data-theme='matching'] #gallery,
-:root[data-theme='matching'] #contact,
-:root[data-theme='matching'] footer {
+:root[data-theme='matching'] #gallery {
   --color-text-secondary: #3f382b;
   --color-text-muted: #443d2d;
   --color-accent-text: #263c34;
@@ -203,8 +201,39 @@
    @layer components) ги връзва към section/canvas за тъмната версия. */
 :root[data-theme='matching'] .services-section,
 :root[data-theme='matching'] #equipment,
-:root[data-theme='matching'] #about,
-:root[data-theme='matching'] #contact {
+:root[data-theme='matching'] #about {
   --color-card: #e6dfd0;
   --color-card-hover: color-mix(in srgb, #e6dfd0 93%, var(--color-action) 7%);
+}
+
+/* Matching: кафявият финал. Синьо-зелените стени долу не се харесаха —
+   контактът и футърът завършват страницата в тъмното топло кафяво на
+   брошурата, върху което златото и хартията светят. */
+:root[data-theme='matching'] #contact,
+:root[data-theme='matching'] footer {
+  --color-section: #33291e;
+  /* Пейнтът се резолвва на root-а (запича зеленото), затова тук му
+     трябва директната кафява стойност, не var(--color-section). */
+  --paint-section-secondary: #33291e;
+  --color-card: #3d3226;
+  --color-card-hover: color-mix(in srgb, #3d3226 93%, #f2ede2 7%);
+  --color-glass: color-mix(in srgb, #3d3226 92%, transparent);
+
+  --color-text: #f2ede2;
+  --color-text-secondary: #dcd5c7;
+  --color-text-muted: #c8bfad;
+  --color-heading: #ddbd82;
+  --color-accent-text: #d9b877;
+
+  --color-border: color-mix(in srgb, #f2ede2 10%, transparent);
+  --color-card-border: color-mix(in srgb, #cfa95f 22%, transparent);
+  --color-positive: #8fd0a6;
+  --color-negative: #ec9c8d;
+  --color-positive-glow: color-mix(in srgb, #8fd0a6 60%, transparent);
+  --color-negative-glow: color-mix(in srgb, #ec9c8d 60%, transparent);
+  --color-negative-border: color-mix(in srgb, #ec9c8d 42%, transparent);
+  --color-negative-surface: color-mix(in srgb, #ec9c8d 9%, transparent);
+
+  --card-shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+  --floating-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
 }
