@@ -27,14 +27,35 @@ export default function ProcedureSphere() {
     const container = containerRef.current
     if (!container) return
 
-    const rootStyles = getComputedStyle(document.documentElement)
-    const themeColor = (token: string) => rootStyles.getPropertyValue(token).trim()
-    const accent = themeColor('--color-action')
-    const accentLight = themeColor('--color-action-hover')
-    const accentBright = themeColor('--color-action-strong')
-
     const isMobile = window.matchMedia('(max-width: 768px)').matches
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const rootStyles = getComputedStyle(document.documentElement)
+    const themeColor = (token: string) => rootStyles.getPropertyValue(token).trim()
+    const pickColor = (...tokens: string[]) => {
+      for (const token of tokens) {
+        const value = themeColor(token)
+        if (value) return value
+      }
+      return '#ffffff'
+    }
+    // Посветени токени за сферата (с fallback към action цветовете).
+    const wireColor = pickColor('--color-sphere-wire', '--color-action')
+    const orbitColor = pickColor('--color-sphere-orbit', '--color-action-hover')
+    const nodeColor = pickColor('--color-sphere-node', '--color-action-strong')
+
+    // Върху тъмно небе адитивното смесване е светлина; върху крем/тан то
+    // избелва до невидимост. Светлите теми рисуват с нормално смесване —
+    // мастилени линии върху хартия — и с по-плътни стойности.
+    const isLightScheme = rootStyles.colorScheme.includes('light')
+    const sphereBlending = isLightScheme ? THREE.NormalBlending : THREE.AdditiveBlending
+    const shellOpacity = isLightScheme ? (isMobile ? 0.2 : 0.15) : (isMobile ? 0.11 : 0.085)
+    const orbitOpacity = isLightScheme ? (isMobile ? 0.34 : 0.28) : (isMobile ? 0.25 : 0.17)
+    const glowBase = isLightScheme ? 0.055 : (isMobile ? 0.18 : 0.13)
+    const glowSwing = isLightScheme ? 0.02 : 0.05
+    const twinkleBase = () => (isLightScheme ? 0.26 + Math.random() * 0.28 : 0.45 + Math.random() * 0.45)
+    const twinkleSwing = isLightScheme ? 0.18 : 0.35
+
     const w = container.clientWidth
     const h = container.clientHeight
     // Адаптивният world radius пази сходен визуален размер на CSS3D текста
@@ -101,17 +122,18 @@ export default function ProcedureSphere() {
     container.addEventListener('mouseenter', pauseRotate)
     container.addEventListener('mouseleave', resumeRotate)
 
-    // Glow текстура
+    // Glow текстура — бяла, тонира се от material.color, така всяка тема
+    // оцветява звездите/сиянието без нова текстура.
     function createGlowTexture(): THREE.CanvasTexture {
       const size = 64
       const c = document.createElement('canvas')
       c.width = size; c.height = size
       const ctx = c.getContext('2d')!
       const grad = ctx.createRadialGradient(size/2, size/2, 2, size/2, size/2, size/2)
-      grad.addColorStop(0, accentBright)
-      grad.addColorStop(0.2, hexToRgba(accentBright, 0.5))
-      grad.addColorStop(0.7, hexToRgba(accentBright, 0.06))
-      grad.addColorStop(1, hexToRgba(accentBright, 0))
+      grad.addColorStop(0, '#ffffff')
+      grad.addColorStop(0.2, hexToRgba('#ffffff', 0.5))
+      grad.addColorStop(0.7, hexToRgba('#ffffff', 0.06))
+      grad.addColorStop(1, hexToRgba('#ffffff', 0))
       ctx.fillStyle = grad
       ctx.fillRect(0, 0, size, size)
       return new THREE.CanvasTexture(c)
@@ -128,7 +150,7 @@ export default function ProcedureSphere() {
         const phi = Math.acos(2 * v - 1)
         const r = sphereRadius + (Math.random() - 0.5) * 10
         const size = Math.random() * 4 + 3
-        const mat = new THREE.SpriteMaterial({ map: glowTexture, color: accentBright, transparent: true, opacity: 0.9 })
+        const mat = new THREE.SpriteMaterial({ map: glowTexture, color: nodeColor, transparent: true, opacity: 0.9, blending: sphereBlending, depthWrite: false })
         const sprite = new THREE.Sprite(mat)
         sprite.position.set(
           r * Math.sin(phi) * Math.cos(theta),
@@ -137,7 +159,7 @@ export default function ProcedureSphere() {
         )
         sprite.scale.set(size, size, 1)
         stars.add(sprite)
-        twinkles.push({ mat, phase: Math.random() * Math.PI * 2, speed: 0.7 + Math.random() * 1.6, base: 0.45 + Math.random() * 0.45 })
+        twinkles.push({ mat, phase: Math.random() * Math.PI * 2, speed: 0.7 + Math.random() * 1.6, base: twinkleBase() })
       }
       scene.add(stars)
     }
@@ -148,22 +170,22 @@ export default function ProcedureSphere() {
     // без тежки частици, post-processing или допълнителен render loop.
     const shellGeometry = new THREE.IcosahedronGeometry(sphereRadius * 0.99, 2)
     const shellMaterial = new THREE.MeshBasicMaterial({
-      color: accent,
+      color: wireColor,
       wireframe: true,
       transparent: true,
-      opacity: isMobile ? 0.1 : 0.065,
+      opacity: shellOpacity,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: sphereBlending,
     })
     const shell = new THREE.Mesh(shellGeometry, shellMaterial)
     scene.add(shell)
 
     const orbitMaterial = new THREE.LineBasicMaterial({
-      color: accentLight,
+      color: orbitColor,
       transparent: true,
-      opacity: isMobile ? 0.24 : 0.16,
+      opacity: orbitOpacity,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: sphereBlending,
     })
     const orbitGroup = new THREE.Group()
     const orbitGeometries: THREE.BufferGeometry[] = []
@@ -191,10 +213,11 @@ export default function ProcedureSphere() {
     // Централно златно сияние
     const centerGlowMaterial = new THREE.SpriteMaterial({
       map: glowTexture,
-      color: accent,
+      color: wireColor,
       transparent: true,
-      opacity: isMobile ? 0.2 : 0.16,
+      opacity: glowBase,
       depthWrite: false,
+      blending: sphereBlending,
     })
     const centerGlow = new THREE.Sprite(centerGlowMaterial)
     const centerGlowSize = sphereRadius * (isMobile ? 1.25 : 0.95)
@@ -284,9 +307,9 @@ export default function ProcedureSphere() {
 
       // Twinkle на звездите
       for (const t of twinkles) {
-        t.mat.opacity = t.base + 0.35 * Math.sin(elapsed * t.speed + t.phase)
+        t.mat.opacity = t.base + twinkleSwing * Math.sin(elapsed * t.speed + t.phase)
       }
-      centerGlow.material.opacity = (isMobile ? 0.18 : 0.13) + 0.05 * Math.sin(elapsed * 0.8)
+      centerGlow.material.opacity = glowBase + glowSwing * Math.sin(elapsed * 0.8)
       if (!prefersReduced) {
         shell.rotation.y += dt * 0.035
         shell.rotation.x += dt * 0.012

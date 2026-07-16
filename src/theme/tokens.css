@@ -105,6 +105,10 @@
   --color-shader-action: var(--palette-6);
   --color-shader-secondary: var(--palette-3);
   --color-shader-star: var(--color-text);
+  /* 3D сферата: клетка, орбити, звезди — розовата рампа на темата. */
+  --color-sphere-wire: var(--palette-5);
+  --color-sphere-orbit: var(--palette-6);
+  --color-sphere-node: var(--color-action-strong);
 
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
@@ -180,6 +184,10 @@
   --color-shader-action: var(--palette-4);
   --color-shader-secondary: var(--palette-2);
   --color-shader-star: var(--palette-4);
+  /* Мастилена клетка върху крем — нормално смесване, зелена рампа. */
+  --color-sphere-wire: #0b6b52;
+  --color-sphere-orbit: var(--palette-4);
+  --color-sphere-node: #12775c;
 }
 
 :root[data-theme='matching'] {
@@ -249,6 +257,10 @@
   --color-shader-action: #3d5a51;
   --color-shader-secondary: var(--palette-5);
   --color-shader-star: var(--palette-2);
+  /* Евкалиптова клетка върху тан — нормално смесване. */
+  --color-sphere-wire: #4e6a61;
+  --color-sphere-orbit: #3d5a51;
+  --color-sphere-node: var(--palette-5);
 }
 
 :root[data-theme='dust'] {
@@ -311,6 +323,10 @@
   --color-shader-action: var(--palette-2);
   --color-shader-secondary: var(--palette-4);
   --color-shader-star: var(--color-text);
+  /* Сребърна клетка от морско стъкло върху графит. */
+  --color-sphere-wire: var(--palette-2);
+  --color-sphere-orbit: var(--palette-6);
+  --color-sphere-node: var(--color-action-strong);
 }
 
 /*
