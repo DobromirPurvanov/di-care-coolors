@@ -3,8 +3,8 @@ export const THEMES = [
     id: 'matching',
     name: 'Matching Palette',
     mode: 'Светла',
-    description: 'Земно зелено, злато и кафяво от брошурата',
-    palette: ['#D0C4AB', '#4D4637', '#CFA95F', '#A5CDC4', '#71978F'],
+    description: 'Тан, злато, кафяво и зелени акценти от брошурата',
+    palette: ['#D0C4AB', '#33291E', '#CFA95F', '#71978F', '#4D4637'],
     background: '#D0C4AB',
   },
   {

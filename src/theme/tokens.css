@@ -122,7 +122,9 @@
   /* По брошурата: повече зелено в стените, злато за действията, кафяво в
      мастилата. Картите остават една обща „хартия". */
   --color-canvas: var(--palette-1);
-  --color-section: color-mix(in srgb, var(--palette-5) 42%, var(--palette-4));
+  /* Светло синьото (мента/тюркоаз) отпадна — тъмните секции са кафявите
+     стени на брошурата. */
+  --color-section: #33291e;
   --color-palette-surface: var(--palette-3);
   --color-card: #e6dfd0;
   --color-card-hover: color-mix(in srgb, #e6dfd0 93%, var(--color-action) 7%);
@@ -186,35 +188,25 @@
   --color-sphere-node: #4e6a61;
 }
 
-/* Matching: върху дълбоките зелени стени мастилата стъпват едно ниво
-   по-тъмно, за да държат ≥4.5:1 (на тан канваса и хартията важат базовите). */
-:root[data-theme='matching'] #about,
-:root[data-theme='matching'] #gallery {
-  --color-text-secondary: #3f382b;
-  --color-text-muted: #443d2d;
-  --color-accent-text: #263c34;
-  --color-heading: #2b4741;
-  --color-negative: #68301e;
-}
-
 /* Matching: картите са обща „хартия" във всички секции — index.css (в
    @layer components) ги връзва към section/canvas за тъмната версия. */
 :root[data-theme='matching'] .services-section,
-:root[data-theme='matching'] #equipment,
-:root[data-theme='matching'] #about {
+:root[data-theme='matching'] #equipment {
   --color-card: #e6dfd0;
   --color-card-hover: color-mix(in srgb, #e6dfd0 93%, var(--color-action) 7%);
 }
 
-/* Matching: кафявият финал. Синьо-зелените стени долу не се харесаха —
-   контактът и футърът завършват страницата в тъмното топло кафяво на
-   брошурата, върху което златото и хартията светят. */
+/* Matching: кафявите стени на брошурата — „За нас", „Галерия", „Контакти"
+   и футърът. Върху тях мастилата са слонова кост, а акцентите злато. */
+:root[data-theme='matching'] #about,
+:root[data-theme='matching'] #gallery,
 :root[data-theme='matching'] #contact,
 :root[data-theme='matching'] footer {
   --color-section: #33291e;
-  /* Пейнтът се резолвва на root-а (запича зеленото), затова тук му
-     трябва директната кафява стойност, не var(--color-section). */
+  /* Пейнтовете се резолвват на root-а, затова тук са с директни стойности. */
   --paint-section-secondary: #33291e;
+  --paint-title: linear-gradient(135deg, #f2ede2 30%, #d9b877 70%);
+  --paint-brand: linear-gradient(110deg, #c9a35c, #ddbd82 55%, #ffe9b8);
   --color-card: #3d3226;
   --color-card-hover: color-mix(in srgb, #3d3226 93%, #f2ede2 7%);
   --color-glass: color-mix(in srgb, #3d3226 92%, transparent);
