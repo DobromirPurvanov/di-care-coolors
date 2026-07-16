@@ -50,10 +50,12 @@
   --color-action-strong: #f8d8e2;
   --color-on-action: var(--palette-1);
   --color-secondary: var(--palette-4);
-  /* Плътният #496074 слаб стоеше чуждо в зеления свят — смесен към секцията
-     панелът остава в палитрата, но сяда в темата. */
-  --color-feature: color-mix(in srgb, var(--palette-3) 62%, var(--color-section));
-  --color-on-feature: var(--color-text);
+  /* Панелът сяда в зеления свят (слабото синьо е само дъх), а иконата носи
+     розовата нишка — синият слаб дърпаше окото извън хармонията. */
+  --color-feature: color-mix(in srgb, var(--palette-3) 30%, var(--color-section));
+  --color-on-feature: var(--palette-6);
+  /* Сияние около hero реда — в тона на розовия край на заглавния градиент. */
+  --color-glow: var(--palette-6);
 
   /* Boundaries and states — розови хеърлайни като златните 14% на оригинала */
   --color-border: color-mix(in srgb, var(--color-text) 8%, transparent);
