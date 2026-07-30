@@ -106,7 +106,7 @@ export default function Equipment() {
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLElement
                 el.style.background = 'var(--color-card)'
-                el.style.boxShadow = 'none'
+                el.style.boxShadow = 'var(--card-shadow-rest)'
               }}
             >
               <div

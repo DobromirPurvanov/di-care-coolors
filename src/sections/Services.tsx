@@ -70,7 +70,7 @@ export default function Services() {
                   borderColor: 'var(--color-card-border)',
                   transform: 'translateY(60px)',
                   transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  boxShadow: 'none',
+                  boxShadow: 'var(--card-shadow-rest)',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement
@@ -80,7 +80,7 @@ export default function Services() {
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement
                   el.style.background = 'var(--color-card)'
-                  el.style.boxShadow = 'none'
+                  el.style.boxShadow = 'var(--card-shadow-rest)'
                 }}
               >
                 {/* Дискретно златно сияние при hover */}

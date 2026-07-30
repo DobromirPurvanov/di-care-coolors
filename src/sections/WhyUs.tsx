@@ -89,7 +89,7 @@ export default function WhyUs() {
               key={i}
               ref={el => { if (el) cardsRef.current[i] = el }}
               className="pillar-card relative overflow-hidden rounded-2xl p-5 sm:p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-action)] hover:shadow-[var(--card-shadow)]"
-              style={{ background: 'var(--color-card)', border: '1px solid var(--color-card-border)' }}
+              style={{ background: 'var(--color-card)', border: '1px solid var(--color-card-border)', boxShadow: 'var(--card-shadow-rest)' }}
             >
               <span
                 className="pillar-icon flex items-center justify-center w-12 h-12 rounded-full mb-5"
