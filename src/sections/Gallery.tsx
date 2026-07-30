@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import SectionHeading from '../components/SectionHeading'
 
 /*
  * Галерия слайдър — снимките от брошурата на клиниката. Scroll-snap +
@@ -88,7 +89,7 @@ export default function Gallery() {
       window.clearTimeout(snapTimer)
       cancelAnimationFrame(tweenRafRef.current)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [])
 
   const goTo = (target: number) => tweenTo(target)
@@ -96,43 +97,39 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="relative z-10"
-      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) 0', background: 'var(--paint-section-secondary)' }}
+      className="section-shell-bleed relative z-10"
+      style={{ background: 'var(--paint-section-secondary)' }}
     >
-      <div className="max-w-6xl mx-auto" style={{ padding: '0 clamp(1rem, 4vw, 3rem)' }}>
-        <p className="text-xs tracking-[0.25em] uppercase mb-4" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>
-          Клиниката отблизо
-        </p>
-        <div className="flex flex-wrap items-end justify-between gap-4 mb-8 sm:mb-10">
-          <h2 className="font-serif-luxe text-gradient leading-[1.12]" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
-            Галерия
-          </h2>
-
-          {/* Навигация + брояч */}
-          <div className="flex items-center gap-3">
-            <span className="text-[11px] tracking-[0.2em] tabular-nums" style={{ color: 'var(--color-text-muted)' }}>
-              {index + 1} / {slides.length}
-            </span>
-            <button
-              type="button"
-              className="gallery-nav-btn"
-              onClick={() => goTo(index - 1)}
-              disabled={index === 0}
-              aria-label="Предишна снимка"
-            >
-              <ChevronLeft size={18} aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              className="gallery-nav-btn"
-              onClick={() => goTo(index + 1)}
-              disabled={index === slides.length - 1}
-              aria-label="Следваща снимка"
-            >
-              <ChevronRight size={18} aria-hidden="true" />
-            </button>
-          </div>
-        </div>
+      <div className="section-inner">
+        <SectionHeading
+          eyebrow="Клиниката отблизо"
+          title="Галерия"
+          aside={
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] tracking-[0.2em] tabular-nums" style={{ color: 'var(--color-text-muted)' }}>
+                {index + 1} / {slides.length}
+              </span>
+              <button
+                type="button"
+                className="gallery-nav-btn"
+                onClick={() => goTo(index - 1)}
+                disabled={index === 0}
+                aria-label="Предишна снимка"
+              >
+                <ChevronLeft size={18} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                className="gallery-nav-btn"
+                onClick={() => goTo(index + 1)}
+                disabled={index === slides.length - 1}
+                aria-label="Следваща снимка"
+              >
+                <ChevronRight size={18} aria-hidden="true" />
+              </button>
+            </div>
+          }
+        />
       </div>
 
       <div ref={trackRef} className="gallery-track" role="region" aria-label="Галерия със снимки от клиниката">

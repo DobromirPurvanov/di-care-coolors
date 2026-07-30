@@ -6,12 +6,13 @@ import { ArrowRight } from 'lucide-react'
 import { categories, procedures } from '../data/procedures'
 import { serviceContent } from '../data/services'
 import BookingButton from '../components/BookingButton'
+import SectionHeading from '../components/SectionHeading'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Services() {
   const sectionRef = useRef<HTMLElement>(null)
-  const titleRef = useRef<HTMLHeadingElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -44,14 +45,16 @@ export default function Services() {
       ref={sectionRef}
       className="services-section relative z-10"
     >
-      <div className="max-w-6xl mx-auto">
-        <h2
-          ref={titleRef}
-          className="text-center font-light uppercase tracking-[0.15em] opacity-0 mb-10 sm:mb-16"
-          style={{ fontSize: 'clamp(1.4rem, 3vw, 2.2rem)', transform: 'translateY(40px)' }}
-        >
-          Нашите услуги
-        </h2>
+      <div className="section-inner">
+        <SectionHeading
+          eyebrow="Направления"
+          title="Нашите услуги"
+          lead="Девет направления под един покрив — от лазерна и дентална медицина до онко грижа и център за дълголетие."
+          align="center"
+          revealRef={titleRef}
+          innerClassName="svc-head opacity-0"
+          style={{ transform: 'translateY(40px)' }}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map((cat, i) => {
@@ -62,7 +65,7 @@ export default function Services() {
                 key={cat.id}
                 className="svc-card group relative overflow-hidden opacity-0 rounded-2xl border transition-all duration-300 hover:border-[var(--color-action)] hover:-translate-y-1"
                 style={{
-                  minHeight: '260px',
+                  minHeight: '228px',
                   background: 'var(--color-card)',
                   borderColor: 'var(--color-card-border)',
                   transform: 'translateY(60px)',
@@ -104,7 +107,7 @@ export default function Services() {
                   {count} {count === 1 ? 'процедура' : 'процедури'}
                 </span>
 
-                <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-6" style={{ minHeight: '260px' }}>
+                <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-6" style={{ minHeight: '228px' }}>
                   <Link to={`/uslugi/${cat.slug}`} className="block" aria-label={`${cat.label}: ${tagline}`}>
                     <h3 className="font-light text-lg tracking-wider uppercase group-hover:text-[var(--color-accent-text,var(--color-action-hover))] transition-colors duration-300">
                       {cat.label}

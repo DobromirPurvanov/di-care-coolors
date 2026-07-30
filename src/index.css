@@ -201,9 +201,41 @@
     pointer-events: none;
   }
 
+  /* Общата обвивка на всяка секция: един вертикален ритъм и един ляв ръб за
+     целия сайт. Преди същият clamp беше преписан inline в шест файла, а
+     „Галерия" го слагаше два пъти (веднъж на секцията, веднъж на вътрешния
+     контейнер) и заглавието ѝ висеше 48px по-навътре от останалите. */
+  .section-shell {
+    padding: var(--space-section) var(--gutter);
+  }
+
+  /* Пълна ширина за слайдъри/карти, които трябва да опрат до ръба — левият
+     ръб на текста се пази от вътрешния .section-inner. */
+  .section-shell-bleed {
+    padding: var(--space-section) 0;
+  }
+
+  .section-inner {
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+
+  /* max-width расте с гутера, иначе border-box изяжда падинга отвътре и
+     текстът пак увисва с един гутер по-навътре от останалите секции. */
+  .section-shell-bleed > .section-inner {
+    max-width: calc(72rem + 2 * var(--gutter));
+    padding-inline: var(--gutter);
+  }
+
+  /* Разстоянието заглавие → съдържание е с едно ниво по-малко от това между
+     секциите, за да личи кое към кое принадлежи. */
+  .section-head {
+    margin-bottom: var(--space-header);
+  }
+
   .procedure-section,
   .services-section {
-    padding: clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem);
+    padding: var(--space-section) var(--gutter);
   }
 
   .services-section {
@@ -505,7 +537,11 @@
   .gallery-track {
     display: flex;
     gap: clamp(0.75rem, 2vw, 1.25rem);
-    padding: 0 clamp(1rem, 8vw, 6rem);
+    /* Първият слайд тръгва точно от левия ръб на текста в .section-inner:
+       gutter + (100vw − 2·gutter − 72rem)/2, което се съкращава до 50vw − 36rem.
+       Преди беше самостоятелен clamp и снимките стояха ~50px по-наляво от
+       заглавието над тях. */
+    padding: 0 max(var(--gutter), 50vw - 36rem);
     overflow-x: auto;
     /* БЕЗ CSS scroll-snap: Lenis официално не го поддържа — snap контейнер
        във viewport-а замразява целия скрол на страницата. Прилепването се

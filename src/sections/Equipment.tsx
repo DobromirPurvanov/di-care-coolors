@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Zap, Sparkles, Droplets, Activity, type LucideIcon } from 'lucide-react'
+import SectionHeading from '../components/SectionHeading'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -41,7 +42,7 @@ const equipment: Device[] = [
 
 export default function Equipment() {
   const sectionRef = useRef<HTMLElement>(null)
-  const titleRef = useRef<HTMLHeadingElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -73,23 +74,19 @@ export default function Equipment() {
     <section
       id="equipment"
       ref={sectionRef}
-      className="relative z-10"
-      style={{
-        padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)',
-        background: 'var(--paint-section-primary)',
-      }}
+      className="section-shell relative z-10"
+      style={{ background: 'var(--paint-section-primary)' }}
     >
-      <div className="max-w-6xl mx-auto">
-        <h2
-          ref={titleRef}
-          className="text-center font-light uppercase tracking-[0.15em] opacity-0 mb-4"
-          style={{ fontSize: 'clamp(1.4rem, 3vw, 2.2rem)', transform: 'translateY(40px)' }}
-        >
-          Апаратура
-        </h2>
-        <p className="text-center text-xs tracking-[0.15em] uppercase mb-10 sm:mb-16" style={{ color: 'var(--color-text-muted)' }}>
-          Световно признати лазерни системи
-        </p>
+      <div className="section-inner">
+        <SectionHeading
+          eyebrow="Технологии"
+          title="Апаратура"
+          lead="Световно признати лазерни и диагностични системи, върху които стъпва всяка от процедурите ни."
+          align="center"
+          revealRef={titleRef}
+          innerClassName="opacity-0"
+          style={{ transform: 'translateY(40px)' }}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {equipment.map((eq, i) => (
@@ -124,7 +121,10 @@ export default function Equipment() {
                   <eq.Icon className="w-6 h-6 sm:w-[34px] sm:h-[34px]" strokeWidth={1.4} aria-hidden="true" />
                 </span>
               </div>
-              <div className="min-w-0 sm:w-3/5 p-5 sm:p-6 flex flex-col justify-center">
+              {/* justify-start, не center: картите в един ред са с еднаква
+                  височина, но с различно съдържание — центрирането разместваше
+                  заглавията им с десетина пиксела едно спрямо друго. */}
+              <div className="min-w-0 sm:w-3/5 p-5 sm:p-6 flex flex-col justify-start">
                 <h3 className="font-light text-sm tracking-[0.1em] uppercase group-hover:text-[var(--color-accent-text,var(--color-action-hover))] transition-colors">
                   {eq.name}
                 </h3>

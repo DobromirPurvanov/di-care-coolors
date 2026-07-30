@@ -27,7 +27,7 @@ export default function Footer() {
     <footer
       className="relative z-10"
       style={{
-        padding: 'clamp(3.5rem, 8vh, 4rem) clamp(1rem, 4vw, 3rem)',
+        padding: 'var(--space-section-tight) var(--gutter)',
         background: 'var(--color-section)',
       }}
     >
@@ -38,14 +38,21 @@ export default function Footer() {
         style={{ background: 'linear-gradient(90deg, transparent 0%, var(--color-secondary) 30%, var(--color-action) 50%, var(--color-action-hover) 70%, transparent 100%)' }}
       />
 
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
+      <div className="section-inner">
+        {/* Четири равни колони: преди беше flex с justify-between, при който
+            дългата навигация теглеше всичко наляво, а долният десен ъгъл на
+            футъра оставаше празен. Контактите запълват мястото и вадят
+            телефона/адреса от единствената им точка по-нагоре в страницата. */}
+        <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Лого + социални */}
-          <div className="flex flex-col items-center md:items-start gap-5">
+          <div className="flex flex-col gap-5">
             <div className="flex items-center gap-2">
               <span className="font-light text-sm tracking-[0.3em] uppercase text-[var(--color-text)]">Dr. Di</span>
               <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>Clinic</span>
             </div>
+            <p className="text-[13px] leading-relaxed max-w-[24ch]" style={{ color: 'var(--color-text-muted)' }}>
+              Клиника за естетична медицина, лазерни процедури и дълголетие във Варна.
+            </p>
             <div className="flex items-center gap-3">
               {[
                 { icon: Instagram, name: 'Instagram', href: 'https://www.instagram.com/drdiclinic/' },
@@ -67,8 +74,8 @@ export default function Footer() {
           </div>
 
           {/* Бързи връзки */}
-          <nav className="flex flex-col items-center md:items-start gap-3" aria-label="Бързи връзки">
-            <span className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: 'var(--color-text-muted)' }}>
+          <nav className="flex flex-col" aria-label="Бързи връзки">
+            <span className="text-[10px] tracking-[0.25em] uppercase mb-2" style={{ color: 'var(--color-text-muted)' }}>
               Навигация
             </span>
             {QUICK_LINKS.map(l => (
@@ -76,7 +83,7 @@ export default function Footer() {
                 key={l.href}
                 type="button"
                 onClick={() => goToAnchor(l.href)}
-                className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] uppercase cursor-pointer transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))] text-left"
+                className="inline-flex min-h-[40px] items-center text-xs tracking-[0.12em] uppercase cursor-pointer transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))] text-left"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
                 {l.label}
@@ -84,38 +91,69 @@ export default function Footer() {
             ))}
           </nav>
 
+          {/* Контакти */}
+          <div className="flex flex-col">
+            <span className="text-[10px] tracking-[0.25em] uppercase mb-2" style={{ color: 'var(--color-text-muted)' }}>
+              Контакти
+            </span>
+            <a
+              href="tel:+359882708081"
+              className="inline-flex min-h-[40px] items-center text-xs tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))]"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              +359 882 708 081
+            </a>
+            <a
+              href="mailto:drdiclinic21@gmail.com"
+              className="inline-flex min-h-[40px] items-center text-xs tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))]"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
+              drdiclinic21@gmail.com
+            </a>
+            <p className="mt-2 text-xs leading-relaxed max-w-[26ch]" style={{ color: 'var(--color-text-secondary)' }}>
+              гр. Варна, ул. „Любен Каравелов" № 71, Партер
+            </p>
+            <p className="mt-3 text-[11px] leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+              Пн–Пт 10:00–17:00 · Сб 10:00–14:00
+            </p>
+          </div>
+
           {/* Правни */}
-          <div className="flex flex-col items-center md:items-start gap-3">
-            <span className="text-[10px] tracking-[0.25em] uppercase mb-1" style={{ color: 'var(--color-text-muted)' }}>
+          <div className="flex flex-col">
+            <span className="text-[10px] tracking-[0.25em] uppercase mb-2" style={{ color: 'var(--color-text-muted)' }}>
               Информация
             </span>
-            <Link to="/poveritelnost" className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))]" style={{ color: 'var(--color-text-secondary)' }}>
+            <Link to="/poveritelnost" className="inline-flex min-h-[40px] items-center text-xs tracking-[0.12em] transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))]" style={{ color: 'var(--color-text-secondary)' }}>
               Политика за лични данни
             </Link>
             <button
               type="button"
               onClick={openConsentBanner}
-              className="inline-flex min-h-[44px] items-center text-xs tracking-[0.12em] cursor-pointer transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))] text-center md:text-left"
+              className="inline-flex min-h-[40px] items-center text-xs tracking-[0.12em] cursor-pointer transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))] text-left"
               style={{ color: 'var(--color-text-secondary)' }}
             >
               Настройки на бисквитките
             </button>
           </div>
+        </div>
 
-          {/* Обратно към началото */}
+        {/* Долен ред: копирайт + обратно към началото */}
+        <div
+          className="mt-12 pt-6 flex flex-wrap items-center justify-between gap-4"
+          style={{ borderTop: '1px solid var(--color-border)' }}
+        >
+          <p className="text-[11px] tracking-wider" style={{ color: 'var(--color-text-muted)' }}>
+            © {new Date().getFullYear()} Dr. Di Clinic. Всички права запазени.
+          </p>
           <button
             onClick={() => scrollToPosition(0)}
-            className="group w-12 h-12 flex-none flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--color-action)]/60 hover:-translate-y-1"
+            className="group w-11 h-11 flex-none flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--color-action)]/60 hover:-translate-y-1"
             style={{ borderColor: 'var(--color-card-border)' }}
             aria-label="Обратно към началото"
           >
             <ArrowUp size={17} className="transition-colors duration-300 group-hover:!text-[var(--color-action)]" style={{ color: 'var(--color-text-muted)' }} aria-hidden="true" />
           </button>
         </div>
-
-        <p className="mt-12 text-center md:text-left text-[11px] tracking-wider" style={{ color: 'var(--color-text-muted)' }}>
-          © {new Date().getFullYear()} Dr. Di Clinic. Всички права запазени.
-        </p>
       </div>
     </footer>
   )

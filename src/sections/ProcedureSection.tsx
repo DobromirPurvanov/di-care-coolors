@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Orbit, LayoutGrid } from 'lucide-react'
 import ProcedureGrid from '../components/ProcedureGrid'
+import SphereBoundary from '../components/SphereBoundary'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -107,44 +108,45 @@ export default function ProcedureSection() {
       ref={sectionRef}
       className="procedure-section relative z-10"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="section-inner">
         <div
           ref={headerRef}
-          className="flex flex-col items-center opacity-0 mb-8 sm:mb-10"
+          className="section-head flex flex-col items-center opacity-0"
           style={{ transform: 'translateY(30px)' }}
         >
           {/* Златна емблема */}
           <span className="theme-logo theme-logo-section mb-6" role="img" aria-label="Dr. Di Clinic" />
 
-          {/* Заглавие с декоративни странични линии (линиите се крият на мобилно,
-              за да не изтласкват заглавието извън екрана) */}
-          <div className="flex items-center justify-center gap-5 sm:gap-8 w-full max-w-3xl">
-            <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-action) 40%, transparent))' }} />
-            <h2
-              className="text-gradient text-center font-light uppercase tracking-[0.15em]"
-              style={{ fontSize: 'clamp(1.4rem, 3.2vw, 2.4rem)', lineHeight: 1.2 }}
-            >
-              Изберете процедура
-            </h2>
-            <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--color-action) 40%, transparent), transparent)' }} />
-          </div>
+          <p
+            className="text-[11px] tracking-[0.25em] uppercase"
+            style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}
+          >
+            Всички процедури
+          </p>
+
+          <h2
+            className="font-serif-luxe text-gradient text-center mt-3 leading-[1.12]"
+            style={{ fontSize: 'clamp(1.9rem, 4.2vw, 2.9rem)' }}
+          >
+            Изберете процедура
+          </h2>
 
           {/* Анимиран златен разделител — разтваря се от центъра */}
           <div
             ref={dividerRef}
             aria-hidden="true"
-            className="my-5 will-change-transform"
+            className="mt-5 will-change-transform"
             style={{
-              width: '72px',
-              height: '1px',
-              background: 'linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-action) 90%, transparent), transparent)',
+              width: '56px',
+              height: '2px',
+              background: 'var(--paint-brand)',
               transform: 'scaleX(0)',
               transformOrigin: 'center',
             }}
           />
 
           <p
-            className="max-w-[30rem] text-center text-[11px] leading-relaxed tracking-[0.15em] sm:tracking-[0.22em] uppercase"
+            className="max-w-[30rem] mt-5 text-center text-[11px] leading-relaxed tracking-[0.15em] sm:tracking-[0.22em] uppercase"
             style={{ color: 'var(--color-text-secondary)', textShadow: 'var(--text-shadow)' }}
           >
             {hint}
@@ -180,9 +182,11 @@ export default function ProcedureSection() {
         >
           {view === 'sphere' ? (
             nearViewport ? (
-              <Suspense fallback={<SphereFallback />}>
-                <ProcedureSphere />
-              </Suspense>
+              <SphereBoundary fallback={<ProcedureGrid />}>
+                <Suspense fallback={<SphereFallback />}>
+                  <ProcedureSphere />
+                </Suspense>
+              </SphereBoundary>
             ) : (
               <SphereFallback />
             )

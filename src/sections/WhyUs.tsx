@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Stethoscope, UserRound, Hourglass, ShieldCheck, Sparkles, Cpu } from 'lucide-react'
+import SectionHeading from '../components/SectionHeading'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -71,32 +72,18 @@ export default function WhyUs() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative z-10"
-      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)', background: 'var(--paint-section-secondary)' }}
+      className="section-shell relative z-10"
+      style={{ background: 'var(--paint-section-secondary)' }}
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Въведение */}
-        <div className="max-w-2xl">
-          <p className="text-xs tracking-[0.25em] uppercase mb-4" style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}>
-            За нас
-          </p>
-          <h2 className="font-serif-luxe text-gradient leading-[1.12]" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
-            Защо Dr. Di Clinic
-          </h2>
-          <div
-            aria-hidden="true"
-            className="mt-5 mb-6"
-            style={{ width: '56px', height: '2px', background: 'var(--paint-brand)' }}
-          />
-          <p style={{ fontSize: '16px', lineHeight: 1.8, color: 'var(--color-text-secondary)' }}>
-            В Dr. Di Clinic гледаме на красотата през погледа на медицината. Съчетаваме диагностика,
-            опит и внимание към детайла, за да се погрижим за кожата ви меко и осмислено. Всеки план е
-            личен, а целта ни е естествен и траен резултат, който изглежда просто като по-отпочиналата версия на вас.
-          </p>
-        </div>
+      <div className="section-inner">
+        <SectionHeading
+          eyebrow="За нас"
+          title="Защо Dr. Di Clinic"
+          lead="В Dr. Di Clinic гледаме на красотата през погледа на медицината. Съчетаваме диагностика, опит и внимание към детайла, за да се погрижим за кожата ви меко и осмислено. Всеки план е личен, а целта ни е естествен и траен резултат, който изглежда просто като по-отпочиналата версия на вас."
+        />
 
         {/* Стълбове */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-9 sm:mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {pillars.map((p, i) => (
             <div
               key={i}

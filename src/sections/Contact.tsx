@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, CalendarClock, ArrowRight, ExternalLink } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, CalendarClock, ArrowRight, ExternalLink } from 'lucide-react'
 import ContactForm from '../components/ContactForm'
 import BookingButton from '../components/BookingButton'
+import SectionHeading from '../components/SectionHeading'
 import { getConsent, onConsentChange } from '../lib/consent'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -30,11 +31,6 @@ function getClinicStatus(): { open: boolean } {
     return { open: false }
   }
 }
-
-const SOCIALS = [
-  { icon: Instagram, name: 'Instagram', href: 'https://www.instagram.com/drdiclinic/' },
-  { icon: Facebook, name: 'Facebook', href: 'https://www.facebook.com/DrDiClinic/' },
-]
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -70,27 +66,20 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative z-10"
-      style={{ padding: 'clamp(4.5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem)', background: 'var(--paint-section-secondary)' }}
+      className="section-shell relative z-10"
+      style={{ background: 'var(--paint-section-secondary)' }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="section-inner">
+        <SectionHeading
+          eyebrow="Контакти"
+          title="Свържете се с нас"
+          lead="Изберете свободен час директно в календара ни или ни оставете съобщение и ще се свържем с вас."
+        />
+
         {/* Двуколонен layout: форма | карта */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
-          {/* Лява колона — заглавие + форма */}
+          {/* Лява колона — форма */}
           <div className="ct-reveal opacity-0 order-1" style={{ transform: 'translateY(40px)' }}>
-            <div className="flex items-center gap-5 mb-3">
-              <h2
-                className="font-light uppercase tracking-[0.15em]"
-                style={{ fontSize: 'clamp(1.4rem, 3vw, 2.2rem)' }}
-              >
-                Свържете се с нас
-              </h2>
-              <span aria-hidden="true" className="hidden sm:block flex-1 h-[1px]" style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--color-action) 50%, transparent), transparent)' }} />
-            </div>
-            <p className="text-sm mb-8" style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
-              Изберете свободен час директно в календара ни или ни оставете съобщение и ще се свържем с вас.
-            </p>
-
             {/* Основен път: онлайн запазване на час в реално време */}
             <div
               className="mb-9 p-5 sm:p-6 rounded-2xl"
@@ -229,34 +218,8 @@ export default function Contact() {
           ))}
         </div>
 
-        {/* Социални мрежи */}
-        <div className="ct-reveal mt-10 flex items-center gap-4 opacity-0" style={{ transform: 'translateY(20px)' }}>
-          <span className="text-[10px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-text-muted)' }}>
-            Последвайте ни
-          </span>
-          {SOCIALS.map(s => (
-            <a
-              key={s.name}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative w-11 h-11 flex items-center justify-center rounded-full border transition-all duration-300 hover:border-[var(--color-action)]/50"
-              style={{ borderColor: 'var(--color-border)' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'color-mix(in srgb, var(--color-action) 10%, transparent)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent' }}
-              aria-label={`Последвайте ни в ${s.name}`}
-            >
-              <s.icon size={18} className="transition-colors duration-300 group-hover:!text-[var(--color-action)]" style={{ color: 'var(--color-text-muted)' }} aria-hidden="true" />
-              <span
-                role="tooltip"
-                className="social-tooltip pointer-events-none absolute left-1/2 bottom-full mb-2 -translate-x-1/2 whitespace-nowrap px-2.5 py-1.5 text-[10px] tracking-[0.08em] opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
-                style={{ background: 'var(--color-glass)', border: '1px solid var(--color-card-border)', color: 'var(--color-text-secondary)' }}
-              >
-                {s.name}
-              </span>
-            </a>
-          ))}
-        </div>
+        {/* Социалните мрежи живеят само във футъра — тук стояха на ~200px над
+            същите две икони там и четяха като повторение. */}
       </div>
     </section>
   )
