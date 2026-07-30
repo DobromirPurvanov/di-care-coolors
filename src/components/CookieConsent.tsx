@@ -38,6 +38,20 @@ export default function CookieConsent() {
     closeTimer.current = setTimeout(() => setOpen(false), 400)
   }
 
+  // Esc затваря банера като „само необходимите" — това е и стойността по
+  // подразбиране, която не изисква съгласие, така че отказът от избор никога
+  // не се тълкува като съгласие. Без това банерът нямаше как да се махне от
+  // клавиатура и оставаше залепен над долния ръб на страницата.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') choose('essential')
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+
+  }, [open])
+
   if (!open) return null
 
   return (

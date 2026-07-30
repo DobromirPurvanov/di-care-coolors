@@ -73,10 +73,24 @@
     color: var(--color-text);
   }
 
-  ::-webkit-scrollbar { width: 5px; }
+  /* Скролбарът е позиционна информация, не декорация. При 5px и злато на 30%
+     прозрачност в светлата тема беше практически невидим върху тана — не се
+     виждаше нито къде си, нито че изобщо има какво да се влачи. Смесваме с
+     мастилото (не с акцента), за да държи контраст и в двете теми. */
+  ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: var(--color-canvas); }
-  ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--color-action) 30%, transparent); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--color-action) 55%, transparent); }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-text) 34%, var(--color-canvas));
+    border: 2px solid var(--color-canvas);
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--color-text) 52%, var(--color-canvas)); }
+
+  /* Firefox */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-text) 34%, var(--color-canvas)) var(--color-canvas);
+  }
 
   :focus-visible {
     outline: 2px solid color-mix(in srgb, var(--color-action) 75%, transparent);
@@ -97,6 +111,25 @@
     z-index: 20;
     height: 4px;
     background: var(--paint-brand);
+  }
+
+  /* Разтегната връзка: цялата карта става кликаема, без да влагаме бутони в
+     <a> (невалидно) и без да дублираме линка за екранните четци. */
+  .svc-link-stretch::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+  }
+
+  /* Фокусът трябва да очертае КАРТАТА, не невидимия ::after слой. */
+  .svc-card:has(.svc-link-stretch:focus-visible) {
+    outline: 2px solid color-mix(in srgb, var(--color-action) 75%, transparent);
+    outline-offset: 3px;
+  }
+
+  .svc-link-stretch:focus-visible {
+    outline: none;
   }
 
   .eq-color-panel {
@@ -184,7 +217,9 @@
   /* ------- Етикети на 3D сферата ------- */
   .procedure-sphere {
     width: 100%;
-    height: min(80svh, 800px);
+    /* Беше min(80svh, 800px): сферата не запълваше кутията си и под нея
+       оставаше широка празна ивица преди следващата секция. */
+    height: min(70svh, 700px);
     /* 3D полето потъва меко в секцията, вместо мрежата/звездите да се
        режат от правоъгълника на канваса. */
     mask-image: linear-gradient(180deg, transparent, black 8%, black 90%, transparent);
@@ -276,7 +311,9 @@
     text-transform: uppercase;
     color: var(--color-heading);
     cursor: pointer;
-    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    /* opacity в прехода: подредбата на етикетите скрива застъпените, а без
+       омекотяване това би „примигвало" при въртене на сферата. */
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, opacity 0.22s ease;
     white-space: nowrap;
     user-select: none;
     /* Тъмен ринг + сянка = ясно отделяне от фона */
@@ -371,6 +408,77 @@
 
   @media (pointer: coarse) {
     .proc-toggle-btn { min-height: 44px; }
+  }
+
+  /* ------- Търсене в списъчния изглед ------- */
+  .proc-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 26rem;
+    border: 1px solid var(--color-card-border);
+    border-radius: 999px;
+    background: var(--color-card);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .proc-search:focus-within {
+    border-color: var(--color-action);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-action) 18%, transparent);
+  }
+
+  .proc-search-icon {
+    position: absolute;
+    left: 16px;
+    flex: none;
+    color: var(--color-text-muted);
+    pointer-events: none;
+  }
+
+  .proc-search-input {
+    width: 100%;
+    /* 16px минимум — под това iOS Safari зумва при фокус. */
+    font-size: 16px;
+    font-weight: 300;
+    min-height: 48px;
+    padding: 12px 44px 12px 44px;
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+    color: var(--color-text);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .proc-search-input::placeholder { color: var(--color-text-muted); }
+  .proc-search-input:focus { outline: none; }
+  /* Родният X на type="search" e различен във всеки браузър и не се стилизира
+     — ползваме собствен бутон. */
+  .proc-search-input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+  .proc-search-clear {
+    position: absolute;
+    right: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex: none;
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color 0.25s ease, background 0.25s ease;
+  }
+
+  .proc-search-clear:hover,
+  .proc-search-clear:focus-visible {
+    color: var(--color-accent-text, var(--color-action-hover));
+    background: var(--color-action-glow-soft);
+  }
+
+  @media (pointer: coarse) {
+    .proc-search-clear { width: 44px; height: 44px; }
   }
 
   /* ------- Чипове в списъчния изглед ------- */
@@ -568,9 +676,15 @@
     transform: scale(1);
   }
 
+  .gallery-slide picture {
+    display: block;
+  }
+
   .gallery-slide img {
     display: block;
     width: 100%;
+    /* Фиксираната височина + cover пази нулев CLS независимо от това, че
+       изходните кадри са с различни пропорции (1600×452 … 1600×1492). */
     height: clamp(280px, 52vh, 520px);
     object-fit: cover;
   }
@@ -596,9 +710,15 @@
     color: var(--color-accent-text, var(--color-action-hover));
   }
 
+  /* Само opacity: 0.35 не се четеше като „изключено" — на пръв поглед
+     изглеждаше същото като активно. Добавяме пунктирана рамка и премахваме
+     границата на цвета, за да личи и без сравнение един до друг. */
   .gallery-nav-btn:disabled {
-    opacity: 0.35;
+    opacity: 0.4;
     cursor: default;
+    border-style: dashed;
+    border-color: color-mix(in srgb, var(--color-text) 22%, transparent);
+    color: var(--color-text-muted);
   }
 
   .gallery-dot {

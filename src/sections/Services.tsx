@@ -108,7 +108,16 @@ export default function Services() {
                 </span>
 
                 <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-6" style={{ minHeight: '228px' }}>
-                  <Link to={`/uslugi/${cat.slug}`} className="block" aria-label={`${cat.label}: ${tagline}`}>
+                  {/* Цялата карта се вдига и сменя рамка при hover, но кликаема
+                      беше само тази връзка — типичен фалшив афорданс. Тук
+                      разтягаме hit зоната на връзката върху цялата карта
+                      (::after в .svc-link-stretch), а вложените контроли седят
+                      над нея с по-висок z-index. */}
+                  <Link
+                    to={`/uslugi/${cat.slug}`}
+                    className="svc-link-stretch block"
+                    aria-label={`${cat.label}: ${tagline}`}
+                  >
                     <h3 className="font-light text-lg tracking-wider uppercase group-hover:text-[var(--color-accent-text,var(--color-action-hover))] transition-colors duration-300">
                       {cat.label}
                     </h3>
@@ -117,16 +126,19 @@ export default function Services() {
                     </p>
                   </Link>
 
-                  {/* Два CTA-та: детайли + директно запазване на час */}
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-4">
-                    <Link
-                      to={`/uslugi/${cat.slug}`}
-                      className="inline-flex min-h-[44px] items-center gap-2 text-xs tracking-wider uppercase transition-colors hover:text-[var(--color-accent-text,var(--color-action-hover))]"
+                  {/* Два CTA-та: детайли + директно запазване на час.
+                      aria-hidden на „Научете повече": води на същото място като
+                      разтегнатата връзка, а екранният четец не бива да чува два
+                      пъти един и същ линк. Визуално остава като афорданс. */}
+                  <div className="relative z-20 flex flex-wrap items-center gap-x-4 gap-y-1 mt-4">
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none inline-flex min-h-[44px] items-center gap-2 text-xs tracking-wider uppercase transition-colors group-hover:text-[var(--color-accent-text,var(--color-action-hover))]"
                       style={{ color: 'var(--color-text-secondary)' }}
                     >
                       Научете повече
-                      <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-[4px]" aria-hidden="true" />
-                    </Link>
+                      <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-[4px]" />
+                    </span>
                     <span aria-hidden="true" className="hidden min-[360px]:block w-px h-3.5" style={{ background: 'var(--color-border)' }} />
                     <BookingButton
                       variant="link"

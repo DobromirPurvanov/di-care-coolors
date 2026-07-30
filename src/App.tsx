@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react'
-import { Routes, Route, Navigate, useLocation } from 'react-router'
+import { Routes, Route, useLocation } from 'react-router'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -11,6 +11,7 @@ import Footer from './sections/Footer'
 import Home from './pages/Home'
 import ServicePage from './pages/ServicePage'
 import Privacy from './pages/Privacy'
+import NotFound from './pages/NotFound'
 import { getLenis, setLenis } from './lib/scroll'
 import { loadCalScript, watchCalModal } from './lib/booking'
 import { getConsent, onConsentChange } from './lib/consent'
@@ -118,7 +119,9 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/uslugi/:slug" element={<ServicePage />} />
         <Route path="/poveritelnost" element={<Privacy />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        {/* Беше <Navigate to="/" replace /> — счупен линк мълчаливо изхвърляше
+            потребителя на началната страница, което се чете като бъг. */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
       <CookieConsent />

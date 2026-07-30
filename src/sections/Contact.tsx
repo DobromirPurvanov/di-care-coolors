@@ -6,6 +6,7 @@ import ContactForm from '../components/ContactForm'
 import BookingButton from '../components/BookingButton'
 import SectionHeading from '../components/SectionHeading'
 import { getConsent, onConsentChange } from '../lib/consent'
+import { isBookingConfigured } from '../lib/booking'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -34,6 +35,9 @@ function getClinicStatus(): { open: boolean } {
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null)
+  // Без конфигуриран календар не обещаваме „свободни часове в реално време" —
+  // формата остава единственият (и честен) път.
+  const bookingOnline = isBookingConfigured()
   const [status, setStatus] = useState<{ open: boolean } | null>(() => getClinicStatus())
   // GDPR: картата на Google се зарежда само при съгласие „всички бисквитки"
   // или при изрично натискане на „Покажи картата".
@@ -73,7 +77,11 @@ export default function Contact() {
         <SectionHeading
           eyebrow="Контакти"
           title="Свържете се с нас"
-          lead="Изберете свободен час директно в календара ни или ни оставете съобщение и ще се свържем с вас."
+          lead={
+            bookingOnline
+              ? 'Изберете свободен час директно в календара ни или ни оставете съобщение и ще се свържем с вас.'
+              : 'Оставете ни съобщение и ще се свържем с вас в рамките на работния ден, или ни се обадете директно.'
+          }
         />
 
         {/* Двуколонен layout: форма | карта */}
@@ -81,30 +89,32 @@ export default function Contact() {
           {/* Лява колона — форма */}
           <div className="ct-reveal opacity-0 order-1" style={{ transform: 'translateY(40px)' }}>
             {/* Основен път: онлайн запазване на час в реално време */}
-            <div
-              className="mb-9 p-5 sm:p-6 rounded-2xl"
-              style={{ border: '1px solid var(--color-card-border)', background: 'var(--color-card)' }}
-            >
-              <div className="flex items-start gap-3">
-                <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--color-accent-text, var(--color-action-hover))', marginTop: '2px', flex: 'none' }} />
-                <div>
-                  <p className="text-sm" style={{ color: 'var(--color-text)' }}>Запазете час онлайн</p>
-                  <p className="text-[13px] mt-1 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-                    Вижте свободните часове в реално време и потвърдете за минута.
-                  </p>
-                </div>
-              </div>
-              <BookingButton
-                variant="primary"
-                className="inline-flex w-full sm:w-auto mt-4 min-h-[48px] px-7 py-3.5 text-[11px] tracking-[0.15em] uppercase font-medium"
+            {bookingOnline && (
+              <div
+                className="mb-9 p-5 sm:p-6 rounded-2xl"
+                style={{ border: '1px solid var(--color-card-border)', background: 'var(--color-card)' }}
               >
-                Запази час онлайн
-                <ArrowRight size={14} aria-hidden="true" />
-              </BookingButton>
-            </div>
+                <div className="flex items-start gap-3">
+                  <CalendarClock size={20} aria-hidden="true" style={{ color: 'var(--color-accent-text, var(--color-action-hover))', marginTop: '2px', flex: 'none' }} />
+                  <div>
+                    <p className="text-sm" style={{ color: 'var(--color-text)' }}>Запазете час онлайн</p>
+                    <p className="text-[13px] mt-1 leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
+                      Вижте свободните часове в реално време и потвърдете за минута.
+                    </p>
+                  </div>
+                </div>
+                <BookingButton
+                  variant="primary"
+                  className="inline-flex w-full sm:w-auto mt-4 min-h-[48px] px-7 py-3.5 text-[11px] tracking-[0.15em] uppercase font-medium"
+                >
+                  Запази час онлайн
+                  <ArrowRight size={14} aria-hidden="true" />
+                </BookingButton>
+              </div>
+            )}
 
             <p className="text-[11px] tracking-[0.16em] uppercase mb-5" style={{ color: 'var(--color-text-muted)' }}>
-              Или ни оставете съобщение
+              {bookingOnline ? 'Или ни оставете съобщение' : 'Оставете ни съобщение'}
             </p>
             <ContactForm />
           </div>

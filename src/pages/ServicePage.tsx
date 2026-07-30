@@ -1,10 +1,13 @@
-import { useEffect } from 'react'
-import { useParams, useLocation, Link, Navigate } from 'react-router'
+import { useEffect, useMemo } from 'react'
+import { useParams, useLocation, Link } from 'react-router'
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
 import { categories, procedures } from '../data/procedures'
 import { serviceContent, clinicPhilosophy } from '../data/services'
+import NotFound from './NotFound'
 import BookingButton from '../components/BookingButton'
-import { usePageMeta } from '../lib/seo'
+import PriceTable from '../components/PriceTable'
+import JsonLd from '../components/JsonLd'
+import { usePageMeta, SITE_URL } from '../lib/seo'
 import { getLenis, scrollToTarget } from '../lib/scroll'
 
 export default function ServicePage() {
@@ -15,11 +18,12 @@ export default function ServicePage() {
 
   // Hook-овете стоят преди ранния return (правилата на React hooks).
   usePageMeta({
-    title: category ? `${category.label} | Dr. Di Clinic` : 'Dr. Di Clinic',
-    description: content
-      ? `${content.tagline}. ${content.intro}`.slice(0, 158)
-      : 'Клиника за естетика и красота във Варна.',
-    path: category ? `/uslugi/${category.slug}` : '/',
+    title: `${category?.label ?? ''} | Dr. Di Clinic`,
+    description: content ? `${content.tagline}. ${content.intro}`.slice(0, 158) : '',
+    path: `/uslugi/${category?.slug ?? ''}`,
+    // При непозната услуга рендерът се поема от <NotFound />, който сам задава
+    // мета таговете (и noindex). Ако и този hook работеше, щеше да ги презапише.
+    enabled: !!category && !!content,
   })
 
   // Ако идваме от клик върху конкретна процедура (3D сферата / списъка),
@@ -54,17 +58,82 @@ export default function ServicePage() {
     }
   }, [targetProcedure, slug])
 
-  // Непозната услуга → обратно към началото.
-  if (!category || !content) return <Navigate to="/" replace />
+  const items = useMemo(
+    () => (category ? procedures.filter((p) => p.category === category.id) : []),
+    [category]
+  )
 
-  const items = procedures.filter((p) => p.category === category.id)
+  // Структурирани данни: услугата + трохите. Без тях Google вижда подстраниците
+  // само като текст и не ги свързва с MedicalClinic-а от index.html.
+  const structured = useMemo(() => {
+    if (!category || !content) return null
+    const url = `${SITE_URL}/uslugi/${category.slug}`
+    return {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'MedicalWebPage',
+          '@id': url,
+          url,
+          name: `${category.label} | Dr. Di Clinic`,
+          description: content.intro,
+          inLanguage: 'bg-BG',
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Начало', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Услуги', item: `${SITE_URL}/#services` },
+            { '@type': 'ListItem', position: 3, name: category.label, item: url },
+          ],
+        },
+        {
+          '@type': 'MedicalBusiness',
+          name: 'Dr. Di Clinic',
+          url: `${SITE_URL}/`,
+          telephone: '+359882708081',
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'ул. Любен Каравелов 71, Партер',
+            addressLocality: 'Варна',
+            postalCode: '9002',
+            addressCountry: 'BG',
+          },
+          makesOffer: items.map((p) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'MedicalProcedure',
+              name: p.title,
+              description: p.description,
+            },
+          })),
+        },
+      ],
+    }
+  }, [category, content, items])
+
+  // Непозната услуга: преди тук стоеше <Navigate to="/" replace /> — потребител
+  // със стар или сгрешен линк се озоваваше на началната страница, без да
+  // разбере какво се е случило. Сега казваме какво стана и предлагаме изход.
+  if (!category || !content) {
+    return (
+      <NotFound
+        title="Тази услуга не съществува"
+        description="Възможно е линкът да е остарял или сгрешен. Всички наши направления са изброени по-долу."
+        path={`/uslugi/${slug ?? ''}`}
+      />
+    )
+  }
+
   const extras = new Map((content.extras ?? []).map((e) => [e.match, e]))
+  const related = categories.filter((c) => c.id !== category.id).slice(0, 4)
 
   return (
     <main
       className="relative z-10"
       style={{ padding: 'clamp(6rem, 14vh, 10rem) clamp(1rem, 4vw, 3rem) clamp(4rem, 9vh, 7rem)' }}
     >
+      {structured && <JsonLd id="service-jsonld" data={structured} />}
       <div className="mx-auto" style={{ maxWidth: '760px' }}>
         {/* Обратна навигация */}
         <Link
@@ -166,6 +235,9 @@ export default function ServicePage() {
             </ul>
           </section>
 
+          {/* Цени — рендира се само ако има реален ценоразпис в clinic.ts */}
+          <PriceTable category={category.id} />
+
           {/* Маркетинг послание */}
           {content.quote && (
             <blockquote
@@ -195,6 +267,34 @@ export default function ServicePage() {
             </a>
           </div>
         </article>
+
+        {/* Другите направления — страницата свършваше със CTA и оттам нататък
+            беше задънена улица: нито връзка към сродна услуга, нито обратно
+            към списъка. Който не намери своето тук, нямаше накъде да продължи. */}
+        <nav className="mt-12" aria-label="Други услуги">
+          <h2 className="text-[11px] tracking-[0.2em] uppercase mb-4" style={{ color: 'var(--color-text-muted)' }}>
+            Разгледайте също
+          </h2>
+          <ul className="flex flex-wrap gap-2.5">
+            {related.map((c) => (
+              <li key={c.id}>
+                <Link to={`/uslugi/${c.slug}`} className="proc-chip">
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                to="/"
+                state={{ scrollTo: '#services' }}
+                className="proc-chip"
+                style={{ color: 'var(--color-accent-text, var(--color-action-hover))' }}
+              >
+                Всички услуги →
+              </Link>
+            </li>
+          </ul>
+        </nav>
 
         {/* Философска линия */}
         <p

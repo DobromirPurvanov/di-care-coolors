@@ -8,6 +8,15 @@ interface PageMeta {
   description: string
   /** Път за canonical, напр. '/' или '/uslugi/laser-fotona'. */
   path: string
+  /**
+   * Изключва hook-а, без да нарушава правилата на hooks. Нужно е там, където
+   * компонентът може да делегира рендера на друг (ServicePage → NotFound):
+   * ефектите на детето се изпълняват ПРЕДИ тези на родителя, така че иначе
+   * родителят презаписваше заглавието, зададено от NotFound.
+   */
+  enabled?: boolean
+  /** Добавя <meta name="robots" content="noindex"> — за 404 състояния. */
+  noindex?: boolean
 }
 
 /** Задава/обновява <meta>/<link> таг и връща функция за възстановяване. */
@@ -27,11 +36,22 @@ function setTag(selector: string, attr: 'content' | 'href', value: string): () =
  * всички маршрути и Google третира подстраниците като дубликати.
  * При напускане възстановява предишните стойности.
  */
-export function usePageMeta({ title, description, path }: PageMeta) {
+export function usePageMeta({ title, description, path, enabled = true, noindex = false }: PageMeta) {
   useEffect(() => {
+    if (!enabled) return
     const url = `${SITE_URL}${path === '/' ? '/' : path}`
     const previousTitle = document.title
     document.title = title
+
+    // SPA-то връща 200 и за несъществуващи пътища, затова „не е намерено"
+    // трябва да се каже изрично на търсачките, иначе индексират празнини.
+    let robots: HTMLMetaElement | null = null
+    if (noindex) {
+      robots = document.createElement('meta')
+      robots.name = 'robots'
+      robots.content = 'noindex, follow'
+      document.head.appendChild(robots)
+    }
 
     const restores = [
       setTag('link[rel="canonical"]', 'href', url),
@@ -46,6 +66,7 @@ export function usePageMeta({ title, description, path }: PageMeta) {
     return () => {
       document.title = previousTitle
       restores.forEach(restore => restore())
+      robots?.remove()
     }
-  }, [title, description, path])
+  }, [title, description, path, enabled, noindex])
 }

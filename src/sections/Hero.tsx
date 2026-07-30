@@ -1,23 +1,33 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ChevronDown, Mouse } from 'lucide-react'
+import { ChevronDown, Mouse, MapPin, ArrowRight } from 'lucide-react'
+import BookingButton from '../components/BookingButton'
 import { scrollToTarget } from '../lib/scroll'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const BRANDS = [
-  { name: 'Fotona\u00AE', tip: 'Водеща световна лазерна технология' },
+  { name: 'Fotona®', tip: 'Водеща световна лазерна технология' },
   { name: '4D Lifting', tip: 'Неинвазивен лифтинг без възстановяване' },
   { name: 'Ozone Therapy', tip: 'Детоксикация и клетъчно подмладяване' },
   { name: 'SmartXide', tip: 'CO2 лазер за прецизен ресърфейсинг' },
 ]
+
+// Заглавието само по себе си е слоган — не казва нито какво предлага
+// клиниката, нито къде е. Тези два реда носят информацията, без да пипат
+// брандовия тон; текстът е същият, който вече стои във футъра и в „Услуги“.
+const LEAD =
+  'Клиника за естетична медицина, лазерни процедури и дълголетие във Варна. Девет направления под един покрив, с медицински подход към всяка процедура.'
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const line1Ref = useRef<HTMLSpanElement>(null)
   const line2Ref = useRef<HTMLSpanElement>(null)
   const charsWrapRef = useRef<HTMLSpanElement>(null)
+  const leadRef = useRef<HTMLParagraphElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  const placeRef = useRef<HTMLAnchorElement>(null)
   const brandsRef = useRef<HTMLDivElement>(null)
   const scrollHintRef = useRef<HTMLButtonElement>(null)
 
@@ -29,6 +39,7 @@ export default function Hero() {
       if (reduced) {
         const targets = [
           line1Ref.current, line2Ref.current, charsWrapRef.current,
+          leadRef.current, ctaRef.current, placeRef.current,
           brandsRef.current, scrollHintRef.current,
           ...(brandsRef.current ? Array.from(brandsRef.current.querySelectorAll('.brand-item')) : []),
         ]
@@ -36,25 +47,32 @@ export default function Hero() {
         return
       }
 
-      const tl = gsap.timeline({ delay: 1.3 }) // след loading screen-а
+      // Кратко закъснение (преди беше 1.3s, синхронизирано със стария бавен
+      // loading screen): точно този delay държеше LCP-то на 1.68s дори без
+      // мрежа, защото заглавието стои на opacity 0 до старта на таймлайна.
+      const tl = gsap.timeline({ delay: 0.2 })
 
-      tl.to(line1Ref.current, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, 0)
-        .to(line2Ref.current, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, 0.2)
+      tl.to(line1Ref.current, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0)
+        .to(line2Ref.current, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.12)
 
       // Разкриване на акцентния ред (единичен елемент — надежден gradient рендер)
       tl.to(charsWrapRef.current, {
         opacity: 1, y: 0,
-        duration: 1,
+        duration: 0.85,
         ease: 'power3.out',
-      }, 0.5)
+      }, 0.28)
 
-      tl.to(brandsRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.35')
+      tl.to(leadRef.current, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.5)
+      tl.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.62)
+      tl.to(placeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.74)
+
+      tl.to(brandsRef.current, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, 0.82)
       if (brandsRef.current) {
         tl.to(brandsRef.current.querySelectorAll('.brand-item'), {
-          opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08,
+          opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', stagger: 0.07,
         }, '<')
       }
-      tl.to(scrollHintRef.current, { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2')
+      tl.to(scrollHintRef.current, { opacity: 1, duration: 0.5, ease: 'power2.out' }, '-=0.2')
     }, sectionRef)
 
     return () => ctx.revert()
@@ -67,7 +85,13 @@ export default function Hero() {
       id="hero"
       ref={sectionRef}
       className="relative z-10 flex flex-col items-center justify-center text-center overflow-hidden"
-      style={{ height: '100svh', minHeight: 'min(600px, 100svh)' }}
+      // minHeight, не height: hero-то вече носи подзаглавие и два бутона и
+      // трябва да може да порасне на нисък екран, вместо да ги отреже.
+      style={{
+        minHeight: '100svh',
+        paddingTop: 'calc(6rem + env(safe-area-inset-top))',
+        paddingBottom: 'calc(6rem + env(safe-area-inset-bottom))',
+      }}
     >
       {/* Палитрен слой за дълбочина над анимирания shader фон */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -75,7 +99,7 @@ export default function Hero() {
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--color-action) 8%, transparent) 0%, transparent 55%)' }} />
       </div>
 
-      <h1 className="relative w-full max-w-5xl px-4 sm:px-6 m-0" style={{ marginTop: '-2vh' }}>
+      <h1 className="relative w-full max-w-5xl px-4 sm:px-6 m-0">
         <span
           ref={line1Ref}
           className="block font-serif-luxe uppercase tracking-[0.12em] sm:tracking-[0.18em] leading-[1.12] opacity-0"
@@ -104,12 +128,62 @@ export default function Hero() {
         </span>
       </h1>
 
+      {/* Подзаглавие: какво е клиниката и къде е — първата информация, която
+          посетителят търси и която слоганът не дава. */}
+      <p
+        ref={leadRef}
+        className="relative mt-6 sm:mt-7 max-w-[46ch] px-5 sm:px-6 opacity-0 text-[15px] sm:text-base"
+        style={{
+          color: 'var(--color-text-secondary)',
+          lineHeight: 1.65,
+          transform: 'translateY(20px)',
+          textShadow: 'var(--text-shadow)',
+        }}
+      >
+        {LEAD}
+      </p>
+
+      {/* Основно и второстепенно действие — преди hero-то нямаше нито едно. */}
+      <div
+        ref={ctaRef}
+        className="relative mt-8 sm:mt-9 flex flex-col min-[420px]:flex-row items-stretch min-[420px]:items-center justify-center gap-3 px-5 opacity-0 w-full max-w-md min-[420px]:max-w-none"
+        style={{ transform: 'translateY(20px)' }}
+      >
+        <BookingButton
+          variant="primary"
+          className="inline-flex min-h-[48px] px-8 py-3.5 text-[11px] tracking-[0.16em] uppercase font-medium"
+        >
+          Запази час
+          <ArrowRight size={14} aria-hidden="true" />
+        </BookingButton>
+        <button
+          type="button"
+          onClick={() => scrollToTarget('#services')}
+          className="inline-flex items-center justify-center gap-2 min-h-[48px] px-8 py-3.5 rounded-full border text-[11px] tracking-[0.16em] uppercase cursor-pointer transition-all duration-300 hover:border-[var(--color-action)] hover:text-[var(--color-accent-text,var(--color-action-hover))]"
+          style={{ borderColor: 'var(--color-card-border)', color: 'var(--color-text)' }}
+        >
+          Вижте услугите
+        </button>
+      </div>
+
+      {/* Локацията като линк към картата — вадим адреса над сгъвката. */}
+      <a
+        ref={placeRef}
+        href="#contact"
+        onClick={e => { e.preventDefault(); scrollToTarget('#contact') }}
+        className="relative mt-5 inline-flex min-h-[44px] items-center gap-2 px-4 opacity-0 text-[11px] tracking-[0.14em] uppercase transition-colors duration-300 hover:text-[var(--color-accent-text,var(--color-action-hover))]"
+        style={{ color: 'var(--color-text-muted)', transform: 'translateY(14px)' }}
+      >
+        <MapPin size={13} aria-hidden="true" />
+        Варна, ул. „Любен Каравелов" 71
+      </a>
+
       <div className="relative w-full px-4 sm:px-6">
         {/* декоративен контейнер за брандовете под заглавието */}
 
         <div
           ref={brandsRef}
-          className="flex flex-wrap items-center justify-center gap-x-4 min-[360px]:gap-x-6 sm:gap-x-8 gap-y-3 opacity-0 mt-8 sm:mt-10 md:mt-14"
+          className="flex flex-wrap items-center justify-center gap-x-4 min-[360px]:gap-x-6 sm:gap-x-8 gap-y-3 opacity-0 mt-8 sm:mt-10"
           style={{ transform: 'translateY(15px)' }}
         >
           {BRANDS.map(b => (

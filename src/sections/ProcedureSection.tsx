@@ -12,6 +12,8 @@ const ProcedureSphere = lazy(() => import('../components/ProcedureSphere'))
 
 type View = 'sphere' | 'list'
 
+const VIEW_KEY = 'dicare-procedures-view'
+
 function SphereFallback() {
   return (
     <div
@@ -44,12 +46,24 @@ export default function ProcedureSection() {
   // По подразбиране списъчният изглед на тъч устройства (там 30-те етикета на
   // сферата се застъпват/отрязват и трудно се уцелват) и при reduced-motion.
   // На десктоп с мишка стартираме с ефектната 3D сфера.
+  //
+  // Изборът се помни: който веднъж е предпочел списъка, не иска да го избира
+  // наново при всяко посещение.
   const [view, setView] = useState<View>(() => {
     if (typeof window === 'undefined') return 'sphere'
+    try {
+      const stored = localStorage.getItem(VIEW_KEY)
+      if (stored === 'sphere' || stored === 'list') return stored
+    } catch { /* localStorage недостъпен — падаме на разпознаването по устройство */ }
     const coarse = window.matchMedia('(pointer: coarse)').matches
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     return coarse || reduced ? 'list' : 'sphere'
   })
+
+  const chooseView = (next: View) => {
+    setView(next)
+    try { localStorage.setItem(VIEW_KEY, next) } catch { /* без значение */ }
+  }
 
   useEffect(() => {
     const section = sectionRef.current
@@ -156,7 +170,7 @@ export default function ProcedureSection() {
           <div className="proc-toggle mt-7" role="group" aria-label="Изглед на процедурите">
             <button
               type="button"
-              onClick={() => setView('sphere')}
+              onClick={() => chooseView('sphere')}
               aria-pressed={view === 'sphere'}
               className={`proc-toggle-btn${view === 'sphere' ? ' is-active' : ''}`}
             >
@@ -165,7 +179,7 @@ export default function ProcedureSection() {
             </button>
             <button
               type="button"
-              onClick={() => setView('list')}
+              onClick={() => chooseView('list')}
               aria-pressed={view === 'list'}
               className={`proc-toggle-btn${view === 'list' ? ' is-active' : ''}`}
             >

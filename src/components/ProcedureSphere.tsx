@@ -58,6 +58,10 @@ export default function ProcedureSphere() {
 
     const w = container.clientWidth
     const h = container.clientHeight
+    // Кеширани размери на контейнера — ползват се в animate() за подредбата
+    // на етикетите и се обновяват само в onResize().
+    let viewW = w
+    let viewH = h
     // Адаптивният world radius пази сходен визуален размер на CSS3D текста
     // както на 320px телефон, така и на по-широк таблет.
     const sphereRadius = isMobile
@@ -80,7 +84,10 @@ export default function ProcedureSphere() {
       const distH = sphereRadius / Math.tan(halfH)
       // 1.5 оставяше почти една трета празно място отстрани и смаляваше
       // етикетите. 1.29 приближава сферата, без да отрязва предните етикети.
-      const margin = isMobile ? 1.29 : 1.25
+      // На десктоп слизаме до 1.18: сферата запълва повече от кадъра, което
+      // прави етикетите с ~6% по-едри и повече от тях минават прага за
+      // четимост, вместо да бъдат скрити.
+      const margin = isMobile ? 1.29 : 1.18
       return Math.max(distV, distH) * margin
     }
     camera.position.z = fitDistance(w, h)
@@ -225,7 +232,68 @@ export default function ProcedureSphere() {
     scene.add(centerGlow)
 
     // Етикети
-    const labels: { obj: CSS3DObject; element: HTMLDivElement; target: THREE.Vector3 }[] = []
+    interface Label {
+      obj: CSS3DObject
+      element: HTMLDivElement
+      target: THREE.Vector3
+      /** Нетрансформираните размери на етикета — измерват се веднъж. */
+      baseW: number
+      baseH: number
+      /** Базовият font-size в px (различен на тъч заради media query-то). */
+      baseFont: number
+    }
+    const labels: Label[] = []
+
+    /*
+     * Двата проблема на етикетите преди това: (1) задните се смаляваха до
+     * около 6px — нечетими, но кликаеми и във фокус реда; (2) се застъпваха
+     * („INCONTILASE" върху „ЛИМФОДРЕНАЖНИ МАСАЖИ").
+     *
+     * И двата идват от това, че CSS3D мащабира етикета с перспективата, а
+     * нищо не следеше какво излиза на екрана. Тук смятаме реалния екранен
+     * размер и правоъгълник на всеки етикет и прилагаме две правила:
+     *   - под MIN_LABEL_PX ефективен шрифт → скрий (нечетимо е по-лошо от липсващо);
+     *   - припокриване с по-преден етикет → скрий по-задния.
+     * Скритите излизат и от tab реда, и от hit-testing-а.
+     */
+    const MIN_LABEL_PX = 10.5
+    /** Хлабина около правоъгълника, за да не се долепват плътно. */
+    const COLLISION_PAD = 2
+
+    /*
+     * Стеснен диапазон на перспективното мащабиране.
+     *
+     * Чистата перспектива правеше предните етикети около 2 пъти по-едри от
+     * задните: предните заемаха пол-екран и изтласкваха всичко зад себе си, а
+     * задните падаха под четимото. Затова компенсираме мащаба на всеки етикет
+     * така, че видимият му размер да стои между тези две граници (спрямо
+     * базовите 13px ≈ 12px…18px). Дълбочината продължава да личи — от
+     * телената сфера, от подредбата и от лекия фейд — но текстът остава четим
+     * навсякъде и в кадъра се побират много повече процедури.
+     */
+    const APPARENT_MIN = 0.9
+    const APPARENT_MAX = 1.04
+
+    /** Перспективата, която CSS3DRenderer слага на контейнера (в px). */
+    function cssPerspective(height: number) {
+      return (0.5 * height) / Math.tan(((FOV / 2) * Math.PI) / 180)
+    }
+    let perspectivePx = cssPerspective(h)
+
+    function hideLabel(el: HTMLDivElement) {
+      // visibility (не display) — пази CSS transition-ите, но също така маха
+      // елемента от tab реда и от hit-testing-а.
+      el.style.visibility = 'hidden'
+      el.style.pointerEvents = 'none'
+      el.tabIndex = -1
+    }
+
+    function showLabel(el: HTMLDivElement, opacity: number) {
+      el.style.visibility = 'visible'
+      el.style.opacity = opacity.toFixed(2)
+      el.style.pointerEvents = 'auto'
+      el.tabIndex = 0
+    }
 
     // Клик върху етикет → страницата на услугата, позиционирана на
     // конкретната процедура (ServicePage скролва и я маркира).
@@ -277,10 +345,24 @@ export default function ProcedureSphere() {
       obj.lookAt(target)
 
       scene.add(obj)
-      labels.push({ obj, element: el, target })
+      labels.push({ obj, element: el, target, baseW: 0, baseH: 0, baseFont: 13 })
     }
 
     labelData.forEach((l) => addLabel(l))
+
+    /**
+     * Измерва нетрансформирания размер на етикета. Не може да стане тук, при
+     * създаването: CSS3DRenderer вкарва елементите в документа чак при първия
+     * render, а откъснат от DOM елемент връща offsetWidth 0 (и празен
+     * computed style). Затова мерим лениво — по веднъж на етикет, в първия
+     * кадър, в който вече е в документа.
+     */
+    function measure(label: Label) {
+      if (label.baseW > 0 || !label.element.isConnected) return
+      label.baseW = label.element.offsetWidth
+      label.baseH = label.element.offsetHeight
+      label.baseFont = parseFloat(getComputedStyle(label.element).fontSize) || 13
+    }
 
     // Анимация
     const clock = new THREE.Clock()
@@ -292,6 +374,22 @@ export default function ProcedureSphere() {
     const worldPosition = new THREE.Vector3()
     const cameraDirection = new THREE.Vector3()
     const toLabelDirection = new THREE.Vector3()
+    const projected = new THREE.Vector3()
+
+    /** Буфери за подредбата на етикетите — преизползват се всеки кадър, за
+        да не правим по два нови масива на 60fps. */
+    interface Candidate {
+      label: Label
+      isActive: boolean
+      viewDepth: number
+      opacity: number
+      left: number
+      right: number
+      top: number
+      bottom: number
+    }
+    const candidates: Candidate[] = []
+    const placed: Candidate[] = []
 
     function animate(now: number) {
       if (!running) return
@@ -321,66 +419,109 @@ export default function ProcedureSphere() {
       // ги веднъж, вместо по 30 пъти на frame.
       camera.getWorldDirection(cameraDirection)
       const dCamera = camera.position.length()
-      const minDist = dCamera - sphereRadius
-      const maxDist = Math.sqrt(dCamera * dCamera - sphereRadius * sphereRadius)
 
+      const perspective = perspectivePx
+      const halfW = viewW / 2
+      const halfH = viewH / 2
+
+      // Фаза 1 — за всеки етикет смятаме дълбочина, екранна позиция и реален
+      // размер след перспективното мащабиране. Още нищо не пишем в DOM-а.
+      candidates.length = 0
       labels.forEach((label, idx) => {
+        measure(label)
         label.obj.position.lerp(label.target, k)
         label.obj.quaternion.copy(camera.quaternion)
 
         label.obj.getWorldPosition(worldPosition)
         toLabelDirection.copy(worldPosition).sub(camera.position).normalize()
-        const dot = cameraDirection.dot(toLabelDirection)
 
         const isActive = activeIdxRef.current === idx
 
-        if (dot <= 0 && !isActive) {
-          label.element.style.display = 'none'
-          label.element.style.pointerEvents = 'none'
+        /*
+         * Кои етикети са „отпред".
+         *
+         * Тук стоеше отрязване по ДОПИРАТЕЛНАТА към сферата (dist > maxDist).
+         * Геометрично това оставя видима само шапка от около 20% от сферата —
+         * при 24 етикета това са 4-5 на кадър и сферата изглеждаше празна.
+         * Правилният критерий е полусферата: косинусът на ъгъла между
+         * посоката към етикета и посоката към камерата. -0.12 пуска малко
+         * отвъд екватора, за да не изчезват етикетите точно на силуета.
+         */
+        const radius = worldPosition.length() || 1
+        const facing = worldPosition.dot(camera.position) / (radius * dCamera)
+        if (!isActive && facing < -0.12) {
+          hideLabel(label.element)
           return
         }
 
         const dist = camera.position.distanceTo(worldPosition)
+        // 0 = най-отпред, 1 = на ръба на видимото
+        const progress = Math.min(Math.max((1 - facing) / 1.12, 0), 1)
 
-        if (dist > maxDist && !isActive) {
-          label.element.style.display = 'none'
-          label.element.style.pointerEvents = 'none'
+        // Дълбочина ПО ОСТА НА ПОГЛЕДА — точно това дели перспективата,
+        // затова с нея се смята и мащабът, а не с евклидовото разстояние.
+        const viewDepth = toLabelDirection.dot(cameraDirection) * dist
+        const rawScale = viewDepth > 1 ? perspective / viewDepth : 0
+        const scale = Math.min(APPARENT_MAX, Math.max(APPARENT_MIN, rawScale))
+        // Компенсация в 3D пространството: CSS3DRenderer ще умножи по
+        // rawScale, затова тук делим на него, за да излезе точно `scale`.
+        label.obj.scale.setScalar(rawScale > 0 ? scale / rawScale : 1)
+        const fontPx = label.baseFont * scale
+
+        // Нечетимият етикет е по-лош от липсващия: заема място, застъпва
+        // съседите си и краде фокус, без да носи информация.
+        if (!isActive && fontPx < MIN_LABEL_PX) {
+          hideLabel(label.element)
           return
         }
 
-        let progress = (dist - minDist) / (maxDist - minDist)
-        progress = Math.min(Math.max(progress, 0), 1)
+        // Екранна позиция (NDC → пиксели спрямо центъра на контейнера).
+        projected.copy(worldPosition).project(camera)
+        const cx = projected.x * halfW
+        const cy = -projected.y * halfH
+        const w = label.baseW * scale
+        const h = label.baseH * scale
 
-        // На телефон показваме само най-предните процедури. Така те могат
-        // да са реално четими и удобни за натискане, без 30 големи етикета да
-        // се застъпват. Останалите се появяват естествено при завъртане.
-        if (isMobile && progress > 0.88 && !isActive) {
-          label.element.style.display = 'none'
-          label.element.style.pointerEvents = 'none'
-          return
-        }
+        // Лек фейд към ръба — дълбочината да си личи, без да пада контрастът
+        // под четимото (старият 0.35 фейд правеше далечните текстове бледи).
+        const fadeStart = 0.6
+        const opacity = progress > fadeStart
+          ? 1 - ((progress - fadeStart) / (1 - fadeStart)) * 0.25
+          : 1
 
-        // Предната полусфера остава ясно четима. Към ръба етикетите избледняват.
-        // На мобилно фейдът започва по-рано и е по-силен — тесният екран събира
-        // 30-те етикета много нагъсто, затова оставяме ясни само предните, а
-        // претрупаният външен пръстен се стапя, вместо да се застъпва/отрязва.
-        let opacity = 1
-        const fadeStart = isMobile ? 0.58 : 0.85
-        const fadeAmount = isMobile ? 0.82 : 0.35
-        if (progress > fadeStart) {
-          opacity = 1 - ((progress - fadeStart) / (1 - fadeStart)) * fadeAmount
-        }
-        if (isActive) opacity = Math.max(opacity, 1)
-
-        if (opacity <= 0.02) {
-          label.element.style.display = 'none'
-          label.element.style.pointerEvents = 'none'
-        } else {
-          label.element.style.display = 'inline-flex'
-          label.element.style.opacity = opacity.toFixed(2)
-          label.element.style.pointerEvents = progress > 0.9 && !isActive ? 'none' : 'auto'
-        }
+        candidates.push({
+          label,
+          isActive,
+          viewDepth,
+          opacity: isActive ? 1 : opacity,
+          left: cx - w / 2 - COLLISION_PAD,
+          right: cx + w / 2 + COLLISION_PAD,
+          top: cy - h / 2 - COLLISION_PAD,
+          bottom: cy + h / 2 + COLLISION_PAD,
+        })
       })
+
+      // Фаза 2 — най-предните печелят мястото. Активният винаги остава.
+      candidates.sort((a, b) => (a.isActive ? -1 : b.isActive ? 1 : a.viewDepth - b.viewDepth))
+
+      placed.length = 0
+      for (const c of candidates) {
+        let blocked = false
+        if (!c.isActive) {
+          for (const p of placed) {
+            if (c.left < p.right && c.right > p.left && c.top < p.bottom && c.bottom > p.top) {
+              blocked = true
+              break
+            }
+          }
+        }
+        if (blocked) {
+          hideLabel(c.label.element)
+        } else {
+          showLabel(c.label.element, c.opacity)
+          placed.push(c)
+        }
+      }
 
       glRenderer.render(scene, camera)
       cssRenderer.render(scene, camera)
@@ -419,6 +560,11 @@ export default function ProcedureSphere() {
     function onResize() {
       const nw = container!.clientWidth
       const nh = container!.clientHeight
+      // Кешираме размерите за подредбата на етикетите: clientWidth в animate()
+      // би форсирал layout на всеки кадър, а те се менят само тук.
+      viewW = nw
+      viewH = nh
+      perspectivePx = cssPerspective(nh)
       camera.aspect = nw / nh
       // Пресмятаме наново разстоянието — при завъртане на телефона или скриване
       // на адрес-лентата съотношението се променя и сферата пак трябва да пасне.

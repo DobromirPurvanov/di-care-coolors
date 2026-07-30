@@ -47,10 +47,21 @@ export default function BookingButton({
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     onClick?.(e)
     const opened = openBooking(service)
-    if (!opened) {
-      // Резервен път: контактната форма (телефон + съобщение).
-      if (onHome) scrollToTarget('#contact')
-      else navigate('/', { state: { scrollTo: '#contact' } })
+    if (opened) return
+
+    // Резервен път: контактната форма. Освен скрола фокусираме първото поле —
+    // иначе потребителят каца в средата на секция и не разбира, че точно
+    // тази форма е отговорът на натиснатия бутон.
+    const focusForm = () => {
+      requestAnimationFrame(() => {
+        document.querySelector<HTMLInputElement>('#cf-name')?.focus({ preventScroll: true })
+      })
+    }
+    if (onHome) {
+      scrollToTarget('#contact')
+      focusForm()
+    } else {
+      navigate('/', { state: { scrollTo: '#contact' } })
     }
   }
 

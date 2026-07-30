@@ -4,8 +4,10 @@ import Hero from '../sections/Hero'
 import ProcedureSection from '../sections/ProcedureSection'
 import Services from '../sections/Services'
 import WhyUs from '../sections/WhyUs'
+import Team from '../sections/Team'
 import Gallery from '../sections/Gallery'
 import Equipment from '../sections/Equipment'
+import Testimonials from '../sections/Testimonials'
 import Contact from '../sections/Contact'
 import { scrollToTarget } from '../lib/scroll'
 import { usePageMeta } from '../lib/seo'
@@ -35,8 +37,14 @@ export default function Home() {
       <ProcedureSection />
       <Services />
       <WhyUs />
+      {/* Team и Testimonials се рендират сами само когато в src/data/clinic.ts
+          има реални данни — иначе връщат null и подредбата остава както преди.
+          Отзивите стоят точно преди „Контакти": социалното доказателство е
+          най-силно непосредствено преди искането за действие. */}
+      <Team />
       <Gallery />
       <Equipment />
+      <Testimonials />
       <Contact />
     </main>
   )

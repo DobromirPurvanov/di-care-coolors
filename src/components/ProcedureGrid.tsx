@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router'
-import { ArrowRight, X, Sparkles } from 'lucide-react'
+import { ArrowRight, X, Sparkles, Search, SearchX } from 'lucide-react'
 import { procedures, categories, categoryById, type Procedure } from '../data/procedures'
 import BookingButton from './BookingButton'
+
+/** Сваля диакритика и регистър, за да търси еднакво „Ботокс" и „ботокс". */
+function normalize(s: string) {
+  return s.toLocaleLowerCase('bg').normalize('NFD').replace(/[̀-ͯ]/g, '')
+}
 
 /** Съдържанието на детайл-панела — споделя се между десктоп колоната и мобилната карта. */
 function DetailBody({ active, onClose }: { active: Procedure; onClose: () => void }) {
@@ -50,16 +55,102 @@ function DetailBody({ active, onClose }: { active: Procedure; onClose: () => voi
 
 export default function ProcedureGrid() {
   const [activeTitle, setActiveTitle] = useState<string | null>(null)
+  const [query, setQuery] = useState('')
   const active = procedures.find((p) => p.title === activeTitle) ?? null
+  const searchRef = useRef<HTMLInputElement>(null)
 
   const toggle = (title: string) => setActiveTitle((cur) => (cur === title ? null : title))
+
+  // 61 процедури в 9 категории са твърде много за сканиране с око — без
+  // търсене единственият начин да намериш конкретна беше да я изчетеш.
+  // Търси и по заглавие, и по описание, и по име на категорията.
+  const filtered = useMemo(() => {
+    const q = normalize(query.trim())
+    if (!q) return procedures
+    return procedures.filter(
+      (p) =>
+        normalize(p.title).includes(q) ||
+        normalize(p.description).includes(q) ||
+        normalize(categoryById[p.category].label).includes(q)
+    )
+  }, [query])
+
+  // Esc: първо затваря детайлите, после изчиства търсенето — най-скорошното
+  // действие се отменя първо, както очаква потребителят.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      if (activeTitle) setActiveTitle(null)
+      else if (query) {
+        setQuery('')
+        searchRef.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [activeTitle, query])
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_340px] lg:gap-12">
       {/* Списък с процедури, групиран по категория */}
       <div className="lg:order-first">
+        <div className="proc-search mb-7">
+          <Search size={16} aria-hidden="true" className="proc-search-icon" />
+          <input
+            ref={searchRef}
+            id="proc-search"
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Търсене на процедура…"
+            aria-label="Търсене на процедура"
+            aria-describedby="proc-search-count"
+            className="proc-search-input"
+            autoComplete="off"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => { setQuery(''); searchRef.current?.focus() }}
+              className="proc-search-clear"
+              aria-label="Изчисти търсенето"
+            >
+              <X size={15} aria-hidden="true" />
+            </button>
+          )}
+        </div>
+        <p id="proc-search-count" className="sr-only" aria-live="polite">
+          {query
+            ? `${filtered.length} ${filtered.length === 1 ? 'намерена процедура' : 'намерени процедури'}`
+            : `${procedures.length} процедури общо`}
+        </p>
+
+        {query && filtered.length === 0 && (
+          <div
+            className="flex flex-col items-center text-center gap-3 rounded-2xl px-6 py-10"
+            style={{ border: '1px dashed var(--color-border)' }}
+          >
+            <SearchX size={22} aria-hidden="true" style={{ color: 'var(--color-text-muted)' }} />
+            <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
+              Няма процедура по „{query}"
+            </p>
+            <p className="text-[13px] leading-relaxed max-w-[34ch]" style={{ color: 'var(--color-text-muted)' }}>
+              Опитайте с друга дума или ни попитайте директно — ще ви насочим към
+              подходящата процедура.
+            </p>
+            <button
+              type="button"
+              onClick={() => { setQuery(''); searchRef.current?.focus() }}
+              className="mt-1 inline-flex min-h-[44px] items-center px-5 rounded-full border text-[11px] tracking-[0.14em] uppercase cursor-pointer transition-colors hover:border-[var(--color-action)] hover:text-[var(--color-accent-text,var(--color-action-hover))]"
+              style={{ borderColor: 'var(--color-card-border)', color: 'var(--color-text-secondary)' }}
+            >
+              Изчисти търсенето
+            </button>
+          </div>
+        )}
+
         {categories.map((cat) => {
-          const items = procedures.filter((p) => p.category === cat.id)
+          const items = filtered.filter((p) => p.category === cat.id)
           if (items.length === 0) return null
           return (
             <section key={cat.id} className="mb-8 last:mb-0" aria-label={cat.label}>

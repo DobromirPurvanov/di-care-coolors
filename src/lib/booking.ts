@@ -1,12 +1,16 @@
 // Централна конфигурация за системата за запазване на часове (Cal.com).
 //
-// Реалният линк се задава чрез env променлива VITE_CAL_LINK във Vercel
-// (и локално в .env.local).
+// Линкът се задава ЕДИНСТВЕНО чрез env променлива VITE_CAL_LINK във Vercel
+// (и локално в .env.local), напр. "dr-di-clinic/konsultacia".
 //
-// ВНИМАНИЕ: fallback стойността по-долу е ВРЕМЕНЕН тестов календар
-// (личен акаунт, 30-мин "Cal Video" среща). Преди публикуване създайте
-// Cal.com акаунт на клиниката с ПРИСЪСТВЕН event (адресът на клиниката,
-// не видео разговор) и задайте VITE_CAL_LINK.
+// НЯМА fallback стойност — и това е нарочно. Преди тук стоеше личен тестов
+// календар ("Cal Video" среща в чужд акаунт) и всеки бутон „Запази час" в
+// продукция водеше пациентите там, защото env-ът не беше зададен. Липсващ
+// линк вече е БЕЗОПАСНА повреда: openBooking() връща false и BookingButton
+// плавно води към контактната форма, вместо към грешен календар.
+//
+// Клиниката трябва да има Cal.com акаунт с ПРИСЪСТВЕН event (адресът на
+// клиниката, не видео разговор).
 //
 // GDPR: embed скриптът на Cal НЕ се зарежда при отваряне на сайта, освен
 // ако потребителят е приел всички бисквитки. При „само необходимите" се
@@ -14,7 +18,19 @@
 // услуга). Ползваме официалния vanilla embed snippet (зареден динамично),
 // вместо npm пакета — така Cal не влиза в bundle-а.
 
-export const CAL_LINK: string = import.meta.env.VITE_CAL_LINK ?? 'dobromir-purvanov-ksto97/30min'
+export const CAL_LINK: string = (import.meta.env.VITE_CAL_LINK ?? '').trim()
+
+/** true, ако календарът изобщо е конфигуриран за този build. */
+export function isBookingConfigured(): boolean {
+  return CAL_LINK !== ''
+}
+
+if (!CAL_LINK && import.meta.env.DEV) {
+  console.warn(
+    '[booking] VITE_CAL_LINK не е зададен — бутоните „Запази час" водят към ' +
+      'контактната форма. Задайте го в .env.local и във Vercel.'
+  )
+}
 
 /** Namespace за Cal embed инстанцията. */
 export const CAL_NAMESPACE = 'zapazi-chas'
@@ -68,6 +84,8 @@ export function isCalUnavailable(): boolean {
  * Идемпотентно — безопасно да се вика при всеки клик.
  */
 export function loadCalScript(): void {
+  // Без конфигуриран календар не теглим нищо от трети страни.
+  if (!CAL_LINK) return
   if (scriptRequested || typeof window === 'undefined') return
   scriptRequested = true
 
@@ -118,6 +136,7 @@ export function loadCalScript(): void {
  */
 export function openBooking(service?: string): boolean {
   if (typeof window === 'undefined') return false
+  if (!CAL_LINK) return false
   loadCalScript()
   if (scriptFailed) return false
 
