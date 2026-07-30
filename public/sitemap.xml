@@ -8,5 +8,7 @@
   <url><loc>https://di-care.vercel.app/uslugi/injekcionni-proceduri</loc><priority>0.8</priority></url>
   <url><loc>https://di-care.vercel.app/uslugi/estetichna-ginekologia</loc><priority>0.8</priority></url>
   <url><loc>https://di-care.vercel.app/uslugi/laserna-stomatologia</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/dalgoletie</loc><priority>0.8</priority></url>
+  <url><loc>https://di-care.vercel.app/uslugi/onko-grizha</loc><priority>0.8</priority></url>
   <url><loc>https://di-care.vercel.app/poveritelnost</loc><priority>0.3</priority></url>
 </urlset>

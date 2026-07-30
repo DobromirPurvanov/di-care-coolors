@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { CSS3DRenderer, CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js'
-import { procedures as labelData, categoryById, type Procedure } from '../data/procedures'
+import { sphereProcedures as labelData, categoryById, type Procedure } from '../data/procedures'
 import { useTheme } from '../theme/theme-context'
 
 function hexToRgba(hex: string, alpha: number) {
